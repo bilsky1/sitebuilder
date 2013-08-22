@@ -38,6 +38,7 @@ end
 group :test do
   gem 'selenium-webdriver', '2.0.0'
   gem 'capybara', '2.1.0'
+  gem 'factory_girl_rails', '4.2.1'
 end
 
 group :production do
@@ -49,6 +50,10 @@ gem 'rb-readline', '0.4.2'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '3.0.1'
+
+gem 'will_paginate', '3.0.4'
+
+gem 'faker', '1.1.2'
 
 # Use unicorn as the app server
 # gem 'unicorn'

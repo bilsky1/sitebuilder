@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   before_save{ self.email = email.downcase }
-  #before_save :create_remember_token
+  before_save :create_remember_token
 
   #validations
   validates :name, presence: true, length: { maximum: 50 }
@@ -24,8 +24,8 @@ class User < ActiveRecord::Base
 
   private
 
-  def create_remember_token
-    self.remember_token = User.encrypt(User.new_remember_token)
-  end
+    def create_remember_token
+      self.remember_token = User.encrypt(User.new_remember_token)
+    end
 
 end
