@@ -44,8 +44,12 @@ group :production do
   gem 'pg', '0.15.1'
   gem 'rails_12factor', '0.0.2'
 end
+
+#gem for successful run rails console
+gem 'rb-readline', '0.4.2'
+
 # Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '3.0.1'
 
 # Use unicorn as the app server
 # gem 'unicorn'
