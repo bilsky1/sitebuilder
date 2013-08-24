@@ -1,0 +1,74 @@
+@import "bootstrap";
+@import "bootstrap-responsive";
+
+/* GLOBAL DEFINITIONS
+-------------------------------------------------- */
+*{
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+}
+
+#content{
+  padding-top: 50px;
+}
+body{
+  background-image:url('texture.png');
+  background-repeat: repeat;
+}
+pre{
+  clear: both;
+}
+.center{
+   margin: 0 auto !important;
+   float: none !important;
+   width: 960px;
+}
+
+/* CUSTOMIZE THE NAVBAR
+-------------------------------------------------- */
+
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+.navbar{
+
+  .navbar-header{
+    padding: 10px;
+    #logo {
+      color: #eaeaea;
+      font-size: 20px;
+      &:hover{
+        text-decoration: none;
+        color: white;
+      }
+    }
+  }
+}
+
+/* Controller: Users, Action: index
+-------------------------------------------------- */
+.users {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-top: 1px solid $grayLighter;
+    &:last-child {
+      border-bottom: 1px solid $grayLighter;
+    }
+  }
+}
+
+/* CUSTOMIZE FORM ERRORS
+-------------------------------------------------- */
+#error_explanation {
+  color: #f00;
+  ul {
+    list-style: none;
+    margin: 0 0 18px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .control-group;
+  @extend .error;
+}

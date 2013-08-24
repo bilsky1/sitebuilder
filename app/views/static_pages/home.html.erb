@@ -1,2 +1,9 @@
-<h1>Site Builder</h1>
-<p>Here will be a signup and signin form.</p>
+<% if signed_in? %>
+    <h1>show all projects</h1>
+<% else %>
+    <div class="center">
+        <%= render 'shared/signin_form' %>
+        <%= render 'shared/signup_form' %>
+    </div>
+<% end %>
+

@@ -8,4 +8,10 @@ module ApplicationHelper
     end
   end
 
+  def nav_aktiv (page)
+    if current_page?page
+      "active"
+    end
+  end
+
 end

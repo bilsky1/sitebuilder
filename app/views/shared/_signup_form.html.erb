@@ -1,0 +1,8 @@
+<div class="span4 well">
+  <legend>New to Site Builder? Sign up!</legend>
+  <%= form_for(@user) do |f| %>
+      <%= render 'users/fields', f: f %>
+
+      <%= f.submit "Create my account", class: "btn btn-warning" %>
+  <% end %>
+</div>
