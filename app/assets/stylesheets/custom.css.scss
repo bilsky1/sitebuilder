@@ -12,7 +12,7 @@
   padding-top: 50px;
 }
 body{
-  background-image:url('texture.png');
+  background-image:url('wood.png');
   background-repeat: repeat;
 }
 pre{
@@ -23,10 +23,28 @@ pre{
    float: none !important;
    width: 960px;
 }
+.transify{
+  background:rgba(245,245,245,.6);
+  -webkit-transition: background 0.2s ease-in-out;
+  -moz-transition: background 0.2s ease-in-out;
+  transition: background 0.2s ease-in-out;
 
+  &:hover{
+    -webkit-transition: background 0.2s ease-in-out;
+    -moz-transition: background 0.2s ease-in-out;
+    transition: background 0.2s ease-in-out;
+
+    background:rgba(245,245,245,1.0);;
+  }
+}
+.well {
+
+  legend{
+    border-color: #d1d1d1;
+  }
+}
 /* CUSTOMIZE THE NAVBAR
--------------------------------------------------- */
-
+BOOTSTRAP-------------------------------------------------- */
 /* Special class on .container surrounding .navbar, used for positioning it into place. */
 .navbar{
 

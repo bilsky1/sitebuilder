@@ -1,9 +1,11 @@
 <% if signed_in? %>
     <h1>show all projects</h1>
 <% else %>
-    <div class="center">
+    <div class="offset1 row">
         <%= render 'shared/signin_form' %>
         <%= render 'shared/signup_form' %>
     </div>
 <% end %>
+
+
 
