@@ -80,14 +80,12 @@ Sitebuilder::Application.configure do
 
   #send email from localhost via gmail
   config.action_mailer.raise_delivery_errors = true
-
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   config.action_mailer.smtp_settings = {
       :address => "smtp.gmail.com",
       :port => 587,
-      :domain => "mail.google.com",
+      :domain => "sitebuilderbilsky.herokuapp.com",
       :user_name => "branislav.bilsky@gmail.com",
       :password => "0335521213",
       :authentication => :plain,
