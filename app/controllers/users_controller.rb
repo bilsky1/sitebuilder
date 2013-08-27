@@ -17,8 +17,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-    if @user.save
+    @user = User.new(user_params)    if @user.save
+      UserMailer.registration_confirmation(@user).deliver
       flash[:success] = "Welcome to the Site Builder"
       redirect_to @user
     else
