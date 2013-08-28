@@ -14,13 +14,20 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @string = "non verified"
+    if params[:verification]
+      if @user.verification_token == params[:verification]
+        @user.verify
+        @string = "verified"
+      end
+    end
   end
 
   def create
     @user = User.new(user_params)
     if @user.save
       UserMailer.registration_confirmation(@user).deliver
-      flash[:success] = "Welcome to the Site Builder"
+      flash[:success] = "For successful registration check your email for verification"
       redirect_to @user
     else
       render 'new'

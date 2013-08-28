@@ -9,6 +9,8 @@ FactoryGirl.define do
       admin true
     end
 
+    state 1
+
   end
 
 end
