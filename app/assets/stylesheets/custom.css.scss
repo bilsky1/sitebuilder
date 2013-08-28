@@ -27,8 +27,8 @@ pre{
    float: none !important;
    width: 960px;
 }
-.transify{
-  background:rgba(245,245,245,.6);
+.container .transify{
+  background-color:rgba(245,245,245,.6);
   -webkit-transition: background 0.2s ease-in-out;
   -moz-transition: background 0.2s ease-in-out;
   transition: background 0.2s ease-in-out;
@@ -38,7 +38,7 @@ pre{
     -moz-transition: background 0.2s ease-in-out;
     transition: background 0.2s ease-in-out;
 
-    background:rgba(245,245,245,1.0);;
+    background-color:rgba(245,245,245,1.0);;
   }
 }
 /* WILL_PAGINATE GEM CLASSES
@@ -54,6 +54,7 @@ pre{
 -------------------------------------------------- */
 .well {
   background-color: $whitesmoke;
+
   legend{
     border-color: #d1d1d1;
   }

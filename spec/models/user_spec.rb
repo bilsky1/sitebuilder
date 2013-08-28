@@ -14,6 +14,7 @@ describe User do
   it { should respond_to(:password_confirmation) }
   it { should respond_to(:remember_token) }
   it { should respond_to(:verification_token) }
+  it { should respond_to(:state) }
   it { should respond_to(:authenticate) }
   it{ should be_valid }
   it { should_not be_admin }
