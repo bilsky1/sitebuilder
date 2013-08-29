@@ -4,6 +4,7 @@ Sitebuilder::Application.routes.draw do
 
   root to: 'static_pages#home'
   match '/help',    to: 'static_pages#help',    via: 'get'
+  match '/confirmation',    to: 'static_pages#confirmation',    via: 'get'
 
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'

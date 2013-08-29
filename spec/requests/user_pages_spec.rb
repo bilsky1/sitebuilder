@@ -102,7 +102,6 @@ describe "User Pages" do
 
     it { should have_content(user.name) }
     it { should have_title(user.name) }
-
   end
 
   describe "index" do

@@ -43,7 +43,9 @@ module SessionsHelper
   end
 
   def store_location
-    session[:return_to] = request.url
+    unless request.url.include?(confirmation_path)
+      session[:return_to] = request.url
+    end
   end
 
 end

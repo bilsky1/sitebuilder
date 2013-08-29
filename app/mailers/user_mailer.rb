@@ -3,7 +3,7 @@ class UserMailer < ActionMailer::Base
 
   def registration_confirmation(user)
     @user = user
-    @url  = user_path(@user)
+    @url  = confirmation_url + "?verification=" + @user.verification_token
     mail(to: @user.email, subject: 'SiteBuilder: Registration e-mail')
   end
 

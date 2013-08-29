@@ -134,4 +134,15 @@ describe User do
     before { @user.save }
     its(:verification_token) { should_not be_blank }
   end
+
+  describe "verification status" do
+    before { @user.save }
+    its(:state) { should_not eq 1 }
+
+    describe "after verify email" do
+      before { @user.verify }
+      its(:state) { should eq 1 }
+    end
+
+  end
 end
