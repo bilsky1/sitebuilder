@@ -27,21 +27,21 @@ describe "StaticPages" do
     it_should_behave_like "all static pages"
   end
 
-  describe "confirmation page" do
+  describe "auth page" do
     let(:user) { FactoryGirl.create(:user) }
-    before { visit confirmation_path }
+    before { visit auth_path }
 
     it { should have_content("Sign up") }
 
     describe "visit with valid verification" do
-      let(:verification_link) { confirmation_path + "?verification=" + user.verification_token }
+      let(:verification_link) { auth_path + "?verification=" + user.verification_token }
       before { visit verification_link}
 
       it { should have_content("successful verify") }
     end
 
     describe "visit with in valid verification" do
-      let(:verification_link) { confirmation_path + "?verification=aaaaaaaaaaaaaaa"}
+      let(:verification_link) { auth_path + "?verification=aaaaaaaaaaaaaaa"}
       before { visit verification_link}
 
       it { should have_content("Sign up") }

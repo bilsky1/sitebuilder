@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
     else
       if user
         unless user.state?
-          flash.now[:error] = 'Please check your email for confirmation'
+          flash.now[:error] = 'Please check your email for authentification.'
         else
           flash.now[:error] = 'Invalid email/password combination'
         end

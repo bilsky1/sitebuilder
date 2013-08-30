@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
-  before_save{ self.email = email.downcase }
-  before_save :create_remember_token, :create_verification_token
+  before_save do
+    self.email = email.downcase
+    generate_token(:remember_token)
+    generate_token(:verification_token)
+  end
 
   #validations
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
@@ -19,12 +22,15 @@ class User < ActiveRecord::Base
     self.save(:validate=>false)
   end
 
-  def User.new_remember_token
-    SecureRandom.urlsafe_base64
+  def send_password_reset
+    generate_token(:password_reset_token)
+    self.password_reset_sent_at = Time.zone.now
+    self.save(:validate=>false)
+    UserMailer.password_reset(self).deliver
   end
 
-  def User.new_verification_token
-    SecureRandom.base64(15).tr('+/=', '0aZ').strip.delete("\n")
+  def send_registration_confirmation
+    UserMailer.registration_confirmation(self).deliver
   end
 
   def User.encrypt(token)
@@ -32,13 +38,10 @@ class User < ActiveRecord::Base
   end
 
   private
-
-    def create_remember_token
-      self.remember_token = User.encrypt(User.new_remember_token)
-    end
-
-    def create_verification_token
-      self.verification_token = User.encrypt(User.new_verification_token)
+    def generate_token(column)
+      begin
+        self[column] = User.encrypt(SecureRandom.base64(15).tr('+/=', '0aZ').strip.delete("\n"))
+      end while User.exists?(column => self[column])
     end
 
 end

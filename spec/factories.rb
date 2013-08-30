@@ -11,6 +11,9 @@ FactoryGirl.define do
 
     state 1
 
+    #for user mailer
+    password_reset_token "aaaaaaaaaaaaaaa"
+
   end
 
 end

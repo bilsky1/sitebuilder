@@ -1,0 +1,6 @@
+var totalCount = 11;
+function ChangeBackground(assets_path){
+    var num = Math.ceil( Math.random() * totalCount );
+    document.body.background = assets_path + '/bgtexture/' + num + '.png';
+    document.body.style.backgroundRepeat = "repeat";
+}

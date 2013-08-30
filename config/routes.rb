@@ -1,10 +1,11 @@
 Sitebuilder::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :password_resets
 
   root to: 'static_pages#home'
   match '/help',    to: 'static_pages#help',    via: 'get'
-  match '/confirmation',    to: 'static_pages#confirmation',    via: 'get'
+  match '/auth',    to: 'static_pages#auth',    via: 'get'
 
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'

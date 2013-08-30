@@ -6,7 +6,7 @@ class StaticPagesController < ApplicationController
   def help
   end
 
-  def confirmation
+  def auth
     if params[:verification]
       @user = User.find_by_verification_token(params[:verification])
       if @user
