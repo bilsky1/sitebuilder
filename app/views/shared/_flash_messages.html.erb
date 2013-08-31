@@ -1,5 +1,5 @@
 <% flash.each do |key, value| %>
-    <div class="alert alert-<%= key %>">
+    <div class="alert alert-<%= key %> fade in">
       <a class="close" onclick="$('div.alert').slideUp("slow");" data-dismiss="alert" href="#">x</a><%= value %>
     </div>
 <% end %>

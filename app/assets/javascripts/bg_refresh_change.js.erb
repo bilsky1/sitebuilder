@@ -1,6 +1,6 @@
-var totalCount = 11;
+var totalCount = 14;
 function ChangeBackground(assets_path){
     var num = Math.ceil( Math.random() * totalCount );
-    document.body.background = assets_path + '/bgtexture/' + num + '.png';
-    document.body.style.backgroundRepeat = "repeat";
+    $("body").css("background-image", "url('" + assets_path + '/bgtexture/' + num + '.png' + "')");
+    $("body").css("background-repeat","repeat");
 }
