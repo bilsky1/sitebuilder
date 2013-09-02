@@ -14,9 +14,11 @@
 <%= render 'layouts/header' %>
 
 <div id="content" class="container">
- <% unless request.url.include?(sessions_path) %>
+ <div id='flash_messages'>
+     <% unless request.url.include?(sessions_path) %>
         <%= render 'shared/flash_messages' %>
-  <% end %>
+      <% end %>
+  </div>
     <%= yield %>
 
     <%= debug(params) if Rails.env.development? %>

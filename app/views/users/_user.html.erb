@@ -1,4 +1,4 @@
-<li>
+<li id="<%= dom_id(user) %>">
   <div class="row-fluid">
     <div class="span8">
       <%= link_to user.name, user %>
@@ -7,7 +7,8 @@
       <div class="pull-right">
         <% if current_user.admin? && !current_user?(user) %>
             <%= link_to user, method: :delete,
-                        :class => "btn btn-danger",
+                        class: "btn btn-danger",
+                        remote: true,
                         data: { confirm: "You sure?" } do %>
                 <i class="icon-trash icon-white"></i>
                 Delete
