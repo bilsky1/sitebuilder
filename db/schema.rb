@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130829223527) do
+ActiveRecord::Schema.define(version: 20131227174834) do
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -29,5 +29,19 @@ ActiveRecord::Schema.define(version: 20130829223527) do
 
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"
   add_index "users", ["verification_token"], name: "index_users_on_verification_token"
+
+  create_table "webs", force: true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.string   "header_content"
+    t.string   "footer_content"
+    t.boolean  "published",      default: false
+    t.datetime "published_at"
+    t.string   "favicon_src"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "webs", ["user_id"], name: "index_webs_on_user_id"
 
 end

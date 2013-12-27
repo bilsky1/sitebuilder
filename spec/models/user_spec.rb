@@ -19,6 +19,8 @@ describe User do
   it{ should be_valid }
   it { should_not be_admin }
 
+  it { should respond_to(:webs) }
+
   describe "with admin attribute set to 'true'" do
     before do
       @user.save!
@@ -145,4 +147,26 @@ describe User do
     end
 
   end
+
+
+  describe "web associations" do
+
+    before { @user.save }
+    let!(:older_web) do
+      FactoryGirl.create(:web, user: @user, created_at: 1.day.ago)
+    end
+    let!(:newer_web) do
+      FactoryGirl.create(:web, user: @user, created_at: 1.hour.ago)
+    end
+
+    it "should destroy associated webs" do
+      webs = @user.webs.to_a
+      @user.destroy
+      expect(webs).not_to be_empty
+      webs.each do |web|
+        expect(Web.where(id: web.id)).to be_empty
+      end
+    end
+  end
+
 end

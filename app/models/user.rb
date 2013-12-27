@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
     generate_token(:verification_token)
   end
 
+  #relations
+  has_many :webs, dependent: :destroy
+
   #validations
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   validates :name, presence: true, length: { maximum: 50 }

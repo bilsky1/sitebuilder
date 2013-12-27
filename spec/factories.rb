@@ -16,4 +16,9 @@ FactoryGirl.define do
 
   end
 
+  factory :web do
+    sequence(:name) { |n| "Testing web #{n}"}
+    user
+  end
+
 end

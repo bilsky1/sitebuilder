@@ -17,6 +17,5 @@
 //
 //------------EXTERNAL JAVASCRIP MODULES & FILES------------------------
 //= require custom.js
-//= require bg_refresh_change.js
 
 
