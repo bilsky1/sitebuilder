@@ -1,6 +1,6 @@
 <li id="<%= dom_id(user) %>">
   <div class="row-fluid">
-    <div class="span8">
+    <div class="span9">
       <%= link_to user.name, user %>
     </div>
     <div class="span3">
@@ -10,7 +10,7 @@
                         class: "btn btn-danger",
                         remote: true,
                         data: { confirm: "You sure?" } do %>
-                <i class="icon-trash icon-white"></i>
+                <i class="fa fa-trash-o"></i>
                 Delete
             <% end %>
         <% end %>

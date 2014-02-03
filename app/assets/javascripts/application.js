@@ -17,5 +17,6 @@
 //
 //------------EXTERNAL JAVASCRIP MODULES & FILES------------------------
 //= require custom.js
+//= require webs_edit_interface.js
 
 

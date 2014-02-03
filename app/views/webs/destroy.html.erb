@@ -1,1 +1,2 @@
-destroy
+$("#flash_messages").html("<%= escape_javascript(render :partial => 'shared/flash_messages' , :locals => { :flash => flash }).html_safe %>");
+$('#<%= dom_id(@web) %>').fadeOut();

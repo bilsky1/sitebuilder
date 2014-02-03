@@ -4,7 +4,7 @@ describe Web do
   let(:user) {FactoryGirl.create(:user)}
 
   before do
-    @web = user.webs.build(name: "Example Web")
+    @web = user.webs.build(name: "Example Web", subdomain:"example")
   end
 
   subject { @web }
@@ -39,4 +39,15 @@ describe Web do
 
     it { should be_published }
   end
+
+  describe "with blank subdomain" do
+    before { @web.subdomain = " " }
+    it{ should be_valid }
+  end
+
+  describe "when subdomain is too long" do
+    before { @web.subdomain = "a" * 31 }
+    it{ should_not be_valid }
+  end
+
 end

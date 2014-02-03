@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131227174834) do
+ActiveRecord::Schema.define(version: 20140110150834) do
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -40,8 +40,10 @@ ActiveRecord::Schema.define(version: 20131227174834) do
     t.string   "favicon_src"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "subdomain",      default: ""
   end
 
+  add_index "webs", ["subdomain"], name: "index_webs_on_subdomain"
   add_index "webs", ["user_id"], name: "index_webs_on_user_id"
 
 end

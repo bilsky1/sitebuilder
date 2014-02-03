@@ -1,1 +1,8 @@
-edit
+<% provide(:title, @web.name + ' | Edit') %>
+<%= render 'webs/edit_panel' %>
+<div id="main-content">
+  <div id="main-content-inner">
+    <p>Editing: <%= @web.name %> </p>
+    <p>Subdomain: <%= @web.subdomain %> </p>
+  </div>
+</div>

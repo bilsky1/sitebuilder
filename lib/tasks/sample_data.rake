@@ -2,6 +2,7 @@ namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
     make_users
+    make_webs
   end
 end
 
@@ -21,5 +22,13 @@ def make_users
                  password: password,
                  password_confirmation: password,
                  state: 1)
+  end
+
+  def make_webs
+    users = User.all(limit: 6)
+    35.times do
+      name = Faker::Lorem.words(3).join(' ')
+      users.each { |user| user.webs.create!(name: name, header_content: "This is repeatitive header", footer_content: "This is repetitive footer") }
+    end
   end
 end

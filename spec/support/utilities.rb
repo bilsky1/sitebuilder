@@ -1,4 +1,5 @@
 include ApplicationHelper
+include UrlHelper
 
 def sign_in(user, options={})
   visit signin_path

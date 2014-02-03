@@ -42,4 +42,8 @@ Sitebuilder::Application.configure do
       :authentication => :plain,
       :enable_starttls_auto => true
   }
+
+  #for subdomains
+  config.action_dispatch.tld_length = 1
+
 end

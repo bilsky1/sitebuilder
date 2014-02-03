@@ -1,1 +1,10 @@
-new
+<div class="row-fluid">
+  <div class=" offset5 span7 well">
+    <%= form_for(@web) do |w| %>
+        <%= render 'shared/error_messages', object: w.object %>
+        <%= w.text_field :name, placeholder: "Name", class: "span12" %>
+        <%= w.text_field :subdomain, placeholder: "Subdomain", class: "span12" %>
+        <%= w.submit "Create new website", class: "btn btn-warning pull-right" %>
+    <% end %>
+  </div>
+</div>

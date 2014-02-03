@@ -1,6 +1,6 @@
 module ApplicationHelper
   def full_title (page_title)
-    base_title = "SiteBuilder"
+    base_title = "WBSBuilder"
     if page_title.empty?
       base_title
     else

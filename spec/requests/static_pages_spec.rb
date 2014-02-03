@@ -11,11 +11,24 @@ describe "StaticPages" do
   describe "Home page" do
     before { visit root_path }
 
-    let(:heading)    { 'Site Builder' }
+    let(:heading)    { 'Sign in to WBSBuilder' }
     let(:page_title) { '' }
 
     it_should_behave_like "all static pages"
     it { should_not have_title('| Home') }
+
+    describe "visit with signed user" do
+      let(:user) { FactoryGirl.create(:user) }
+      let(:heading)    { 'Web sites' }
+      before do
+        sign_in user
+        visit root_path
+      end
+
+      it_should_behave_like "all static pages"
+      it { should have_title('| Web sites') }
+      it { should have_content(:heading) }
+    end
   end
 
   describe "Help page" do

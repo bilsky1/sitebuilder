@@ -55,8 +55,9 @@ gem 'bcrypt-ruby', '3.0.1'
 gem "bootstrap-sass", "~> 2.3.2.0"
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
+gem "font-awesome-rails"
 
-gem "state_machine", "~> 1.2.0"
+#gem "state_machine", "~> 1.2.0"
 
 gem 'faker', '1.1.2'
 
