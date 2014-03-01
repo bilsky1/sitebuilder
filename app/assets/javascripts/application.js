@@ -14,9 +14,29 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
+//----------------------------jQuery-UI-INTERACTIONS-----------------------
+//= require jquery.ui.draggable
+//= require jquery.ui.droppable
+//= require jquery.ui.resizable
+//= require jquery.ui.selectable
+//= require jquery.ui.sortable
+//= require jquery.ui.dialog
 //
-//------------EXTERNAL JAVASCRIP MODULES & FILES------------------------
+//
+//-------------INCLUDE SUBPAGE PLUGIN AND ALL CLASSES---------------------
+//---global.js and a_c_block must to be first included
+//= require subpagebuild/classes/global.js
+//= require subpagebuild/classes/a_c_block.js
+//= require_tree ./subpagebuild/classes/override
+//= require subpagebuild/subpagebuild.js
+//
+//
 //= require custom.js
 //= require webs_edit_interface.js
+//
+//------------EXTERNAL JAVASCRIP MODULES & FILES------------------------
+//= require ckeditor-jquery
+//= require jquery.minicolors
+//= require fancybox
 
 

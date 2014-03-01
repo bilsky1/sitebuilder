@@ -1,0 +1,176 @@
+//EXTEND - PURE JS INHERITANCE method - add method to class
+//Empty subpage content icon
+var deleteCode = "<i class='fa fa-times'></i>";
+var moveCode =  "<i class='fa fa-arrows'></i>";
+var settingsCode = "<i class='fa fa-wrench'></i>";
+
+var emptyIconCode = "<div id='dndIcon' class='text-center'><img alt='Drag element here' src='/assets/drag_drop_icon.png'></div>";
+var emptyColumnCode = '<div class="colEmptyIcon">Drag element here</div>';
+
+// variable to know if element is drag & drop or sort
+var transfered = 'sortable';
+
+//dragBlockId = gen_block data-type
+var dragBlockId = "";
+var numberOfGenBlock = 0;
+var genPageBgColor;
+var genBlocksList = new Array();
+var globalOptions;
+var globalSubpageBuild;
+
+//GENERATE Block object, depend on blockID parameter of dropped block
+function generateBlock(blockType,blockId){
+    var blockObj;
+    //--------BASIC blocks
+    if(blockType === "text_b")
+        blockObj = new TextBlock(blockId,globalOptions.gen_block_class, "#" + $(this).attr("id"));
+    else if(blockType === "title_b")
+        blockObj = new TitleBlock(blockId, globalOptions.gen_block_class, "#" + $(this).attr("id"));
+    else if(blockType === "image_b")
+        blockObj = new ImageBlock(blockId, globalOptions.gen_block_class, "#" + $(this).attr("id"));
+    else if(blockType === "image_text_b")
+        blockObj = new ImageTextBlock(blockId, globalOptions.gen_block_class, "#" + $(this).attr("id"));
+    else if(blockType === "button_b")
+        blockObj = new ButtonBlock(blockId, globalOptions.gen_block_class, "#" + $(this).attr("id"));
+    else if(blockType === "gallery_b")
+        blockObj = new GalleryBlock(blockId, globalOptions.gen_block_class, "#" + $(this).attr("id"));
+    else if(blockType === "map_b")
+        blockObj = new MapsBlock(blockId, globalOptions.gen_block_class, "#" + $(this).attr("id"));
+    //--------STRUCTURE blocks
+    else if(blockType === "column_b")
+        blockObj = new ColumnBlock(blockId, globalOptions.gen_block_class, "#" + $(this).attr("id"));
+    else if(blockType === "divider_b")
+        blockObj = new DividerBlock(blockId, globalOptions.gen_block_class, "#" + $(this).attr("id"));
+    //--------AJAX blocks
+    else if(blockType === "ajax_content_b")
+        blockObj = new AjaxContentBlock(blockId, globalOptions.gen_block_class, "#" + $(this).attr("id"));
+    //--------MEDIA blocks
+    else if(blockType === "pdf_b")
+        blockObj = new PdfBlock(blockId, globalOptions.gen_block_class, "#" + $(this).attr("id"));
+    else if(blockType === "youtube_b")
+        blockObj = new YoutubeBlock(blockId, globalOptions.gen_block_class, "#" + $(this).attr("id"));
+    else if(blockType === "social_icons_b")
+        blockObj = new SocialIconsBlock(blockId, globalOptions.gen_block_class, "#" + $(this).attr("id"));
+    else if(blockType === "code_b")
+        blockObj = new CodeBlock(blockId, globalOptions.gen_block_class, "#" + $(this).attr("id"));
+
+    genBlocksList.push(blockObj);
+
+    return blockObj;
+}//generateBlock
+
+//set up inline editor for elements with class (Argument className)
+function setInlineCKeditor(className){
+    $(className).each(function(){
+        var name;
+        for(name in CKEDITOR.instances) {
+            var instance = CKEDITOR.instances[name];
+            if(this && this == instance.element.$) {
+                return;
+            }
+        }
+        $(this).attr('contenteditable', true);
+
+        CKEDITOR.inline( this, {
+            uiColor: '#C2C2C2',
+            toolbar: [
+                ['Bold','Italic','Underline', "-" ,'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'],
+                ['TextColor','BGColor','Font','FontSize'],
+                [ 'NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+                [ 'Link', 'Unlink' ],
+                ['Undo','Redo']
+
+            ]
+        });
+    });
+}//setInlineCKeditor
+
+//startDragEffect - set style when block is drag or sort
+function startDragEffect(){
+    $(".ui-draggable-dragging").css({
+        background: "#2e8bd9",
+        border: "1px solid #155489"
+    });
+    $(globalOptions.full_page_content).css("background","rgba(0,0,0,0.7)");
+    globalSubpageBuild.css({
+        background: genPageBgColor,
+        borderRadius: "5px",
+        border: "1px dashed black"
+    });
+}//startDragEffect
+
+//stoptDragEffect - delete style when block is drag or sort
+function stoptDragEffect(){
+    $(globalOptions.full_page_content).css("background",genPageBgColor);
+    globalSubpageBuild.css({
+        background: "none",
+        borderRadius: "0px",
+        border: "none"
+    });
+}//stoptDragEffect
+
+//DRAG & DROP icon on empty subpage content
+function dragAndDropIcon(element){
+    if( jQuery.trim(element.html()) === "" || element.html() === emptyIconCode){
+        element.append(emptyIconCode);
+    } else {
+        element.find("#dndIcon").remove();
+    }
+} //DRAG & DROP icon
+
+function showHideEmptyColumnCode(element){
+    element.find(".col").each(function(){
+        if( jQuery.trim($(this).html()) === ""){
+            $(this).append(emptyColumnCode);
+        }
+        else if($(this).html() === emptyColumnCode){}
+        else {
+            $(this).find(".colEmptyIcon").remove();
+        }
+    });
+}
+
+function loadAllBlock(obj){
+    obj.find(globalOptions.gen_block_class).each(function(){
+        var blockObj = generateBlock($(this).data("type"),parseInt($(this).attr("id")));
+        blockObj.setBlockHoverHandler();
+    });
+    dragAndDropIcon(obj);
+    showHideEmptyColumnCode(globalSubpageBuild);
+    setInlineCKeditor('.ckeditor');
+}
+
+function genIdToNewBlock(){
+    var lastId = 0;
+    for(var i=0; i < genBlocksList.length; i++){
+        if(parseInt(genBlocksList[i].id) > lastId){
+            lastId = parseInt(genBlocksList[i].id);
+        }
+    }
+    return lastId+1;
+}
+
+function extend(obj, blockAbstractClass){
+    for (var i in blockAbstractClass) {
+        obj.prototype[i] = blockAbstractClass[i]
+    }
+}//extend
+
+/*Convert rgba color to hexa color*/
+function hex( c ) {
+    var m = /rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/.exec(c);
+    return m ? '#' + (1 << 24 | m[1] << 16 | m[2] << 8 | m[3]).toString(16).substr(1) : c;
+};
+
+/*Convert hex color to rgb color*/
+function hex2rgb(hex,opacity) {
+    // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+    var oldHex = hex;
+    var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+    hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+        return r + r + g + g + b + b;
+    });
+
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? "rgba("+ parseInt(result[1], 16) + ","+ parseInt(result[2], 16) + ","+  parseInt(result[3], 16) +"," + opacity + ")" : oldHex;
+}

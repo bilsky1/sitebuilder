@@ -10,5 +10,11 @@
  *
  *= require_self
  *= require_tree .
+ * --------------------------jQuery-UI-INTERACTIONS-----------------
+ *= require jquery.ui.resizable
+ *= require jquery.ui.selectable
+ *= require jquery.ui.dialog
+ *= require jquery.minicolors
+ *= require fancybox
  */
 

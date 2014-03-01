@@ -27,6 +27,12 @@ pre{
    float: none !important;
    width: 100%;
 }
+.text-center{
+  text-align: center;
+}
+.margin-top-15perc{
+    margin-top: 15%;
+}
 .container{
   width: 100%;
   .transify{
@@ -333,37 +339,50 @@ ul.blocks{
   padding: 0;
   li{
     list-style-type: none;
-    background-color: #525455;
     float:right;
-    margin: 8px;
-    padding: 30px 49px 65px 49px;
-    border-radius: 4px;
-    position: relative;
-    border: 1px solid #424242;
-    a{
-      color:#fefefe;
-      span.image{
-        position: absolute;
-        left: 50%;
-        top: 20px;
-        text-align: center;
-        img{
-
-        }
-      }
-      span{
-        position: absolute;
-        font-size: 13px;
-        text-transform: uppercase;
-        width: 100px;
-        left: 50%;
-        text-align: center;
-        margin-left: -50px;
-        bottom: 10px;
-      }
-    }
   }
 
+}
+
+.block{
+  background-color: #525455;
+  margin: 8px;
+  padding: 30px 49px 65px 49px;
+  border-radius: 4px;
+  position: relative;
+  border: 1px solid #424242;
+  z-index: 999;
+  a{
+    color:#fefefe;
+    span.image{
+      position: absolute;
+      left: 50%;
+      top: 20px;
+      text-align: center;
+      img{
+
+      }
+    }
+    span{
+      position: absolute;
+      font-size: 13px;
+      text-transform: uppercase;
+      width: 100px;
+      left: 50%;
+      text-align: center;
+      margin-left: -50px;
+      bottom: 10px;
+    }
+    &:hover{
+      cursor: move;
+    }
+  }
+  &:hover{
+    cursor: move;
+  }
+}
+#subpageContent .block{
+  position: absolute;
 }
 
 /*DEFAULT SHOW SIDEBAR-BLOCK CONTENT*/

@@ -1,0 +1,340 @@
+
+#subpageContent{
+  margin: 20px;
+}
+/*SUBPAGE BUILD PLUGIN
+------------------------------------------------*/
+.gen_block{
+  /*box-shadow: 0px 0px 0px 2px rgba(68, 68, 68, 0.49);*/
+  position: relative;
+  border-radius:4px;
+  padding: 4px;
+  clear: both;
+  /*fix the problem of floated content*/
+  &:after{
+    content: " ";
+    clear: both;
+    display: block;
+  }
+  &:hover{
+    box-shadow: 0px 0px 0px 2px rgba(68, 68, 68, 0.49) !important;
+    border: none !important;
+  }
+}
+.blockControls{
+  position: relative;
+  display: block;
+}
+.blockControls button {
+  margin-right: 3px;
+  padding: 1px 3px;
+  border-radius: 3px !important;
+  background-color: transparent;
+  font-weight: bold;
+  color: #DFDFDF;
+  border: none;
+  outline: none !important;
+
+  &:hover{
+    color: #6E9DD1;
+    cursor: pointer;
+  }
+}
+.blockControls button.current{
+  color: #6E9DD1;
+  cursor: pointer;
+}
+.deleteBlock, .moveBlock, .modifyBlock{
+  position: absolute;
+  border: none;
+  display: block;
+  color: rgba(0,0,0,0.8);
+  margin: 0;
+  top: -5px;
+  z-index: 999;
+  background-color: rgba(68, 68, 68, 0.49);
+
+  &:hover{
+    background-color: rgba(0,0,0,0.6);
+  }
+
+}
+.deleteBlock{
+  right: -5px;
+  padding: 5px 8px;
+  border-radius: 0px 4px 0px 4px;
+
+  &:hover{
+    color: #ca6969;
+    cursor: pointer;
+  }
+}
+.moveBlock{
+  left: 50%;
+  margin-left: -40px;
+  padding: 5px 30px;
+  border-radius: 0px 0px 4px 4px;
+
+  &:hover{
+    color: #C5AE34;
+    cursor: move;
+  }
+}
+.modifyBlock{
+  left: -5px;
+  padding: 5px 8px;
+  border-radius: 4px 0px 4px 0px;
+
+  &:hover{
+    color: #6E9DD1;
+    cursor: pointer;
+  }
+}
+/*Doesn't show dialog when it's add*/
+.dialog{
+  display: none;
+}
+/*jQuery-UI sortable*/
+.ui-state-highlight {
+  border: 1px solid rgba(0, 0, 0, 0.4) !important;
+  box-shadow: 0px 0px 3px rgb(255, 214, 0) !important;
+  background: none !important;
+}
+.ckeditor *{
+  -webkit-user-select: text;
+  -khtml-user-select: text;
+  -moz-user-select: text;
+  -o-user-select: text;
+  user-select: text;
+}
+
+#addBlock{
+  background-color: #525455;
+  margin: 8px;
+  padding: 30px 49px 65px 49px;
+  border-radius: 4px;
+  position: absolute;
+  border: 1px solid #424242;
+
+  a{
+    color:#fefefe;
+    span.image{
+      position: absolute;
+      left: 50%;
+      top: 20px;
+      text-align: center;
+      img{
+
+      }
+    }
+    span{
+      position: absolute;
+      font-size: 13px;
+      text-transform: uppercase;
+      width: 100px;
+      left: 50%;
+      text-align: center;
+      margin-left: -50px;
+      bottom: 10px;
+    }
+  }
+}
+
+/*SUBPAGE BUILD PLUGIN*/
+
+/*CKEDITOR change*/
+.cke_inner{
+  background-color: transparent !important;
+  padding-bottom: 2px !important;
+  .cke_top{
+    border-radius: 4px !important;
+  }
+}
+.cke_show_borders {
+  outline: none !important;
+}
+
+
+
+/*SUBPAGE BLOCK styles - this gonna be different depend by theme css, the copied to project css by first save*/
+/*----------------------Global Block------------------------------------*/
+.ui-widget-overlay{
+  background: transparent !important;
+}
+.ui-dialog{
+  height: 600px;
+  form,table{
+    button{
+      margin: 0 2px;
+      border-radius: 3px;
+      border: 1px solid rgb(167, 167, 167);
+      padding: 2px 6px;
+      i{
+        color: rgb(71, 69, 69);
+      }
+    }
+  }
+}
+/*----------------------Global Block------------------------------------*/
+
+/*---------------------------------Title block-------------------------*/
+#subpageContent h1 {
+  font-size: 30px !important;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  span{
+    font-size: 30px !important;
+  }
+}
+#subpageContent h2 {
+  font-size: 26px !important;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  span{
+    font-size: 26px !important;
+  }
+}
+#subpageContent h3 {
+  font-size: 22px !important;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  span{
+    font-size: 22px !important;
+  }
+}
+
+/*Divider block*/
+#subpageContent .dividerBlock{
+  background: #000000;
+  height: 1px;
+  position: relative;
+}
+/*---------------------------------Title block-------------------------*/
+/*---------------------------------Button block-------------------------*/
+.buttonAlign{
+  margin: 10px 0;
+}
+.button{
+  border-radius: 3px;
+  background-color: #f1d161;
+  color: rgb(56, 56, 56);
+  padding: 10px 16px;
+
+  &:hover{
+    text-decoration: none;
+    background-color: #FCCD28;
+    color: black;
+  }
+
+}
+/*---------------------------------Button block-------------------------*/
+/*---------------------------------Image + Text block-------------------------*/
+.imageAndText{
+  a{
+    float:left;
+    margin-right: 15px;
+    margin-bottom: 15px;
+  }
+  clear: both;
+}
+/*---------------------------------Image + Text block-------------------------*/
+/*---------------------------------Gallery block-------------------------*/
+.galItem{
+  float:left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+/*---------------------------------Gallery block-------------------------*/
+/*---------------------------------Maps block-------------------------*/
+.googleMaps {
+  width: 100%;
+  height: 300px;
+  /* Bootstrap Css Map Fix*/
+  img {
+    max-width: none;
+  }
+  /* Bootstrap Css Map Fix*/
+  label {
+    width: auto; display:inline;
+  }
+
+}
+/*---------------------------------Maps block-------------------------*/
+
+/*---------------------------------Column block--------------------------*/
+
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+
+@media only screen and (max-width: 480px) {
+  .col {
+    margin: 1% 0 1% 0%;
+  }
+}
+@media only screen and (max-width: 480px) {
+
+}
+/*---------------------------------Column block--------------------------*/
+/*---------------------------------Social Icon block--------------------------*/
+.socialIconsBlock{
+  a{
+    color: rgba(0, 0, 0, 0.6);
+    margin: 2px 3px;
+
+    &:first-child{
+      margin-left: 0;
+    }
+    &:last-child{
+      margin-right: 0;
+    }
+  }
+
+  a.fbIcon:hover{ color: #3b5998 !important; }
+  a.gplusIcon:hover{ color: #dd4b39 !important; }
+  a.twitterIcon:hover{ color: #55acee !important; }
+  a.pinterestIcon:hover{ color: #d73532 !important; }
+  a.linkedInIcon:hover{ color: #1b86bd !important; }
+  a.gitHubIcon:hover{ color: #4183c4 !important; }
+  a.tumblrIcon:hover{ color: #243c53 !important; }
+}
+.socIconDialogRow{
+  display: block;
+  margin: 5px;
+  width: 290px;
+
+  input[type="checkbox"]{
+    width: 15px;
+    height: 15px;
+    margin: 0 10px 10px 10px;
+    -ms-transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    -o-transform: scale(1.5);
+  }
+
+}
+/*---------------------------------Social Icon block--------------------------*/
+
+/*---------------------------------Youtube block--------------------------*/
+.youtubeVideo{
+  iframe{
+    width: 100%;
+    height: 300px;
+  }
+}
+/*---------------------------------Youtube block--------------------------*/
+
+/*---------------------------------Code block--------------------------*/
+form.CodeForm{
+  textarea{
+    width: 350px;
+    height: 200px;
+  }
+}
+/*---------------------------------Code block--------------------------*/
+
+/*---------------------------------Other styles--------------------------*/
+.colEmptyIcon {
+  text-align: center;
+  color: #7FBBE7;
+  text-transform: uppercase;
+  font-size: 15px;
+  padding: 20px 0;
+}
+/*---------------------------------Other styles--------------------------*/

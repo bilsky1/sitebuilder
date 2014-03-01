@@ -56,6 +56,10 @@ gem "bootstrap-sass", "~> 2.3.2.0"
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
 gem "font-awesome-rails"
+gem 'jquery-ui-rails'
+gem "ckeditor_rails", "~> 4.3.1"
+gem "jquery-minicolors-rails", "~> 2.1.1.2"
+gem "fancybox-rails", "~> 0.2.1"
 
 #gem "state_machine", "~> 1.2.0"
 
