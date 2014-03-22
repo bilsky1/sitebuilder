@@ -29,14 +29,20 @@
 //= require subpagebuild/classes/a_c_block.js
 //= require_tree ./subpagebuild/classes/override
 //= require subpagebuild/subpagebuild.js
+//= require subpagebuild/classes/c_cleaner.js
 //
 //
 //= require custom.js
 //= require webs_edit_interface.js
+//= require subpage_loader.js
 //
 //------------EXTERNAL JAVASCRIP MODULES & FILES------------------------
 //= require ckeditor-jquery
 //= require jquery.minicolors
 //= require fancybox
+//
+//--------------VENDOR PLUGINS-----------------
+// require vendor
+
 
 

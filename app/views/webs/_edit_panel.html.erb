@@ -173,11 +173,23 @@
         </div>
         <!-- BLOCKS CONTENT end -->
 
-      <!-- BLOCKS CONTENT start -->
+      <!-- PAGES CONTENT start -->
       <div class="sidebar-big-content" id="pages-content">
         <h2>Pages</h2>
+        <form action="/pages/create_page" method="post">
+          <div id="pages-messages"></div>
+          <input type="hidden" name="web_id" value="<%= @web.id %>">
+          <input type="text" name="name" value="" placeholder="New pages name">
+          <input type="text" name="title" value="" placeholder="New page title">
+          <input type="submit" value="Create" class="btn btn-success" id="create-new-page">
+        </form>
+        <ul id="pagesList">
+          <% @pages.each do |page| %>
+              <li class='alert alert-info'><%= page.name %><i class="fa fa-trash-o fa-lg delete-page" data-page-id="<%= page.id %>" ></i></li>
+          <% end %>
+        </ul>
       </div>
-      <!-- BLOCKS CONTENT end -->
+      <!-- PAGES CONTENT end -->
 
       <!-- BLOCKS CONTENT start -->
       <div class="sidebar-big-content" id="settings-content">

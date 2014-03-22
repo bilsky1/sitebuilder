@@ -238,7 +238,16 @@ pre{
   ul.sidebar-menu{
     margin-top: 15px;
   }
-
+  form{
+    width: 90%;
+    margin: 0 auto;
+    input{
+      width: 90%;
+    }
+    input[type="submit"]{
+      width: auto;
+    }
+  }
   .category-header{
     margin: 15px 0;
     padding: 0;
@@ -453,7 +462,7 @@ div#main-content{
   #main-content-inner{
     margin-left: 310px;
     height: 100%;
-    background: gray;
+    background: #fbfbfb;
     overflow-y: scroll !important;
     overflow-x: scroll !important;
     &::-webkit-scrollbar {
@@ -490,7 +499,8 @@ div#main-content{
 div#debug-info{
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: 300px;
+  right: 0;
 }
 /*jQuery TOOLTIP
 ------------------------------------------------*/

@@ -16,5 +16,8 @@
  *= require jquery.ui.dialog
  *= require jquery.minicolors
  *= require fancybox
+ *
+ *--------------VENDOR PLUGINS-----------------
+ * require vendor
  */
 

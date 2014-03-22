@@ -9,25 +9,28 @@
 
 <div id="main-content">
   <div id="main-content-inner">
+    <!-- required use for subpage_plugin image upload-->
+    <p id="web-id" style="display: none;"><%= @web.id %></p>
+    <!-- ************************************************** -->
+
     <p>Editing: <%= @web.name %> </p>
     <p>Subdomain: <%= @web.subdomain %> </p>
-    <!--
-          <div class="gen_block" id="3" data-type="image_b"><p>Image managere</p></div>
-          <div class="gen_block" id="1" data-type="title_b"><div class="ckeditor"><h1>Titulok dobre čo</h1></div></div>
-          <div class="gen_block" id="2" data-type="text_b"><div class='ckeditor'><p>Text block.</p></div></div>
-          <div class="gen_block" style="display: block;" data-type="column_b" id="1"><div class="columnns group"><div class="col span_1_of_3">Drag element here ...</div><div class="col span_1_of_3">Drag element here ...</div><div class="col span_1_of_3">Drag element here ...</div></div></div>
-          <div class="gen_block" style="display: block;" data-type="column_b" id="1"><div class="columns group"><div class="col span_1_of_3">Drag element here ...</div><div class="col span_1_of_3">Drag element here ...</div><div class="col span_1_of_3">Drag element here ...</div></div></div>
-    -->
-    <div id="subpageContent">
-      <div class="gen_block" style="display: block;" data-type="column_b" id="2">
-        <div class="columns group">
-          <div class="col span_1_of_3"></div>
-          <div class="col span_1_of_3"></div>
-          <div class="col span_1_of_3"></div>
-        </div>
-      </div>
-      <div class="gen_block" style="display: block;" data-type="column_b" id="5"><div class="columns group"><div class="col span_1_of_3"></div><div class="col span_1_of_3"></div><div class="col span_1_of_3"></div></div></div>
-      <div class="gen_block" style="display: block;" data-type="column_b" id="8"><div class="columns group"><div class="col span_1_of_3"></div><div class="col span_1_of_3"></div><div class="col span_1_of_3"></div></div></div>
+
+
+    <!-- ************************NAVIGATION*********************** -->
+    <p>Navigation: </p>
+    <%= render 'webs/pages_nav' %>
+    <!-- ************************NAVIGATION*********************** -->
+
+    <!--***********************SAVE BUTTON*******************-->
+    <div class="saveButtonContainer">
+      <button id="saveSubpage"class="btn btn-success">Save subpage</button>
     </div>
+    <!--***********************SAVE BUTTON*******************-->
+
+
+    <!--***********************SUBPAGE CONTENT*******************-->
+    <div id="subpageContent"></div>
+    <!--***********************SUBPAGE CONTENT*******************-->
   </div>
 </div>

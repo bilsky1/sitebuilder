@@ -16,9 +16,6 @@ gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
-
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
@@ -51,15 +48,26 @@ gem 'rb-readline', '0.4.2'
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '3.0.1'
 
-#Design gems
-gem "bootstrap-sass", "~> 2.3.2.0"
-gem 'will_paginate', '3.0.4'
-gem 'bootstrap-will_paginate', '0.0.9'
-gem "font-awesome-rails"
-gem 'jquery-ui-rails'
-gem "ckeditor_rails", "~> 4.3.1"
-gem "jquery-minicolors-rails", "~> 2.1.1.2"
-gem "fancybox-rails", "~> 0.2.1"
+#group :assets do
+  # Use jquery as the JavaScript library
+  gem 'jquery-rails'
+
+  #Design gems
+  gem "bootstrap-sass", "~> 2.3.2.0"
+  gem 'will_paginate', '3.0.4'
+  gem 'bootstrap-will_paginate', '0.0.9'
+  gem "font-awesome-rails"
+  gem 'jquery-ui-rails'
+  gem "ckeditor_rails", "~> 4.3.1"
+  gem "jquery-minicolors-rails", "~> 2.1.1.2"
+  #gem "fancybox-rails", "~> 0.2.1"
+  gem 'fancybox2-rails', '~> 0.2.8'
+  #gem "jquery-fileupload-rails", "~> 0.4.1"
+#end
+
+#image manager - uploader - and manipulating
+gem "carrierwave", "~> 0.10.0"
+gem 'rmagick', '~> 2.13.2'
 
 #gem "state_machine", "~> 1.2.0"
 

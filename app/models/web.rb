@@ -1,6 +1,7 @@
 class Web < ActiveRecord::Base
   #relations
   belongs_to :user
+  has_many :pages, dependent: :destroy
 
   VALID_SUBDOMAIN_REGEX = /\A(?![-.])[a-zA-Z0-9.-]+(?<![-.])\z/i
 

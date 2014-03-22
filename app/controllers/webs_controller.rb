@@ -31,6 +31,7 @@ class WebsController < ApplicationController
   end
 
   def edit
+    @pages = @web.pages
   end
 
   def update
@@ -45,6 +46,8 @@ class WebsController < ApplicationController
       format.js
     end
   end
+
+  #TODO upload image or pdf or anything else
 
   private
     def web_params

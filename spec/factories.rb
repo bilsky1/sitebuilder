@@ -22,4 +22,19 @@ FactoryGirl.define do
     user
   end
 
+  factory :image do
+    sequence(:name) { |n| "TestImage#{n}"}
+    user
+    web
+  end
+
+  factory :page do
+    sequence(:name) { |n| "ExampleName#{n}"}
+    sequence(:content) { |n| "HtmlContent#{n}"}
+    sequence(:title) { |n| "Title #{n}"}
+    sequence(:meta_keywords) { |n| "Meta keywords #{n}"}
+    sequence(:meta_description) { |n| "Meta description#{n}"}
+    user
+    web
+  end
 end

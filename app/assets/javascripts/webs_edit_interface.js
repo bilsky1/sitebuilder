@@ -11,7 +11,8 @@ $(document).ready(function() {
     };
     var close_big_sidebar = {
         width: 0,
-        border: "none"
+        border: "none",
+        display: "none"
     };
 
     var open_sidebar= {
@@ -23,7 +24,8 @@ $(document).ready(function() {
     }
     var open_big_sidebar = {
         width: 250,
-        borderRight: "1px solid #c2c2c2"
+        borderRight: "1px solid #c2c2c2",
+        display: "block"
     }
 
 
@@ -70,7 +72,10 @@ $(document).ready(function() {
                 });
             $("#main-content-inner").animate({
                 marginLeft: close_sidebar.marginLeft
-            }, 1000);
+            }, 1000,
+            function(){
+                $("#sidebar-big").css("display",close_big_sidebar.display);
+            });
         }
         else{
             $("#sidebar-small").animate({
@@ -88,6 +93,7 @@ $(document).ready(function() {
             $("#main-content-inner").animate({
                 marginLeft: open_sidebar.marginLeft
             }, 1000);
+            $("#sidebar-big").css("display",open_big_sidebar.display);
         }
         $("#sidebar-content").toggleClass('expand');
     });

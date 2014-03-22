@@ -11,7 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140110150834) do
+ActiveRecord::Schema.define(version: 20140317195719) do
+
+  create_table "images", force: true do |t|
+    t.integer  "page_id"
+    t.text     "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "image"
+  end
+
+  create_table "pages", force: true do |t|
+    t.integer  "web_id"
+    t.string   "name"
+    t.text     "content"
+    t.string   "title"
+    t.string   "meta_keywords"
+    t.string   "meta_description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "pages", ["name"], name: "index_pages_on_name"
+  add_index "pages", ["web_id"], name: "index_pages_on_web_id"
 
   create_table "users", force: true do |t|
     t.string   "name"

@@ -7,6 +7,8 @@ Sitebuilder::Application.routes.draw do
 
   constraints(NoSubdomain) do
     resources :users
+    #resources :images
+    #resources :pages
     resources :sessions, only: [:new, :create, :destroy]
     resources :password_resets
 
@@ -17,6 +19,17 @@ Sitebuilder::Application.routes.draw do
     match '/signup',  to: 'users#new',            via: 'get'
     match '/signin',  to: 'sessions#new',         via: 'get'
     match '/signout', to: 'sessions#destroy',     via: 'delete'
+
+    #images controller match for AJAX call from subpagebuild JS plugin
+    match '/images/create_assets', to: 'images#create_assets',     via: 'post'
+    match '/images/add_assets', to: 'images#add_assets',     via: 'post'
+    match '/images/delete_assets', to: 'images#delete_assets',     via: 'post'
+
+    #pages API
+    match '/pages/get_page', to: 'pages#get_page', via: 'post'
+    match '/pages/create_page', to: 'pages#create_page', via: 'post'
+    match '/pages/update_page', to: 'pages#update_page', via: 'post'
+    match '/pages/delete_page', to: 'pages#delete_page', via: 'post'
 
     # The priority is based upon order of creation: first created -> highest priority.
     # See how all your routes lay out with "rake routes".
