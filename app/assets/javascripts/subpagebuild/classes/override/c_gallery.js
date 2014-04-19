@@ -46,6 +46,13 @@ function GalleryBlock(id,elClass, subpageContentId) {
         "</form>"+
         "</div>";
 
+    this.setEmptyImageCode = function(){
+        var imageContent = jQuery.trim($("#" + this.id).children(".galleryDiv").html());
+        if(imageContent === ""){
+            $("#" + this.id).children(".galleryDiv").html(this.emptyContent);
+        }
+    };
+
     this.setColorPickers = function(){
         var block = this;
         var borderColor = $("#" + block.id).find(".galleryItem").css("border-color");
@@ -139,7 +146,7 @@ function GalleryBlock(id,elClass, subpageContentId) {
     this.setAjaxFileUpload = function(){
         var block = this;
         $("#" + block.settingsDialogId).find('.upload-form').find(".file-input").change(function(){
-            $('#' + block.id).children(".galleryDiv").append("<i id='tmp-loader' class='fa fa-cog fa-spin fa-lg'></i>");
+            $('#' + block.id).children(".galleryDiv").append("<i class='tmp-loader' class='fa fa-cog fa-spin fa-lg'></i>");
             //for test error make a error in image_uploader.rb
             $(this).closest('form').ajaxSubmit({
                 beforeSubmit: function(a,f,o) {
@@ -172,13 +179,15 @@ function GalleryBlock(id,elClass, subpageContentId) {
                 complete: function(XMLHttpRequest, textStatus) {
                     console.log(XMLHttpRequest.responseText);
                     responseJson = jQuery.parseJSON(XMLHttpRequest.responseText);
+
+                    $('#' + block.id).children(".galleryDiv").find(".tmp-loader").remove();
+
                     if(!responseJson.errors){
                         console.log(responseJson.src);
-                        $('#' + block.id).children(".galleryDiv").find("#tmp-loader").remove();
                         $('#' + block.id).children(".galleryDiv").find(".emptyImage").remove();
                         $('#'+block.id).children(".galleryDiv").append("<div class='galleryItem'><a id='link" + responseJson.id + "' data-fancybox-group='gal" + block.id + "' class='fancybox' href='" + responseJson.src  + "'><img id='img" + responseJson.id + "' src='" + responseJson.thumb + "'></a></div>");
                         $("#" + block.id).find(".fancybox").fancybox();
-                        block.imageHoverHandler("img" + responseJson.id);
+                        block.imageHandler("img" + responseJson.id);
 
                         $("#" + block.settingsDialogId).find("input[name='image_form[id]']").val(responseJson.id);
 
@@ -211,6 +220,7 @@ function GalleryBlock(id,elClass, subpageContentId) {
         this.setColorPickers();
         this.setBorderOnOff();
         this.setGalItemSpacing();
+        this.setEmptyImageCode();
     };
 
     this.createDialogWindow = function(){
@@ -280,7 +290,12 @@ function GalleryBlock(id,elClass, subpageContentId) {
 
     this.setDeleteImageHandler = function(id){
         var block = this;
-        $("#" + id).closest(".galleryItem").find(".delete").find("i").on("click",function(e){
+        var el;
+        if(id==="all")
+            el = $("#" + block.id).find("img");
+        else
+            el = $("#" + id);
+        el.closest(".galleryItem").find(".delete").find("i").on("click",function(e){
             e.preventDefault();
             block.deleteImage($(this).closest(".galleryItem").find("a").find("img").attr("id"));
             $(this).closest(".galleryItem").remove();
@@ -289,19 +304,13 @@ function GalleryBlock(id,elClass, subpageContentId) {
         });
     };
 
-    this.imageHoverHandler = function(id){
+    this.imageHandler = function(id){
         var block = this;
         var findImg = "img";
         if(id != "all")
             findImg += "#" + id;
         $('#' + block.id).find(findImg).closest(".galleryItem").prepend(block.getImageHoverCode());
         block.setDeleteImageHandler(id);
-        /*$('#' + block.id).find(findImg).mouseenter(function(e) {
-            $(this).closest(".galleryItem").prepend(block.getImageHoverCode());
-            block.setDeleteImageHandler();
-        }).mouseleave(function(e) {
-                $(this).closest(".galleryItem").find(".imageControls").remove();
-        });*/
     };
 
     this.getImageHoverCode = function(){
@@ -313,7 +322,7 @@ function GalleryBlock(id,elClass, subpageContentId) {
     this.setBlockHoverHandler = function(){
         var block = this;
         this.createDialogWindow();
-        this.imageHoverHandler("all");
+        this.imageHandler("all");
         $('#' + block.id).mouseenter(function(e) {
             if($(this).find(".blockControls")){
                 $(this).prepend(block.getHoverCode());
@@ -333,7 +342,7 @@ function GalleryBlock(id,elClass, subpageContentId) {
         this.showHideEmptyCode(globalSubpageBuild);
         showHideEmptyColumnCode(globalSubpageBuild);
         this.deleteBlockFromArray();
-
+        isContentChange = true;
     };
 
 }//GalleryBlock

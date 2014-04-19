@@ -1,6 +1,1 @@
-<% provide(:title, @web.name ) %>
-<p>Show: <%= @web.name %></p>
-<p>Subdomain: <%= @web.subdomain %></p>
-<div id="subpageContent">
-
-</div>
+<%= render 'layouts/web_themes/' + @web.theme.name + '/content' %>

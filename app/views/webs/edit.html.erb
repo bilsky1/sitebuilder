@@ -1,5 +1,6 @@
 <% provide(:title, @web.name + ' | Edit') %>
-<%= render 'webs/edit_panel' %>
+
+<%= render 'webs/edit_panel/edit_panel' %>
 
 <script type="text/javascript">
     $(document).ready(function() {
@@ -8,29 +9,8 @@
 </script>
 
 <div id="main-content">
-  <div id="main-content-inner">
-    <!-- required use for subpage_plugin image upload-->
-    <p id="web-id" style="display: none;"><%= @web.id %></p>
-    <!-- ************************************************** -->
-
-    <p>Editing: <%= @web.name %> </p>
-    <p>Subdomain: <%= @web.subdomain %> </p>
-
-
-    <!-- ************************NAVIGATION*********************** -->
-    <p>Navigation: </p>
-    <%= render 'webs/pages_nav' %>
-    <!-- ************************NAVIGATION*********************** -->
-
-    <!--***********************SAVE BUTTON*******************-->
-    <div class="saveButtonContainer">
-      <button id="saveSubpage"class="btn btn-success">Save subpage</button>
-    </div>
-    <!--***********************SAVE BUTTON*******************-->
-
-
-    <!--***********************SUBPAGE CONTENT*******************-->
-    <div id="subpageContent"></div>
-    <!--***********************SUBPAGE CONTENT*******************-->
+  <div id="main-content-inner" style="background: <%= @web.bg_color %>;">
+    <%= render 'webs/edit_page_content' %>
   </div>
 </div>
+<%= render 'webs/unsaved_content_alert' %>

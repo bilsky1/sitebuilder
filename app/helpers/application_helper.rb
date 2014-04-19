@@ -8,6 +8,10 @@ module ApplicationHelper
     end
   end
 
+  def theme_assets_load()
+
+  end
+
   def nav_aktiv (page)
     if current_page?page
       "active"

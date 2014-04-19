@@ -4,13 +4,14 @@ describe Web do
   let(:user) {FactoryGirl.create(:user)}
 
   before do
-    @web = user.webs.build(name: "Example Web", subdomain:"example")
+    @web = user.webs.build(name: "Example Web", theme_id:1, subdomain:"example")
   end
 
   subject { @web }
 
   it{ should respond_to(:name) }
   it{ should respond_to(:user) }
+  it{ should respond_to(:theme) }
   it{ should respond_to(:published) }
   it { should_not be_published }
   it { should be_valid }
@@ -18,6 +19,11 @@ describe Web do
 
   describe "when user_id is not present" do
     before { @web.user_id = nil }
+    it { should_not be_valid }
+  end
+
+  describe "when theme_id is not present" do
+    before { @web.theme_id = nil }
     it { should_not be_valid }
   end
 

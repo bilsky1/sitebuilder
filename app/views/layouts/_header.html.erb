@@ -8,7 +8,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <% if isWebsEditAction? %>
+        <% if isWebsEditOrUpdateAction? %>
             <%= link_to "", id: "sidebar-toggle", 'data-placement' => 'right' , rel:"tooptip", title:"Toggle Sidebar" do %>
                 <i class="fa fa-bars fa-1g"></i>
             <% end %>
@@ -56,7 +56,7 @@
             <% end %>
           </ul>
 
-          <% if isWebsEditAction? %>
+          <% if isWebsEditOrUpdateAction? %>
               <div id="device-view-control">
                 <a href="" data-content-width="480px" id="phone" class="device-control"><i class="fa fa-mobile-phone"></i></a>
                 <a href="" data-content-width="768px" id="tablet" class="device-control"><i class="fa fa-tablet"></i></a>

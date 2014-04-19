@@ -1,8 +1,16 @@
 Sitebuilder::Application.routes.draw do
-  resources :webs
+
 
   constraints(Subdomain) do
+    resources :webs
     match '/',  to: 'webs#show', via: 'get'
+
+    match '/pages/get_page', to: 'pages#get_page', via: 'post'
+
+    match '/ajax_contents/get_content', to: 'ajax_contents#get_content', via: 'post'
+    match '/ajax_contents/get_content_after', to: 'ajax_contents#get_content_after', via: 'post'
+
+    match '/ext_services/get_ext_service', to: 'ext_services#get_ext_service', via: 'post'
   end
 
   constraints(NoSubdomain) do
@@ -13,6 +21,12 @@ Sitebuilder::Application.routes.draw do
     resources :password_resets
 
     root to: 'static_pages#home'
+
+    match '/webs/:id/update_style_settings',  to: 'webs#update_style_settings', via: 'post'
+    match '/webs/:id/update_publish',  to: 'webs#update_publish', via: 'post'
+    match '/webs/:id',  to: 'webs#update', via: 'post'
+    resources :webs
+
     match '/help',    to: 'static_pages#help',    via: 'get'
     match '/auth',    to: 'static_pages#auth',    via: 'get'
 
@@ -29,7 +43,26 @@ Sitebuilder::Application.routes.draw do
     match '/pages/get_page', to: 'pages#get_page', via: 'post'
     match '/pages/create_page', to: 'pages#create_page', via: 'post'
     match '/pages/update_page', to: 'pages#update_page', via: 'post'
+    match '/pages/update_page_settings', to: 'pages#update_page_settings', via: 'post'
     match '/pages/delete_page', to: 'pages#delete_page', via: 'post'
+
+    #navigations API
+    match '/navigations/uprate_navigation', to: 'navigations#uprate_navigation', via: 'post'
+
+    #ajax_contents API
+    match '/ajax_contents/create_blank', to: 'ajax_contents#create_blank', via: 'post'
+    match '/ajax_contents/update_contents', to: 'ajax_contents#update_contents', via: 'post'
+    match '/ajax_contents/get_contents', to: 'ajax_contents#get_contents', via: 'post'
+    match '/ajax_contents/get_content', to: 'ajax_contents#get_content', via: 'post'
+    match '/ajax_contents/get_content_after', to: 'ajax_contents#get_content_after', via: 'post'
+    match '/ajax_contents/delete', to: 'ajax_contents#delete', via: 'post'
+
+    #ext_services API
+    match '/ext_services/get_ext_service', to: 'ext_services#get_ext_service', via: 'post'
+    match '/ext_services/create_ext_service', to: 'ext_services#create_ext_service', via: 'post'
+    match '/ext_services/update_ext_service', to: 'ext_services#update_ext_service', via: 'post'
+    match '/ext_services/delete_ext_service', to: 'ext_services#delete_ext_service', via: 'post'
+
 
     # The priority is based upon order of creation: first created -> highest priority.
     # See how all your routes lay out with "rake routes".

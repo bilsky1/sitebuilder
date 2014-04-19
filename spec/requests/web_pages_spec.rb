@@ -3,7 +3,8 @@ require 'spec_helper'
 describe "Web pages" do
   subject { page }
   let(:user) { FactoryGirl.create(:user) }
-  let(:web) { FactoryGirl.create(:web, user: user) }
+  let(:theme) { FactoryGirl.create(:theme) }
+  let(:web) { FactoryGirl.create(:web, user: user, theme: theme) }
 
   describe "index webs page" do
 
@@ -26,7 +27,7 @@ describe "Web pages" do
 
     describe "pagination" do
       before do
-        50.times { FactoryGirl.create(:web, user: user) }
+        50.times { FactoryGirl.create(:web, user: user, theme: theme) }
         visit webs_path
       end
       after { user.webs.delete }
@@ -42,7 +43,7 @@ describe "Web pages" do
 
     describe "delete links" do
         before do
-          FactoryGirl.create(:web, user: user)
+          FactoryGirl.create(:web, user: user, theme: theme)
           visit webs_path
         end
 
@@ -81,7 +82,10 @@ describe "Web pages" do
      describe "with valid information" do
        let(:web_name)  { "Example web site" }
        before do
+         #ODO choose theme in selectbox
+         #theme.save!
          fill_in "Name",  with: web_name
+         #select theme.id, from: "web[theme_id]"
          click_button "Create new website"
        end
        it { should have_selector('div.alert.alert-success') }

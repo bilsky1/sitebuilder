@@ -8,11 +8,10 @@
                 gen_block_class: '.gen_block'
             };
 
+
             globalOptions = $.extend(defaults, options);
-
-            numberOfGenBlock = $(globalOptions.gen_block_class).length;
-
             genPageBgColor = $(globalOptions.full_page_content).css("background");
+            numberOfGenBlock = $(globalOptions.gen_block_class).length;
 
             return this.each(function() {
                 globalSubpageBuild = $(this);
@@ -24,11 +23,11 @@
                     e.preventDefault();
                 });
 
-                $("#" + globalSubpageBuild.attr("id") + ", .col").sortable({
+                $("#" + globalSubpageBuild.attr("id") + ", .col, .ajax-col").sortable({
                     placeholder: "ui-state-highlight",
                     handle: '.moveBlock',
                     revert: true,
-                    connectWith: "#subpageContent, .col",
+                    connectWith: "#subpageContent, .col, .ajax-col",
                     refresh: true,
                     receive: function(event, ui){
                         if ( transfered === "draggable" && $(this).find(".block") ) {
@@ -46,16 +45,17 @@
                             blockObj.showHideEmptyCode(globalSubpageBuild,emptyIconCode);
                             blockObj.setBlockHoverHandler(globalSubpageBuild, emptyIconCode);
 
-                            if($("#" + blockObj.id).data("type") === "column_b"){
+                            if($("#" + blockObj.id).data("type") === "column_b" || $("#" + blockObj.id).data("type") === "ajax_content_b"){
                                 blockObj.refreshSortable();
-                            }else if($("#" + blockObj.id).data("type") === "map_b"){
-                                blockObj.initializeGoogleMap();
+                                if($("#" + blockObj.id).data("type") === "ajax_content_b")
+                                    blockObj.createAjaxContentService();
                             }
 
                             transfered = 'sortable';
                             dragBlockId = "";
                         }
                         setInlineCKeditor('.ckeditor');
+                        isContentChange = true;
                     },
                     update: function( event, ui ) {
                         showHideEmptyColumnCode(globalSubpageBuild);
@@ -76,7 +76,7 @@
                     appendTo: 'body',
                     cursor: 'move',
                     revert: 'invalid',
-                    connectToSortable: '#'+globalSubpageBuild.attr("id") + ', .col',
+                    connectToSortable: '#'+globalSubpageBuild.attr("id") + ', .col, .ajax-col',
                     start: function( event, ui ) {
                         transfered = 'draggable',
                         dragBlockId = $(this).attr("id");

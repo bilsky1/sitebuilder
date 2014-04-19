@@ -1,8 +1,11 @@
 <div class="row-fluid">
-  <div class=" offset5 span7 well">
+  <div class=" offset4 span4 well">
+    <legend>Create new web site</legend>
     <%= form_for(@web) do |w| %>
         <%= render 'shared/error_messages', object: w.object %>
         <%= w.text_field :name, placeholder: "Name", class: "span12" %>
+        <%= w.label :theme_id, 'Theme: ' %>
+        <%= w.select :theme_id, @themes.map { |t| [ t.name, t.id ] }, {include_blank: false}, {class:"span12"}  %>
         <%= w.text_field :subdomain, placeholder: "Subdomain", class: "span12" %>
         <%= w.submit "Create new website", class: "btn btn-warning pull-right" %>
     <% end %>

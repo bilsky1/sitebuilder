@@ -2,7 +2,12 @@ module WebsHelper
   def isWebsShowAction?
     (params[:action] == 'show' && params[:controller] == 'webs')
   end
-  def isWebsEditAction?
-    (params[:action] == 'edit' && params[:controller] == 'webs')
+
+  def isEscapeFragmentParams?
+    !params[:_escaped_fragment_].nil?
+  end
+
+  def isWebsEditOrUpdateAction?
+    (params[:action] == 'edit' || params[:action] == 'update') && (params[:controller] == 'webs')
   end
 end

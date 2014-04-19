@@ -1,0 +1,39 @@
+<% provide(:title, @web.name ) %>
+
+<!-- required use for subpage_plugin image upload-->
+<p id="web-id" style="display: none;"><%= @web.id %></p>
+
+<!-- HEADER start -->
+<div class="custom-theme-wrapper custom-theme-row1">
+  <header id="custom-theme-header" class="clear">
+    <hgroup>
+      <h1><%= @web.name %></h1>
+      <h2 id="header_content"><%= render 'webs/header_content' %></h2>
+    </hgroup>
+    <!-- ************************NAVIGATION*********************** -->
+    <%= render 'layouts/web_themes/' + @web.theme.name + '/navigation' %>
+  </header>
+</div>
+<!-- HEADER end -->
+<% if isWebsShowAction? %>
+    <div id='flash_messages'>
+      <% unless request.url.include?(sessions_path) %>
+          <%= render 'shared/flash_messages' %>
+      <% end %>
+    </div>
+<% end %>
+
+<div id="subpageContent">
+  <% if isEscapeFragmentParams? %>
+      <%= raw @web.pages.find_by_url_name(params[:_escaped_fragment_]).content %>
+  <% end %>
+</div>
+
+<!-- Footer start-->
+<div class="custom-theme-wrapper custom-theme-row3">
+  <footer id="custom-theme-footer" class="clear">
+    <p id="footer_content" class="pull-left"><%= render 'webs/footer_content' %></p>
+    <p class="pull-right">Theme created by : Branislav Bilský</p>
+  </footer>
+</div>
+<!-- Footer end-->

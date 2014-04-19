@@ -1,0 +1,15 @@
+$('#main-content-inner').hide().html('<%= j render 'webs/edit_page_content' %>').fadeIn();
+initializeNavEdit();
+$("#subpageContent").subpagebuild();
+//save button
+$("#saveSubpage").on("click",function(e){
+    e.preventDefault();
+    var subpageCleaner = new Cleaner();
+    subpageCleaner.updateContentToServer();
+});
+
+$('#header_content').html('<%= j render 'webs/header_content' %>');
+$('#footer_content').html('<%= j render 'webs/footer_content' %>');
+
+//TODO make change to css file
+

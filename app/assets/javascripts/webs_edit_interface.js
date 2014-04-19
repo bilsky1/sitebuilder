@@ -28,8 +28,6 @@ $(document).ready(function() {
         display: "block"
     }
 
-
-
     //-----------------------------------------------------------------
     //-----------WINDOW WIDTH start----------------------------------
     //-----------------------------------------------------------------
@@ -114,8 +112,6 @@ $(document).ready(function() {
     });
 
     /*Change content of sidebar-big*/
-    /*view*/
-    onClickSidebarById("#sidebar-view","#view-content");
 
     /*blocks*/
     onClickSidebarById("#sidebar-blocks","#blocks-content");
@@ -125,6 +121,9 @@ $(document).ready(function() {
 
     /*settings*/
     onClickSidebarById("#sidebar-settings","#settings-content");
+
+    /*services*/
+    onClickSidebarById("#sidebar-services","#services-content");
 
     /*publish*/
     onClickSidebarById("#sidebar-publish","#publish-content");
@@ -175,5 +174,39 @@ $(document).ready(function() {
     //-------------------------------------------------------------------
     //-----------DEVICE-VIEW-CONTROL end----------------------------------
     //-------------------------------------------------------------------
+
+
+    //-------------------------------------------------------------------
+    //---------------SETTINGS PAGES start--------------------------------
+    //-------------------------------------------------------------------
+    $("#web_bg_color").minicolors('settings', {
+        defaultValue: hex($("#main-content-inner").css("background")),
+        change: function(hex) {
+
+            $("#main-content-inner").css("background",hex2rgb(hex,1));
+            genPageBgColor = hex2rgb(hex,1);
+            //console.log(hex2rgb(hex,opacity));
+        }
+    });
+
+    //-------------------------------------------------------------------
+    //---------------SETTINGS PAGES end----------------------------------
+    //-------------------------------------------------------------------
+
+
+    //-------------------------------------------------------------------
+    //---------------WEBS PAGES start----------------------------------
+    //-------------------------------------------------------------------
+    $("#favicon-upload").children("input[type='file']").change(function(){
+        var fileName = $(this).val();
+        var cleanFileName=fileName.split('\\').pop();
+        $(this).closest("#favicon-upload").children("#file-name").text(cleanFileName);
+    });
+    //-------------------------------------------------------------------
+    //---------------WEBS PAGES end----------------------------------
+    //-------------------------------------------------------------------
+
+    //INITIALIZE ALL TOOLTIPS
+    $(".tooltip-icon").tooltip();
 
 });

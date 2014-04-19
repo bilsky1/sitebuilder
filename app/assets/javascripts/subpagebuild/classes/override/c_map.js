@@ -3,7 +3,7 @@ function MapsBlock(id,elClass, subpageContentId) {
     this.id = id;
     this.elClass = elClass;
 
-    this.genBlockCode = "<div class='googleMaps'></div>";
+    this.genBlockCode = "<div data-loc='Trnava' data-zoom='12' class='googleMaps'></div>";
 
     this.settingsDialogId = "settings-confirm" + this.id;
     this.settingsDialogCode =   "<form class='MapForm' action=''>" +
@@ -76,19 +76,29 @@ function MapsBlock(id,elClass, subpageContentId) {
     this.initializeGoogleMap = function(){
         //48.380, 17.587 - GPS of Trnava // for initialization
         var block = this;
+        var zoom = parseInt($("#" + block.id).children(".googleMaps").data("zoom"));
+        var location = $("#" + block.id).children(".googleMaps").data("loc");
         this.geocoder = new google.maps.Geocoder();
-        this.mapOptions = {
-            zoom: 8,
-            center: new google.maps.LatLng(48.380, 17.587)
-        };
-
-        this.map = new google.maps.Map($("#" + this.id).children(".googleMaps")[0],this.mapOptions);
-        var marker = new google.maps.Marker({
-            map: block.map,
-            position: new google.maps.LatLng(48.380, 17.587)
+        this.geocoder.geocode( { 'address': location}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                block.mapOptions = {
+                    zoom: zoom,
+                    center: results[0].geometry.location
+                };
+                block.map = new google.maps.Map($("#" + block.id).children(".googleMaps")[0],block.mapOptions);
+                var marker = new google.maps.Marker({
+                    map: block.map,
+                    position: results[0].geometry.location
+                });
+                block.markers.push(marker);
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
         });
-        block.markers.push(marker);
-        $("#" + this.settingsDialogId).find("form.MapForm").find("input[name*='addressValue']").val("Trnava");
+
+
+
+        $("#" + this.settingsDialogId).find("form.MapForm").find("input[name*='addressValue']").val(location);
     };
 
     this.initDialogWindowSettings = function(){
@@ -111,6 +121,7 @@ function MapsBlock(id,elClass, subpageContentId) {
         var block = this;
         $("#" + this.id).append("\n" + this.getSettingsDialogCode());
         this.initDialogWindowSettings();
+        this.initializeGoogleMap();
         $('#' + this.settingsDialogId).dialog({
             resizable: false,
             height:"auto",
@@ -124,6 +135,10 @@ function MapsBlock(id,elClass, subpageContentId) {
                     block.codeAdressGoogleMapsApi(address,parseInt(zoom));
                     var height = $("#" + block.settingsDialogId).find("form.MapForm").find("input[name*='heightValue']").val();
                     $("#" + block.id).children(".googleMaps").css("height",height);
+
+                    $("#" + block.id).children(".googleMaps").attr("data-loc",address);
+                    $("#" + block.id).children(".googleMaps").attr("data-zoom",zoom);
+
                     $( this ).dialog( "close" );
                 },
                 Cancel: function() {

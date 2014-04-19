@@ -16,16 +16,15 @@ FactoryGirl.define do
 
   end
 
+  factory :theme do
+    name "default"
+  end
+
   factory :web do
     sequence(:name) { |n| "TestWeb#{n}"}
     sequence(:subdomain) {|n| "example#{n}"}
     user
-  end
-
-  factory :image do
-    sequence(:name) { |n| "TestImage#{n}"}
-    user
-    web
+    theme
   end
 
   factory :page do
@@ -34,7 +33,13 @@ FactoryGirl.define do
     sequence(:title) { |n| "Title #{n}"}
     sequence(:meta_keywords) { |n| "Meta keywords #{n}"}
     sequence(:meta_description) { |n| "Meta description#{n}"}
-    user
     web
   end
+
+  factory :image do
+    sequence(:name) { |n| "TestImage#{n}"}
+    user
+    page
+  end
+
 end

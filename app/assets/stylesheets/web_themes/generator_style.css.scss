@@ -1,0 +1,353 @@
+@import "font-awesome";
+#subpageContent{
+  margin: 20px;
+}
+table{
+  text-align: left;
+}
+div.ckeditor {
+  *{
+    font-size: inherit;
+    font-family: inherit;
+  }
+}
+/*----------------------Global Block------------------------------------*/
+
+/*---------------------------------Title block-------------------------*/
+#subpageContent h2 {
+  font-size: 26px;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  *{
+    font-size: inherit ;
+    font-family: inherit;
+  }
+}
+#subpageContent h3 {
+  font-size: 22px ;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  *{
+    font-size: inherit;
+    font-family: inherit;
+  }
+}
+#subpageContent h4 {
+  font-size: 18px ;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  *{
+    font-size: inherit ;
+    font-family: inherit;
+  }
+}
+
+/*Divider block*/
+#subpageContent .dividerBlock{
+  background: #000000;
+  height: 1px;
+  position: relative;
+}
+/*---------------------------------Title block-------------------------*/
+/*---------------------------------Button block-------------------------*/
+.buttonAlign{
+  margin: 10px 0;
+}
+.button{
+  border-radius: 3px;
+  background-color: #f1d161;
+  color: rgb(56, 56, 56);
+  padding: 10px 16px;
+
+  &:hover{
+    text-decoration: none;
+    background-color: #FCCD28;
+    color: black;
+  }
+
+}
+/*---------------------------------Button block-------------------------*/
+/*---------------------------------Image + Text block-------------------------*/
+.imageAndText{
+  .imageContainer{
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 15px;
+  }
+  clear: both;
+  *{
+    font-size: inherit;
+    font-family: inherit;
+  }
+}
+/*---------------------------------Image + Text block-------------------------*/
+/*---------------------------------Gallery block-------------------------*/
+.galleryDiv{
+  text-align: center;
+  .galleryItem{
+    /*Only possible value for margin is 0, 2px, 5px, 7px,
+     * this is required for select box in options none, small, medium, big
+     */
+    display: inline-block;
+    border-width: 1px;
+    border-style: solid;
+    border-color: white;
+    width: auto;
+    vertical-align: top;
+    max-height: 150px;
+    overflow: hidden;
+    .imageControls{
+      position: relative;
+      .delete{
+        background-color: black;
+        opacity: 0.65;
+        color: red;
+        border-radius: 0 0 0 2px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        &:hover{
+          opacity: 0.75;
+          cursor: pointer;
+        }
+        i{
+          padding: 3px 7px;
+        }
+      }
+    }
+    a{
+      img{
+        width: 100%;
+      }
+    }
+  }
+
+}
+/*---------------------------------Gallery block-------------------------*/
+/*---------------------------------Maps block-------------------------*/
+.googleMaps {
+  width: 100%;
+  height: 300px;
+  /* Bootstrap Css Map Fix*/
+  img {
+    max-width: none;
+  }
+  /* Bootstrap Css Map Fix*/
+  label {
+    width: auto; display:inline;
+  }
+
+}
+/*---------------------------------Maps block-------------------------*/
+
+/*---------------------------------Column block--------------------------*/
+
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+
+@media only screen and (max-width: 480px) {
+  .col {
+    margin: 1% 0 1% 0%;
+  }
+}
+@media only screen and (max-width: 480px) {
+
+}
+/*---------------------------------Column block--------------------------*/
+/*---------------------------------Social Icon block--------------------------*/
+.socialIconsBlock{
+  a{
+    color: rgba(0, 0, 0, 0.6);
+    margin: 2px 3px;
+
+    &:first-child{
+      margin-left: 0;
+    }
+    &:last-child{
+      margin-right: 0;
+    }
+  }
+
+  a.fbIcon:hover{ color: #3b5998 !important; }
+  a.gplusIcon:hover{ color: #dd4b39 !important; }
+  a.twitterIcon:hover{ color: #55acee !important; }
+  a.pinterestIcon:hover{ color: #d73532 !important; }
+  a.linkedInIcon:hover{ color: #1b86bd !important; }
+  a.gitHubIcon:hover{ color: #4183c4 !important; }
+  a.tumblrIcon:hover{ color: #243c53 !important; }
+}
+.socIconDialogRow{
+  display: block;
+  margin: 5px;
+  width: 290px;
+
+  input[type="checkbox"]{
+    width: 15px;
+    height: 15px;
+    margin: 0 10px 10px 10px;
+    -ms-transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    -o-transform: scale(1.5);
+  }
+
+}
+/*---------------------------------Social Icon block--------------------------*/
+
+/*---------------------------------Youtube block--------------------------*/
+.youtubeVideo{
+  iframe{
+    width: 100%;
+    height: 300px;
+  }
+}
+/*---------------------------------Youtube block--------------------------*/
+
+/*---------------------------------Code block--------------------------*/
+form.CodeForm{
+  textarea{
+    width: 350px;
+    height: 200px;
+  }
+}
+/*---------------------------------Code block--------------------------*/
+
+/*---------------------------------Other styles--------------------------*/
+.colEmptyIcon {
+  text-align: center;
+  color: #7FBBE7;
+  text-transform: uppercase;
+  font-size: 15px;
+  padding: 20px 0;
+}
+.emptyImage{
+  background: rgb(206, 204, 204);
+  width: 100%;
+  text-align: center;
+  padding: 55px 0;
+  color: rgb(75, 140, 209);
+  text-transform: uppercase;
+  border: 1px dashed rgb(27, 27, 27);
+  font-size: 17px;
+}
+
+/*-------------File input------*/
+div.upload {
+  width: auto;
+  height: 37px;
+  background-color: #2db643;
+  border-radius: 7px;
+  overflow: hidden;
+  margin: 15px 0 15px 0;
+  position: relative;
+  &:hover{
+    background-color: #39C44F;
+    cursor: pointer;
+  }
+  span{
+    background-color: transparent;
+    text-align: center;
+    width: 100%;
+    padding-top: 11px;
+    font-size: 14px;
+    font-weight: 100;
+  }
+  input {
+    width: 250px !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 5px 25px;
+    opacity: 0;
+    &:hover{
+      cursor:pointer;
+    }
+  }
+}
+/*---------------------------------Other styles--------------------------*/
+.saveButtonContainer{
+  background-color: #333333;
+  position: fixed;
+  top: 42px;
+  right: 0;
+  z-index: 9999;
+  border-radius: 0 0 0 10px;
+
+  #saveSubpage{
+    margin: 13px 13px 17px 17px;
+    text-transform: capitalize;
+  }
+
+  .alert{
+    margin: 5px 20px;
+  }
+}
+#loading{
+  text-align: center;
+}
+/*Pages
+-------------------------------------------------*/
+#pagesList {
+  margin: 20px 15px;
+  li{
+    list-style-type: none;
+    margin-bottom: 7px;
+    padding: 8px 13px;
+    i.delete-page{
+      padding-left: 10px;
+      padding-top: 3px;
+      float: right;
+      &:hover{
+        cursor: pointer;
+        color: red;
+      }
+    }
+    i.sort-page{
+      padding-right: 12px;
+      padding-left: 0;
+      padding-top: 0px;
+      float: left;
+      font-size: 1.7em;
+      &:hover{
+        cursor: move;
+        color: #51a351;
+      }
+    }
+  }
+
+  .pages-sortable-placeholder{
+    height: 30px;
+    border-radius: 4px;
+    background-color: #fcf8e3;
+    border: 1px solid #fbeed5;
+  }
+
+}
+#pages-messages{
+  .alert{
+    margin-bottom: 7px;
+  }
+}
+
+/*---------------------------------AJAX CONTENT block--------------------------*/
+.ajax-block-container{
+  .ajax-col{
+    padding: 10px 10px;
+  }
+
+  .ajax-content-after{
+    display: none;
+  }
+
+  .buttonAlign{
+    padding: 10px 10px;
+  }
+}
+.buttonBackAlign{
+  padding: 10px 10px;
+  display: none;
+}
+/*---------------------------------AJAX CONTENT block--------------------------*/
+/*-------------------UNSAVED CONTENT ALERT
+--------------------------------------------------------------*/
+#unsavedContentModal{
+  h3{
+    font-size: 15px;
+  }
+}

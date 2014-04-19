@@ -231,6 +231,15 @@ pre{
     font-weight: normal;
     margin-left: 10px;
   }
+  h3{
+    text-align: center;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    background: #E9E9E9;
+    color: #555555;
+    font-weight: bold;
+  }
 
   ul li {
     position: relative;
@@ -241,11 +250,46 @@ pre{
   form{
     width: 90%;
     margin: 0 auto;
-    input{
-      width: 90%;
-    }
+
     input[type="submit"]{
-      width: auto;
+      width: auto !important;
+    }
+
+    div.upload {
+      width: 109px;
+      height: 28px;
+      background-color: #f9a732;
+      border-radius: 7px;
+      overflow: visible;
+      margin: 0px 0 27px 0px;
+      position: relative;
+
+      span{
+        background-color: transparent;
+        text-align: center;
+        width: 94%;
+        padding-top: 8px;
+        font-size: 13px;
+        font-weight: 100;
+        &#file-name{
+          color: black;
+          position: absolute;
+          top: -3px;
+          left: 110px;
+        }
+      }
+      input {
+        width: 173px !important;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 5px 25px;
+        opacity: 0;
+        &:hover{
+          cursor:pointer;
+        }
+      }
+
     }
   }
   .category-header{
@@ -265,6 +309,108 @@ pre{
     border-top: 1px solid #c2c2c2;
     border-bottom: 1px solid #c2c2c2;
     clear:both;
+  }
+
+  ul#pagesSettings{
+    width: 100%;
+    padding-left: 0;
+    margin-left: 0;
+    li{
+      list-style-type: none;
+      border-bottom: 1px solid #B6B6B6;
+      &:first-child{
+        border-top: 1px solid #B6B6B6;
+      }
+      .showHideLink{
+        padding: 10px 15px;
+        display: block;
+        color: #585858;
+        text-align: left;
+        font-size: 15px;
+        &:hover, &.active{
+          background-color: #BEBEBE;
+          text-decoration: none;
+        }
+        i{
+          float: right;
+        }
+      }
+      .showPageSettings{
+        display: none;
+        form{
+          margin: 15px auto;
+          input, textarea {
+            width: 85%;
+            float: left;
+          }
+          select{
+            float: left;
+            width: 91%;
+          }
+          i{
+            float: right;
+            width: 5%;
+            margin: 0;
+            padding: 7px 3px;
+          }
+        }
+      }
+    }
+  }
+
+  ul#servicesSettings{
+    width: 100%;
+    padding-left: 0;
+    margin-left: 0;
+    li{
+      list-style-type: none;
+      border-bottom: 1px solid #B6B6B6;
+      &:first-child{
+        border-top: 1px solid #B6B6B6;
+      }
+      .showHideLink{
+        padding: 10px 15px;
+        display: block;
+        color: #585858;
+        text-align: left;
+        font-size: 15px;
+        &:hover, &.active{
+          background-color: #BEBEBE;
+          text-decoration: none;
+        }
+        i{
+          float: right;
+        }
+      }
+      .showServiceSettings{
+        display: none;
+        form{
+          margin: 15px auto;
+          input, textarea {
+            width: 85%;
+            float: left;
+          }
+          select{
+            float: left;
+            width: 91%;
+          }
+          i{
+            float: right;
+            width: 5%;
+            margin: 0;
+            padding: 7px 3px;
+          }
+          a.delete-service{
+            i{
+              float: none;
+              width: auto;
+              margin: 0;
+              padding: 3px 0px;
+            }
+          }
+        }
+      }
+    }
   }
 }
 
@@ -480,7 +626,23 @@ div#main-content{
     }
   }
 }
-
+form.edit_web{
+    margin: 0 auto 15px auto !important;
+    input, textarea {
+      width: 85%;
+      float: left;
+    }
+    select{
+      float: left;
+      width: 91%;
+    }
+    i.tooltip-icon {
+      float: right;
+      width: 5%;
+      margin: 0;
+      padding: 7px 3px;
+    }
+}
 /* CUSTOMIZE FORM ERRORS
 -------------------------------------------------- */
 #error_explanation {
@@ -514,9 +676,23 @@ div#debug-info{
     border-right-color: white;
   }
 }
+.tooltip.left {
+  margin-right: 6px;
+
+  .tooltip-arrow{
+    border-left-color: white;
+  }
+}
 .tooltip-inner  {
   padding: 3px 6px !important;
   font-size: 13px;
   background-color: white;
   color: black;
 }
+
+.modal{
+  display: none;
+}
+
+
+

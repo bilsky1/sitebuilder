@@ -6,8 +6,8 @@ class CreateWebs < ActiveRecord::Migration
       t.string :header_content
       t.string :footer_content
       t.boolean :published, default: false
-      t.datetime :published_at
-      t.string :favicon_src
+      t.datetime :published_at,default: Time.now
+      t.string :favicon
 
       t.timestamps
     end

@@ -1,0 +1,14 @@
+<div id="custom-theme-nav">
+    <ul id="nav">
+      <% @nav = @web.navigations.order("page_position ASC") %>
+      <% unless @nav.blank? %>
+          <% @nav.each do |nav| %>
+              <li><a href="#!<%= nav.page.url_name %>" data-page-id="<%= nav.page.id %>" ><%= nav.page.name %></a></li>
+          <% end %>
+      <% else %>
+          <% @pages.each do |page| %>
+              <li><a href="#!<%= page.url_name %>" data-page-id="<%= page.id %>" ><%= page.name %></a></li>
+          <% end %>
+      <% end %>
+    </ul>
+</div>

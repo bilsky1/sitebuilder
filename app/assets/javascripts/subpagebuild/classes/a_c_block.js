@@ -10,7 +10,16 @@ var blockAbstractClass = {
     setBlockHoverHandler: function(){
         var block = this;
         this.createDialogWindow();
-        $('#' + block.id).mouseenter(function(e) {
+        $('#' + block.id).hover(
+            function() {
+                $(this).prepend(block.getHoverCode());
+                block.setDeleteHandler();
+                block.setSettingsHandler();
+            }, function() {
+                $(this).find(".blockControls").remove();
+            }
+        );
+        /*$('#' + block.id).mouseenter(function(e) {
             if($(this).find(".blockControls")){
                 $(this).prepend(block.getHoverCode());
                 block.setDeleteHandler();
@@ -18,7 +27,7 @@ var blockAbstractClass = {
             }
         }).mouseleave(function(e) {
                 $(this).find(".blockControls").remove();
-            });
+            });  */
     },//setBlockHoverHandler
 
     deleteBlockFromArray: function(){
@@ -36,6 +45,7 @@ var blockAbstractClass = {
         this.showHideEmptyCode(globalSubpageBuild);
         showHideEmptyColumnCode(globalSubpageBuild);
         this.deleteBlockFromArray();
+        isContentChange = true;
     },
 
     //setDeleteHandler - onclick delete control delete this block
@@ -86,7 +96,7 @@ var blockAbstractClass = {
 
     //getSettingsDialogCode - build settings dialog code
     getSettingsDialogCode: function() {
-        return "<div class='dialog' id='" + this.settingsDialogId + "' title='Empty the recycle bin?'>"  +
+        return "<div class='dialog' id='" + this.settingsDialogId + "' title='Block Settings'>"  +
             this.settingsDialogCode +
             "</div>";
     },//getSettingsDialogCode

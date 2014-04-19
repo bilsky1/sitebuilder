@@ -2,14 +2,26 @@ $(document).ready(function(){
 
     checkURL();
 
-    initializeNav();
+    initializeNavEdit();
 
 });
 
-var lasturl="";
-function initializeNav(){
+function initializeNavEdit(){
+    $('ul#nav li a').unbind("click");
     $('ul#nav li a').click(function (e){
-        checkURL(this.hash);
+        if (!isContentChange){
+            checkURL(this.hash);
+        }else{
+            var activePageName = getActivePageName();
+            if(activePageName){
+                unsavedContentModal();
+                setUnsavedContentModalButtonsHandlers(activePageName);
+            }else{
+                var cleaner = new Cleaner();
+                cleaner.
+                checkURL(this.hash);
+            }
+        }
     });
 }
 function getSubpageHash(hash){
@@ -26,16 +38,13 @@ function getSubpageHash(hash){
 
 function checkURL(hash){
     hash = getSubpageHash(hash);
-    if(hash != lasturl){
-        lasturl=hash;
 
-        if(hash==""){
-            $('#subpageContent').html("default_content");
-        }
-        else{
-            setSelectedNav(hash);
-            getPage(hash);
-        }
+    if(hash==""){
+        $('#subpageContent').html("");
+    }
+    else{
+        setSelectedNav(hash);
+        getPage(hash);
     }
 }
 
@@ -54,11 +63,16 @@ function setSelectedNav(url){
 
 function getPage(subpageName){
     subpageName = subpageName.replace('#!','');
+    /*Delete modal windows*/
+    var cleaner = new Cleaner();
+    cleaner.deletePluginsMessyCode();
+    cleaner.reinitializeBlockList();
+
     $('#subpageContent').prepend("<div id='loading'><i class='fa fa-spinner fa-spin fa-2x'></i></div>");
     $.ajax({
         type: "POST",
         url: "/pages/get_page",
-        data: {web_id:$("#web-id").text(), page_name: subpageName},
+        data: {web_id:$("#web-id").text(), page_url_name: subpageName},
         dataType: 'json',
         error: function (jqXHR, exception) {
             if (jqXHR.status === 0) {
@@ -82,8 +96,8 @@ function getPage(subpageName){
                     genBlocksList = new Array(); //TODO - lost unsaved changes
                     //edit interface sucess method
                     $("#subpageContent").html(data.page_content);
-
                     $("#subpageContent").subpagebuild(); //reinitialize content builder
+                    changeTitle(data.title, data.web_name);
                     //---------------------------------
                 });
                 $("#subpageContent").fadeIn(600);
@@ -95,5 +109,47 @@ function getPage(subpageName){
         }
 
     });
-
 }
+
+//-------------------------------------------------------------------
+//---------------UNSAVED CONTENT ALERT----------------------------------
+//-------------------------------------------------------------------
+function unsavedContentModal(){
+    var options = {
+        "keyboard" : true
+    }
+    $('#unsavedContentModal').modal(options);
+}
+function setUnsavedContentModalButtonsHandlers(pageName){
+    /*$("#deleteUnsavedContent").on("click",function(){
+        var subpageCleaner = new Cleaner();
+        subpageCleaner.deleteContentAndGetSaved(pageName);
+        $(this).unbind('click');
+        $("#saveUnsavedContent").unbind('click');
+    });*/
+    $("#saveUnsavedContent").on("click",function(){
+        var subpageCleaner = new Cleaner();
+        subpageCleaner.updateContentToServer(pageName);
+        $('#unsavedContentModal').modal('hide');
+        $(this).unbind('click');
+        //$("#deleteUnsavedContent").unbind('click');
+    });
+    $('#unsavedContentModal').keydown(function(event){
+        if(event.keyCode==13){
+            $('#saveUnsavedContent').trigger('click');
+        }
+    });
+}
+
+function getActivePageName(){
+    var activePageEl = $('ul#nav li.active a');
+    if (activePageEl.length > 0){
+        return activePageEl.attr("href").replace("#!","");
+    }else{
+        return false;
+    }
+}
+
+function changeTitle(new_title,web_name){
+    document.title = "WBSBuilder | Edit | " + web_name + " | " + new_title;;
+};

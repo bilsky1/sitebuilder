@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
+//= require bootstrap-datetimepicker
 //----------------------------jQuery-UI-INTERACTIONS-----------------------
 //= require jquery.ui.draggable
 //= require jquery.ui.droppable
@@ -31,9 +32,10 @@
 //= require subpagebuild/subpagebuild.js
 //= require subpagebuild/classes/c_cleaner.js
 //
-//
-//= require custom.js
 //= require webs_edit_interface.js
+//= require custom.js
+//= require ext_services.js
+//= require domain_settings.js
 //= require subpage_loader.js
 //
 //------------EXTERNAL JAVASCRIP MODULES & FILES------------------------

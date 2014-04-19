@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:session][:password]) && user.state?
       sign_in user
-      redirect_back_or user
+      redirect_back_or webs_url
     else
       if user
         unless user.state?

@@ -3,12 +3,12 @@ class PagesController < ApplicationController
   #API get - find web and then find subpage by name
   def get_page
     if check_id(params[:web_id])
-      if check_page(params[:page_name])
+      if check_page(params[:page_url_name])
         web = Web.find_by_id(params[:web_id])
         unless web.nil?
-          page = web.pages.find_by_name(params[:page_name])
+          page = web.pages.find_by_url_name(params[:page_url_name])
           unless page.nil?
-            render :json => { 'page_content' => page.content }.to_json
+            render :json => { 'page_content' => page.content, 'title' => page.title, 'meta_keywords' => page.meta_keywords, 'meta_description' => page.meta_description, 'web_name' => page.web.name }.to_json
           else
             output = "Web subpagepage doesn't exist."
             render :json => { 'errors' => output}.to_json
@@ -32,11 +32,12 @@ class PagesController < ApplicationController
       web = Web.find_by_id(params[:web_id])
       unless web.nil?
         page = web.pages.new()
-        page.name = params[:name].mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n,'').to_s.delete(' ') #delete diacritics and spaces (name is used for #!url purpose)
+        page.name = params[:name]
+        page.url_name = params[:name]
         page.title = params[:title]
         page.content = ""
         if page.save
-          render :json => { 'create_result' => "1", 'page_name' => page.name, "page_id"=> page.id}.to_json
+          render :json => { 'create_result' => "1", 'page_name' => page.name, 'page_url_name'=>page.url_name, "page_id"=> page.id, "page_title" => page.title}.to_json
         else
           render :json => { :errors => page.errors.full_messages }.to_json
         end
@@ -53,10 +54,10 @@ class PagesController < ApplicationController
   #API update - find web, find web.pages by name, change content or name or anything save return value
   def update_page
     if check_id(params[:web_id])
-      if check_page(params[:page_name])
+      if check_page(params[:page_url_name])
         web = Web.find_by_id(params[:web_id])
         unless web.nil?
-          page = web.pages.find_by_name(params[:page_name])
+          page = web.pages.find_by_url_name(params[:page_url_name])
           unless page.nil?
             page.content = params[:content]
             if page.save
@@ -86,10 +87,15 @@ class PagesController < ApplicationController
     if check_id(params[:page_id])
       page = Page.find_by_id(params[:page_id])
       unless page.nil?
-        if page.destroy
-          render :json => { 'delete_result' => "1"}.to_json
+        if page.web.pages.count > 1
+          if page.destroy
+            render :json => { 'delete_result' => "1"}.to_json
+          else
+            output = "Cannot delete page."
+            render :json => { 'errors' => [output]}.to_json
+          end
         else
-          output = "Cannot delete page."
+          output = "Minimal count of pages is 1."
           render :json => { 'errors' => [output]}.to_json
         end
       else
@@ -102,6 +108,40 @@ class PagesController < ApplicationController
     end
   end
 
+  def update_page_settings
+    if  check_id(params[:web_id])
+      if check_id(params[:page_id])
+        web = Web.find_by_id(params[:web_id])
+        unless web.nil?
+          page = web.pages.find_by_id(params[:page_id])
+          unless page.nil?
+            if page.update(updateSettingsParams)
+              render :json => { 'update_settings_result' => "1", 'page_name' => page.name, 'page_url_name' => page.url_name}.to_json
+            else
+              render :json => { :errors => page.errors.full_messages }.to_json
+            end
+          else
+            output = "Page doesn't exist."
+            render :json => { 'errors' => [output]}.to_json
+          end
+        else
+          output = "Web subpagepage doesn't exist."
+          render :json => { 'errors' => [output]}.to_json
+        end
+      else
+        output = "Bad id of page."
+        render :json => { 'errors' => [output]}.to_json
+      end
+    else
+      output = "Bad id of web."
+      render :json => { 'errors' => [output]}.to_json
+    end
+  end
+
+  def get_page_settings_block_el
+    render ''
+  end
+
   private
     def check_id(string)
       Integer(string) != nil rescue false
@@ -109,6 +149,10 @@ class PagesController < ApplicationController
 
     def check_page(string)
       !string.blank?
+    end
+
+    def updateSettingsParams
+      params.permit(:name, :title, :meta_keywords, :meta_description)
     end
 
 end

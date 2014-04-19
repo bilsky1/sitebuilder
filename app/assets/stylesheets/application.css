@@ -9,7 +9,12 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
+ *= require bootstrap
+ *= require bootstrap-datetimepicker
+ *= require custom
+ *= require subpagebuild
+ *= require web_themes/column_block
+ *= require web_themes/generator_style
  * --------------------------jQuery-UI-INTERACTIONS-----------------
  *= require jquery.ui.resizable
  *= require jquery.ui.selectable

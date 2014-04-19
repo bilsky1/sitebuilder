@@ -17,6 +17,9 @@ var genPageBgColor;
 var genBlocksList = new Array();
 var globalOptions;
 var globalSubpageBuild;
+var idOfLastBlock;
+
+var isContentChange = false; //use to alert when there is a unsaved content
 
 //GENERATE Block object, depend on blockID parameter of dropped block
 function generateBlock(blockType,blockId){
@@ -42,8 +45,10 @@ function generateBlock(blockType,blockId){
     else if(blockType === "divider_b")
         blockObj = new DividerBlock(blockId, globalOptions.gen_block_class, "#" + $(this).attr("id"));
     //--------AJAX blocks
-    else if(blockType === "ajax_content_b")
+    else if(blockType === "ajax_content_b"){
         blockObj = new AjaxContentBlock(blockId, globalOptions.gen_block_class, "#" + $(this).attr("id"));
+        blockObj.getAjaxBlockContents();
+    }
     //--------MEDIA blocks
     else if(blockType === "pdf_b")
         blockObj = new PdfBlock(blockId, globalOptions.gen_block_class, "#" + $(this).attr("id"));
@@ -85,6 +90,31 @@ function setInlineCKeditor(className){
     });
 }//setInlineCKeditor
 
+function setInlineCKeditorByEl(className,el){
+    el.find(className).each(function(){
+        var name;
+        for(name in CKEDITOR.instances) {
+            var instance = CKEDITOR.instances[name];
+            if(this && this == instance.element.$) {
+                return;
+            }
+        }
+        $(this).attr('contenteditable', true);
+
+        CKEDITOR.inline( this, {
+            uiColor: '#C2C2C2',
+            toolbar: [
+                ['Bold','Italic','Underline', "-" ,'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'],
+                ['TextColor','BGColor','Font','FontSize'],
+                [ 'NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+                [ 'Link', 'Unlink' ],
+                ['Undo','Redo']
+
+            ]
+        });
+    });
+}
+
 //startDragEffect - set style when block is drag or sort
 function startDragEffect(){
     $(".ui-draggable-dragging").css({
@@ -119,7 +149,7 @@ function dragAndDropIcon(element){
 } //DRAG & DROP icon
 
 function showHideEmptyColumnCode(element){
-    element.find(".col").each(function(){
+    element.find(".col, .ajax-col").each(function(){
         if( jQuery.trim($(this).html()) === ""){
             $(this).append(emptyColumnCode);
         }
@@ -138,6 +168,18 @@ function loadAllBlock(obj){
     dragAndDropIcon(obj);
     showHideEmptyColumnCode(globalSubpageBuild);
     setInlineCKeditor('.ckeditor');
+    idOfLastBlock = getIdOfLastBlock();
+}
+
+function loadAllBlockInSubcontent(subcontentEl){
+    subcontentEl.find(globalOptions.gen_block_class).each(function(){
+        var blockObj = generateBlock($(this).data("type"),parseInt($(this).attr("id")));
+        blockObj.setBlockHoverHandler();
+    });
+    dragAndDropIcon($("#subpageContent"));
+    showHideEmptyColumnCode(globalSubpageBuild);
+    setInlineCKeditorByEl('.ckeditor',subcontentEl);
+    idOfLastBlock = getIdOfLastBlock();
 }
 
 function genIdToNewBlock(){
@@ -150,6 +192,16 @@ function genIdToNewBlock(){
     return lastId+1;
 }
 
+function getIdOfLastBlock(){
+    var lastId = 0;
+    for(var i=0; i < genBlocksList.length; i++){
+        if(parseInt(genBlocksList[i].id) > lastId){
+            lastId = parseInt(genBlocksList[i].id);
+        }
+    }
+    return lastId;
+}
+
 function extend(obj, blockAbstractClass){
     for (var i in blockAbstractClass) {
         obj.prototype[i] = blockAbstractClass[i]
@@ -160,7 +212,7 @@ function extend(obj, blockAbstractClass){
 function hex( c ) {
     var m = /rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/.exec(c);
     return m ? '#' + (1 << 24 | m[1] << 16 | m[2] << 8 | m[3]).toString(16).substr(1) : c;
-};
+}
 
 /*Convert hex color to rgb color*/
 function hex2rgb(hex,opacity) {
@@ -173,4 +225,14 @@ function hex2rgb(hex,opacity) {
 
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? "rgba("+ parseInt(result[1], 16) + ","+ parseInt(result[2], 16) + ","+  parseInt(result[3], 16) +"," + opacity + ")" : oldHex;
+}
+
+function removeAllAttr(el){
+    el.each(function() {
+        var attributes = this.attributes;
+        var i = attributes.length;
+        while( i-- ){
+            this.removeAttributeNode(attributes[i]);
+        }
+    })
 }

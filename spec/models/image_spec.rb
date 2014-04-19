@@ -1,18 +1,18 @@
 require 'spec_helper'
 
 describe Image do
-  let(:web) {FactoryGirl.create(:web)}
+  let(:page) {FactoryGirl.create(:page)}
 
   before do
-    @image = web.images.build(name: "Example Web")
+    @image = page.images.build(name: "Example Web")
   end
 
   it{ should respond_to(:name) }
-  it{ should respond_to(:web) }
+  it{ should respond_to(:page) }
 
 
-  describe "when web_id is not present" do
-    before { @image.web_id = nil }
+  describe "when page_id is not present" do
+    before { @image.page_id = nil }
     it { should_not be_valid }
   end
 

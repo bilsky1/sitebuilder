@@ -37,7 +37,12 @@ function ImageTextBlock(id,elClass, subpageContentId) {
         "<div class='upload'><span class='label'>Upload image</span><input class='file-input' name='image_form[uploaded_image]' type='file'></div>" +
         "</form>"+
         "</div>";
-
+    this.setEmptyImageCode = function(){
+        var imageContent = jQuery.trim($("#" + this.id).find(".imageContainer").html());
+        if(imageContent === ""){
+            $("#" + this.id).find(".imageContainer").html(this.emptyContent);
+        }
+    };
     this.getSettingsDialogCode = function() {
         return "<div class='dialog' id='" + this.settingsDialogId + "' title='Update image + Text block'>"  +
             this.settingsDialogCode +
@@ -83,13 +88,14 @@ function ImageTextBlock(id,elClass, subpageContentId) {
 
     this.deleteBlock = function(){
         this.deleteImage();
+        this.deleteCkEditorMessyContent();
         var deleteButtonElement = $("#" + this.id).children(".blockControls").children('.deleteBlock');
         deleteButtonElement.closest(this.elClass).remove();
         $("#" + this.settingsDialogId).remove();
         this.showHideEmptyCode(globalSubpageBuild);
         showHideEmptyColumnCode(globalSubpageBuild);
         this.deleteBlockFromArray();
-
+        isContentChange = true;
     };
 
     this.setAjaxFileUpload = function(){
@@ -163,6 +169,7 @@ function ImageTextBlock(id,elClass, subpageContentId) {
             $("#" + block.id).find(".imageAndText").find(".imageContainer").css({ marginLeft: 15, float: "right" });
         });
         this.setAjaxFileUpload();
+        this.setEmptyImageCode();
     };
 
     this.createDialogWindow = function(){
@@ -184,6 +191,11 @@ function ImageTextBlock(id,elClass, subpageContentId) {
                 }
             }
         });
+    };
+
+    this.deleteCkEditorMessyContent = function  (){
+        var inlineWindowIdentifier = $("#" + this.id).find(".ckeditor").attr("aria-describedby");
+        $("#" + inlineWindowIdentifier).closest(".cke").remove();
     };
 
 }//ImageTextBlock

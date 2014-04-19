@@ -1,0 +1,46 @@
+<h2>Pages</h2>
+<h3 class="category-header">New page</h3>
+<form action="/pages/create_page" method="post">
+  <div id="pages-messages"></div>
+  <input type="hidden" name="web_id" value="<%= @web.id %>">
+  <input type="text" name="name" value="" placeholder="New pages name">
+  <input type="text" name="title" value="" placeholder="New page title">
+  <input type="submit" value="Create" class="btn btn-success" id="create-new-page">
+</form>
+<h3 class="category-header">Navigation</h3>
+<ul id="pagesList">
+
+  <% @nav = @web.navigations.order("page_position ASC") %>
+  <% unless @nav.blank? %>
+      <% @nav.each do |nav| %>
+          <li data-page-id="<%= nav.page.id %>" class='alert alert-info'><i class="fa fa-bars sort-page"></i><span class='pageName'><%= nav.page.name %></span><i class="fa fa-trash-o fa-lg delete-page" ></i></li>
+      <% end %>
+  <% else %>
+      <% @pages.each do |page| %>
+          <li data-page-id="<%= page.id %>" class='alert alert-info'><i class="fa fa-bars sort-page"></i><span class='pageName'><%= page.name %></span><i class="fa fa-trash-o fa-lg delete-page" ></i></li>
+      <% end %>
+  <% end %>
+</ul>
+<h3 class="category-header">Pages settings</h3>
+<ul id="pagesSettings">
+  <% @pages.each do |page| %>
+      <li>
+        <a class="showHideLink" href="#">
+          <span class="pageName"><%= page.name %></span>
+          <i class="fa fa-angle-down fa-lg"></i>
+        </a>
+        <div class="showPageSettings">
+          <form class="update-page-settings" action="/pages/update_page_settings" method="post">
+            <div class="page-settings-messages"></div>
+            <div class="clearfix"><input type="hidden" name="web_id" value="<%= @web.id %>"></div>
+            <div class="clearfix"><input type="hidden" name="page_id" value="<%= page.id %>"></div>
+            <div class="clearfix"><input type="text" name="name" value="<%= page.name %>" placeholder="Page name"><i class="tooltip-icon fa fa-info-circle fa-lg" data-placement="left" rel="tooltip" title="Page name" ></i></div>
+            <div class="clearfix"><input type="text" name="title" value="<%= page.title %>" placeholder="Page title"><i class="tooltip-icon fa fa-info-circle fa-lg" data-placement="left" rel="tooltip" title="Page title" ></i></div>
+            <div class="clearfix"><input type="text" name="meta_keywords" value="<%= page.meta_keywords %>" placeholder="Keywords"><i class="tooltip-icon fa fa-info-circle fa-lg" data-placement="left" rel="tooltip" title="Keywords" ></i></div>
+            <div class="clearfix"><input type="text" name="meta_description" value="<%= page.meta_description %>" placeholder="Description"><i class="tooltip-icon fa fa-info-circle fa-lg" data-placement="left" rel="tooltip" title="Description" ></i></div>
+            <div class="clearfix"><input type="submit" value="Save" class="btn btn-success" id="update-page"></div>
+          </form>
+        </div>
+      </li>
+  <% end %>
+</ul>

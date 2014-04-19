@@ -59,7 +59,12 @@ function ImageBlock(id, elClass, subpageContentId) {
             $("#" + block.id).children(".imageAlign").css("text-align","right");
         });
     };
-
+    this.setEmptyImageCode = function(){
+        var imageContent = jQuery.trim($("#" + this.id).find(".imageAlign").html());
+        if(imageContent === ""){
+            $("#" + this.id).find(".imageAlign").html(this.emptyContent);
+        }
+    };
     this.getSettingsDialogCode = function() {
         return "<div class='dialog' id='" + this.settingsDialogId + "' title='Update image'>"  +
             this.settingsDialogCode +
@@ -109,7 +114,7 @@ function ImageBlock(id, elClass, subpageContentId) {
         this.showHideEmptyCode(globalSubpageBuild);
         showHideEmptyColumnCode(globalSubpageBuild);
         this.deleteBlockFromArray();
-
+        isContentChange = true;
     };
     this.setAjaxFileUpload = function(){
         var block = this;
@@ -173,6 +178,7 @@ function ImageBlock(id, elClass, subpageContentId) {
         $("#" + this.id).find("a.fancybox").fancybox();
         this.setAlignHandler();
         this.setAjaxFileUpload();
+        this.setEmptyImageCode();
     };
 
     this.createDialogWindow = function(){

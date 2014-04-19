@@ -21,11 +21,11 @@ function ColumnBlock(id,elClass) {
     };
 
     this.refreshSortable = function(){
-        $("#" + globalSubpageBuild.attr("id") + ", .col").sortable({
+        $("#" + globalSubpageBuild.attr("id") + ", .col, .ajax-col").sortable({
             placeholder: "ui-state-highlight",
             handle: '.moveBlock',
             revert: true,
-            connectWith: "#subpageContent, .col",
+            connectWith: "#subpageContent, .col, .ajax-col",
             refresh: true,
             receive: function(event, ui){
                 if ( transfered === "draggable" && $(this).find(".block") ) {
@@ -43,17 +43,17 @@ function ColumnBlock(id,elClass) {
                     blockObj.showHideEmptyCode(globalSubpageBuild);
                     blockObj.setBlockHoverHandler();
 
-                    if($("#" + blockObj.id).data("type") === "column_b"){
+                    if($("#" + blockObj.id).data("type") === "column_b" || $("#" + blockObj.id).data("type") === "ajax_content_b"){
                         blockObj.refreshSortable();
-                    }
-                    else if($("#" + blockObj.id).data("type") === "map_b"){
-                        blockObj.initializeGoogleMap();
+                        if($("#" + blockObj.id).data("type") === "ajax_content_b")
+                            blockObj.createAjaxContentService();
                     }
 
                     transfered = 'sortable';
                     dragBlockId = "";
                 }
                 setInlineCKeditor('.ckeditor');
+                isContentChange = true;
             },
             update: function( event, ui ) {
                 showHideEmptyColumnCode(globalSubpageBuild);
@@ -285,6 +285,7 @@ function ColumnBlock(id,elClass) {
         this.showHideEmptyCode(globalSubpageBuild);
         showHideEmptyColumnCode(globalSubpageBuild);
         this.deleteBlockFromArray();
+        isContentChange = true;
     };
 
     this.settingsCode = "<button class='2col' >2</button>" +

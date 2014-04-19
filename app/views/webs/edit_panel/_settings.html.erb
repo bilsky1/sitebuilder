@@ -1,0 +1,26 @@
+<h2>Settings</h2>
+<h3 class="category-header">Styles</h3>
+<%= form_for @web, url: {action: "update_style_settings"}, method: :post, html: {id:"web-style-settings-update"} do |w| %>
+    <div class="errors"></div>
+    <div class="clearfix"><%= w.text_field :bg_color, placeholder: "Background color"%></div>
+
+    <div id="favicon-upload" class="upload clearfix">
+      <span class="label">Upload favicon</span>
+      <%= w.file_field :favicon %>
+      <span id="file-name"></span>
+    </div>
+
+    <div class="clearfix"><%= w.submit "Save", class: "btn btn-success pull-right" %></div>
+
+<% end %>
+
+<h3 class="category-header">Webs</h3>
+<%= form_for @web, url: {action: "update"}, method: :post do |w| %>
+    <%= render 'shared/error_messages', object: w.object %>
+    <div class="clearfix"><%= w.text_field :name, placeholder: "Name" %><i class="tooltip-icon fa fa-info-circle fa-lg" data-placement="left" rel="tooltip" title="Web name" ></i></div>
+    <div class="clearfix"><%= w.select :theme_id, @themes.map { |t| [ t.name, t.id ] }, {include_blank: false}  %><i class="tooltip-icon fa fa-info-circle fa-lg" data-placement="left" rel="tooltip" title="Choose web theme" ></i></div>
+    <div class="clearfix"><%= w.text_area :header_content, placeholder: "Header content"  %><i class="tooltip-icon fa fa-info-circle fa-lg" data-placement="left" rel="tooltip" title="Header content on the top of every page." ></i></div>
+      <div class="clearfix"><%= w.text_area :footer_content, placeholder: "Footer content"  %><i class="tooltip-icon fa fa-info-circle fa-lg" data-placement="left" rel="tooltip" title="Footer content on the bottom of every page" ></i></div>
+
+    <div class="clearfix"><%= w.submit "Save", class: "btn btn-success pull-right" %></div>
+<% end %>

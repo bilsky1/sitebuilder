@@ -1,36 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title><%= full_title(yield(:title)) %></title>
-
-  <!-- Good showing on mobile device with responsive design -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-  <script src="http://malsup.github.com/jquery.form.js"></script>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-<% unless isWebsShowAction? %>
-    <%= render 'layouts/header' %>
+<% if isWebsShowAction? %>
+    <% @web = Web.find_by_subdomain!(request.subdomain)  %>
+    <%= render 'layouts/web_themes/' + @web.theme.name + '/header' %>
+<% else %>
+    <%= render 'layouts/system_layout' %>
 <% end %>
-
-<div id="content" class="container">
- <div id='flash_messages'>
-     <% unless request.url.include?(sessions_path) %>
-        <%= render 'shared/flash_messages' %>
-      <% end %>
-  </div>
-    <%= yield %>
-
-    <% if Rails.env.development? %>
-        <div id="debug-info">
-          <%= debug(params) %>
-        </div>
-    <% end %>
-</div>
-
-</body>
-</html>
