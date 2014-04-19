@@ -34,16 +34,16 @@ class WebsController < ApplicationController
     @web = Web.find_by_subdomain!(request.subdomain)
 
     if (@web.published_at < Time.now && !@web.published)
-      @web.published = true
-      @web.save()
-      flash[:error] = "copy content to content published for all pages, in edit GUI please set published to false vhen change published time"
+      @pages = @web.pages
+      if params[:back_link]=="true"
+        flash[:success] = "You can edit this site #{view_context.link_to 'here', edit_web_url(@web, subdomain: 'www')}.".html_safe
+        render 'webs/show'
+      end
+    else
+      render 'webs/remaining_time_to_publish'
     end
 
-    @pages = @web.pages
-    if params[:back_link]=="true"
-      flash[:success] = "You can edit this site #{view_context.link_to 'here', edit_web_url(@web, subdomain: 'www')}.".html_safe
-      render 'webs/show'
-    end
+
   end
 
   def edit
