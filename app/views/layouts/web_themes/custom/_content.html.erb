@@ -15,6 +15,7 @@
   </header>
 </div>
 <!-- HEADER end -->
+
 <% if isWebsShowAction? %>
     <div id='flash_messages'>
       <% unless request.url.include?(sessions_path) %>
@@ -22,7 +23,6 @@
       <% end %>
     </div>
 <% end %>
-
 <div id="subpageContent">
   <% if isEscapeFragmentParams? %>
       <%= raw @web.pages.find_by_url_name(params[:_escaped_fragment_]).content %>

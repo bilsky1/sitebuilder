@@ -4,7 +4,7 @@ class WebsController < ApplicationController
   before_action :get_themes,     only: [:new,:edit, :update]
 
   def index
-    @webs = current_user.webs.paginate(page: params[:page])
+    @webs = current_user.webs.order("created_at DESC").paginate(page: params[:page])
   end
 
   def new
@@ -18,6 +18,7 @@ class WebsController < ApplicationController
       page = @web.pages.new()
       page.title = "Home"
       page.name = "Home"
+      page.url_name = "home"
       page.content = ""
       page.save
 

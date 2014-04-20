@@ -1,4 +1,8 @@
 class Web < ActiveRecord::Base
+  before_save do
+    self.subdomain = self.subdomain.downcase
+  end
+
   #relations
   belongs_to :user
   belongs_to :theme
