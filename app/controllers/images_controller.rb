@@ -2,8 +2,8 @@ class ImagesController < ApplicationController
   #create images from multiupload
   def add_assets
     #create new image
-    if check_page(params[:image_form][:page_name])
-      page = Page.find_by_url_name(params[:image_form][:page_name])
+    if check_id(params[:image_form][:page_id])
+      page = Page.find_by_id(params[:image_form][:page_id])
       unless page.nil?
         image = page.images.new()
         image.name="Example"
@@ -40,8 +40,8 @@ class ImagesController < ApplicationController
     end
 
     #create new image
-    if check_page(params[:image_form][:page_name])
-      page = Page.find_by_url_name(params[:image_form][:page_name])
+    if check_id(params[:image_form][:page_id])
+      page = Page.find_by_id(params[:image_form][:page_id])
       unless page.nil?
         image = page.images.new()
         image.name="Example"
@@ -82,8 +82,4 @@ class ImagesController < ApplicationController
     def check_id(string)
       Integer(string) != nil rescue false
     end
-
-  def check_page(string)
-    !string.blank?
-  end
 end

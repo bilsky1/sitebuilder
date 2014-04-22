@@ -2,13 +2,10 @@
 function ImageBlock(id, elClass, subpageContentId) {
 
     this.getModifySubpageName = function(hash){
-        if(hash != null)
-            return hash.replace('#!','');
-        else
-            return "";
+        return $("#subpageContent").data("page_id");
     }
 
-    this.getWindowHash = function(){
+    /*this.getWindowHash = function(){
         var hash=window.location.hash.toString();
         if(hash == ''){
             hash = $("#nav").find("li").first().find("a").attr("href");
@@ -16,7 +13,7 @@ function ImageBlock(id, elClass, subpageContentId) {
                 hash = "";
         }
         return hash;
-    };
+    };*/
 
 
     this.id = id;
@@ -39,7 +36,7 @@ function ImageBlock(id, elClass, subpageContentId) {
         "</table>" +
         "<form accept-charset='UTF-8' action='/images/create_assets' data-remote='true' enctype='multipart/form-data' class='upload-form' method='post'><div style='margin:0;padding:0;display:inline'><input name='utf8' type='hidden' value='✓'></div>" +
         "<input type='hidden' name='image_form[id]' value='" + $("#" + this.id).find("img").attr("id") +"'> " +
-        "<input type='hidden' name='image_form[page_name]' value='" + this.getModifySubpageName(this.getWindowHash()) + "'> " +
+        "<input type='hidden' name='image_form[page_id]' value='" + this.getModifySubpageName() + "'> " +
         "<div class='upload'><span class='label'>Upload image</span><input class='file-input' name='image_form[uploaded_image]' type='file'></div>" +
         "</form>"+
         "</div>";

@@ -4,13 +4,13 @@ function SocialIconsBlock(id,elClass, subpageContentId) {
     this.subpageContentId = subpageContentId;
 
     this.genBlockCode = "<p class='socialIconsBlock'>" +
-        "<a class='fbIcon' href='#' target='_blank'><i class='fa fa-facebook-square fa-2x'></i></a>" +
-        "<a class='gplusIcon' href='#' target='_blank'><i class='fa fa-google-plus-square fa-2x'></i></a>" +
-        "<a class='twitterIcon' href='#' target='_blank'><i class='fa fa-twitter-square fa-2x'></i></a>" +
-        "<a class='pinterestIcon' href='#' target='_blank'><i class='fa fa-pinterest-square fa-2x'></i></a>" +
-        "<a class='linkedInIcon' href='#' target='_blank'><i class='fa fa-linkedin-square fa-2x'></i></a>" +
-        "<a class='gitHubIcon' href='#' target='_blank'><i class='fa fa-github-square fa-2x'></i></a>" +
-        "<a class='tumblrIcon' href='#' target='_blank'><i class='fa fa-tumblr-square fa-2x'></i></a>" +
+        "<a class='fbIcon' href='https://www.facebook.com' target='_blank'><i class='fa fa-facebook-square fa-2x'></i></a>" +
+        "<a class='gplusIcon' href='https://plus.google.com' target='_blank'><i class='fa fa-google-plus-square fa-2x'></i></a>" +
+        "<a class='twitterIcon' href='https://twitter.com' target='_blank'><i class='fa fa-twitter-square fa-2x'></i></a>" +
+        "<a class='pinterestIcon' href='https://www.pinterest.com' target='_blank'><i class='fa fa-pinterest-square fa-2x'></i></a>" +
+        "<a class='linkedInIcon' href='https://www.linkedin.com' target='_blank'><i class='fa fa-linkedin-square fa-2x'></i></a>" +
+        "<a class='gitHubIcon' href='https://github.com' target='_blank'><i class='fa fa-github-square fa-2x'></i></a>" +
+        "<a class='tumblrIcon' href='https://www.tumblr.com' target='_blank'><i class='fa fa-tumblr-square fa-2x'></i></a>" +
         "</p>";
 
     this.settingsDialogId = "settings-confirm" + this.id;
