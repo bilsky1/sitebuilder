@@ -33,7 +33,9 @@ function Loader() {
     };
 
     this.initGaleries = function(){
-        $(".fancybox").fancybox();
+        $(".fancybox").fancybox({
+            'padding'		: 0
+        });
     };
 
     /*----------------AJAX CONTENT LOADING & HANDLERS SET

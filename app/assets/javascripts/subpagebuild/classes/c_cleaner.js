@@ -2,8 +2,6 @@
 function Cleaner() {
     this.content = "";
 
-    this.subpageName = "";
-
     this.cleanContent = function(content){
         $("body").append("<div id='tmpSubpageContent'></div>");
         var tmpSubpageContentEl = $("#tmpSubpageContent");
@@ -133,11 +131,6 @@ function Cleaner() {
         genBlocksList = new Array();
     };
 
-    this.setSubpageName = function(hash){
-        if(hash != null)
-            this.subpageName = hash.replace('#!','');
-    }
-
     this.printError = function(error, type){
         $("#saveSubpage").closest(".saveButtonContainer").prepend("<div class='alert alert-" + type + " fade in'>" +
             "<a class='close' data-dismiss='alert' href='#'>x</a>" + error +
@@ -147,7 +140,6 @@ function Cleaner() {
 
     this.updateContentToServer = function(pageName){
 
-        this.setSubpageName(pageName);
         var originalButText = $('#saveSubpage').text();
         var cleaner = this;
         this.content = cleaner.cleanContent($("#subpageContent").html());
@@ -156,7 +148,7 @@ function Cleaner() {
         $.ajax({
             type: "POST",
             url: "/pages/update_page",
-            data: {web_id:$("#web-id").text(), page_url_name: this.subpageName, content: this.content},
+            data: {web_id:$("#web-id").text(), page_id: $("#subpageContent").data("page_id"), content: this.content},
             dataType: 'json',
             error: function (jqXHR, exception) {
                 if (jqXHR.status === 0) {
@@ -172,10 +164,11 @@ function Cleaner() {
                     alert('Uncaught Error.\n' + jqXHR.responseText);
                     console.log(jqXHR.responseText);
                 }
+                $('#saveSubpage').text("Save subpage");
             },
             success: function(data){
                 if (data.update_result != null){
-                    $('#saveSubpage').text(originalButText);
+                    $('#saveSubpage').text("Save subpage");
 
                     if(parseInt(data.update_result) === 1){
                         cleaner.printError("Sucessfully updated","success");
@@ -186,6 +179,7 @@ function Cleaner() {
                 }
                 else if(data.errors != null){
                     var i;
+                    $('#saveSubpage').text("Save subpage");
                     for (i = 0; i < data.errors.length; i++) {
                         console.log(data.errors[i]);
                         cleaner.printError(data.errors[i],"error");
@@ -194,16 +188,6 @@ function Cleaner() {
             }
         });
     };//updateContentToServer
-
-    /*this.deleteContentAndGetSaved = function(pageName){
-        var i;
-        for(i = 0; i < genBlocksList.length; i++){
-            if(genBlocksList[i].id > idOfLastBlock){
-                genBlocksList[i].deleteBlock();
-            }
-        }
-        isContentChange = false;
-    }; */
 }
 $(document).ready(function(){
     /*BUTTON USE CLEANER CLASS*/

@@ -107,17 +107,17 @@ function AjaxContentBlock(id,elClass, subpageContentId) {
         $("#" + this.settingsDialogId).find("form.AjaxButtonForm").find(".leftAlign").on("click",function(e){
             e.preventDefault();
             $("#" + block.id).children(".ajax-block-container").children(".buttonAlign").css("text-align","left");
-            $("#" + block.id).children(".buttonBackAlign").css("text-align","left");
+            $("#" + block.id).children(".ajax-block-container").children(".buttonBackAlign").css("text-align","left");
         });
         $("#" + this.settingsDialogId).find("form.AjaxButtonForm").find(".centerAlign").on("click",function(e){
             e.preventDefault();
             $("#" + block.id).children(".ajax-block-container").children(".buttonAlign").css("text-align","center");
-            $("#" + block.id).children(".buttonBackAlign").css("text-align","center");
+            $("#" + block.id).children(".ajax-block-container").children(".buttonBackAlign").css("text-align","center");
         });
         $("#" + this.settingsDialogId).find("form.AjaxButtonForm").find(".rightAlign").on("click",function(e){
             e.preventDefault();
             $("#" + block.id).children(".ajax-block-container").children(".buttonAlign").css("text-align","right");
-            $("#" + block.id).children(".buttonBackAlign").css("text-align","right");
+            $("#" + block.id).children(".ajax-block-container").children(".buttonBackAlign").css("text-align","right");
         });
     };
 
@@ -193,10 +193,10 @@ function AjaxContentBlock(id,elClass, subpageContentId) {
         this.deleteAjaxContent();
         deleteButtonElement.closest(this.elClass).remove();
         $("#" + this.settingsDialogId).remove();
-        this.showHideEmptyCode(globalSubpageBuild);
         showHideEmptyColumnCode(globalSubpageBuild);
         this.deleteBlockFromArray();
         isContentChange = true;
+        this.showHideEmptyCode(globalSubpageBuild);
     };
 
     this.setAjaxBlockButtonBackHandler = function(){
@@ -358,13 +358,8 @@ function AjaxContentBlock(id,elClass, subpageContentId) {
     };
 
     this.getCurrentPageId = function(){
-        var currentPage = $("#nav").children(".active");
-        if (!currentPage)
-            currentPage = $("#nav").find("li").first();
-
-        return parseInt(currentPage.children("a").data("page-id"));
+        return $("#subpageContent").data("page_id");
     }
-
 }//AjaxContentBlock
 
 extend(AjaxContentBlock,blockAbstractClass);

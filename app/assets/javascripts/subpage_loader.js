@@ -7,7 +7,7 @@ $(document).ready(function(){
 });
 
 function initializeNavEdit(){
-    $('ul#nav li a').unbind("click");
+    /*$('ul#nav li a').unbind("click");
     $('ul#nav li a').click(function (e){
         if (!isContentChange){
             checkURL(this.hash);
@@ -17,9 +17,21 @@ function initializeNavEdit(){
                 unsavedContentModal();
                 setUnsavedContentModalButtonsHandlers(activePageName);
             }else{
-                var cleaner = new Cleaner();
-                cleaner.
                 checkURL(this.hash);
+            }
+        }
+    });   */
+    $(window).bind('popstate', function(e) {
+        e.preventDefault();
+        if (!isContentChange){
+            checkURL(location.hash);
+        }else{
+            var activePageName = getActivePageName();
+            if(activePageName){
+                unsavedContentModal();
+                setUnsavedContentModalButtonsHandlers(activePageName);
+            }else{
+                checkURL(location.hash);
             }
         }
     });
@@ -101,6 +113,7 @@ function getPage(subpageName){
                     //---------------------------------
                 });
                 $("#subpageContent").fadeIn(600);
+                $("#subpageContent").data("page_id",data.page_id);
             }
             else if(data.errors != null){
                 console.log(data.errors);
@@ -119,6 +132,9 @@ function unsavedContentModal(){
         "keyboard" : true
     }
     $('#unsavedContentModal').modal(options);
+    /*$('#unsavedContentModal').on('hidden', function(){
+        window.location.hash = "#!page1";
+    });*/
 }
 function setUnsavedContentModalButtonsHandlers(pageName){
     /*$("#deleteUnsavedContent").on("click",function(){

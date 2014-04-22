@@ -17,7 +17,7 @@
 <!-- HEADER end -->
 
 <% if isWebsShowAction? %>
-    <div id='flash_messages'>
+    <div id='flash_messages_show'>
       <% unless request.url.include?(sessions_path) %>
           <%= render 'shared/flash_messages' %>
       <% end %>

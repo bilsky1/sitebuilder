@@ -1,6 +1,6 @@
 class Page < ActiveRecord::Base
   before_save do
-    self.url_name = name.mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n,'').to_s.delete(' ') #delete diacritics and spaces (name is used for #!url purpose)
+    self.url_name = name.mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n,'').to_s.delete(' ').downcase #delete diacritics and spaces (name is used for #!url purpose)
   end
 
   after_save :check_navigation_exist

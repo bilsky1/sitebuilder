@@ -186,7 +186,9 @@ function GalleryBlock(id,elClass, subpageContentId) {
                         console.log(responseJson.src);
                         $('#' + block.id).children(".galleryDiv").find(".emptyImage").remove();
                         $('#'+block.id).children(".galleryDiv").append("<div class='galleryItem'><a id='link" + responseJson.id + "' data-fancybox-group='gal" + block.id + "' class='fancybox' href='" + responseJson.src  + "'><img id='img" + responseJson.id + "' src='" + responseJson.thumb + "'></a></div>");
-                        $("#" + block.id).find(".fancybox").fancybox();
+                        $("#" + block.id).find(".fancybox").fancybox({
+                            'padding'		: 0
+                        });
                         block.imageHandler("img" + responseJson.id);
 
                         $("#" + block.settingsDialogId).find("input[name='image_form[id]']").val(responseJson.id);
@@ -215,7 +217,9 @@ function GalleryBlock(id,elClass, subpageContentId) {
     };
 
     this.initDialogWindowSettings = function(){
-        $("#" + this.id).find("a.fancybox").fancybox();
+        $("#" + this.id).find("a.fancybox").fancybox({
+            'padding'		: 0
+        });
         this.setAjaxFileUpload();
         this.setColorPickers();
         this.setBorderOnOff();

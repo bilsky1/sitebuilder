@@ -1,0 +1,83 @@
+@media only screen and (max-width: 992px) {
+/*  GRID OF THREE  */
+  .span_1_of_3 {
+    width: 47%;
+    &:last-child{
+      width: 97%;
+    }
+  }
+/*  GRID OF FOUR */
+  .span_1_of_4 {
+    width: 47%;
+  }
+
+/*  GRID OF FIVE */
+  .span_1_of_5 {
+    width: 47%;
+    &:last-child{
+      width: 97%;
+    }
+  }
+}
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+@media only screen and (max-width: 768px) {
+/*  GRID OF FOUR */
+  .span_4_of_4 {
+    width: 100%;
+  }
+
+  .span_3_of_4 {
+    width: 100%;
+  }
+
+  .span_2_of_4 {
+    width: 100%;
+  }
+  .span_1_of_4 {
+    width: 100%;
+  }
+
+/*  GRID OF FIVE */
+  .span_5_of_5 {
+    width: 100%;
+  }
+
+  .span_4_of_5 {
+    width: 100%;
+  }
+
+  .span_3_of_5 {
+    width: 100%;
+  }
+
+  .span_2_of_5 {
+    width: 100%;
+  }
+
+  .span_1_of_5 {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 480px) {
+/*  GRID OF TWO  */
+  .span_2_of_2 {
+    width: 100%;
+  }
+  .span_1_of_2 {
+    width: 100%;
+  }
+
+/*  GRID OF THREE  */
+  .span_3_of_3 {
+    width: 100%;
+  }
+  .span_2_of_3 {
+    width: 100%;
+  }
+  .span_1_of_3 {
+    width: 100%;
+    &:last-child{
+      width: 100%;
+    }
+  }
+}

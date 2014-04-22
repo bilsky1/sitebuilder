@@ -8,8 +8,12 @@ $(document).ready(function(){
 
 var lasturl="";
 function initializeNav(){
-    $('ul#nav li a').click(function (e){
+    /*$('ul#nav li a').click(function (e){
         checkURL(this.hash);
+    });*/
+    $(window).bind('hashchange', function(e){
+        e.preventDefault();
+        checkURL(location.hash);
     });
 }
 function getSubpageHash(hash){

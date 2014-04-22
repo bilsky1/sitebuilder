@@ -263,7 +263,9 @@ pre{
       overflow: visible;
       margin: 0px 0 27px 0px;
       position: relative;
-
+      .label:hover{
+        cursor:pointer;
+      }
       span{
         background-color: transparent;
         text-align: center;
@@ -283,8 +285,11 @@ pre{
         position: absolute;
         top: 0;
         left: 0;
-        padding: 5px 25px;
-        opacity: 0;
+        padding:0px;
+        filter: alpha(opacity=1);
+        -moz-opacity: 0.00;
+        opacity: 0.00;
+        cursor:pointer;
         &:hover{
           cursor:pointer;
         }
@@ -541,7 +546,7 @@ ul.blocks{
 }
 
 /*DEFAULT SHOW SIDEBAR-BLOCK CONTENT*/
-#view-content, #settings-content, #publish-content, #pages-content{
+#view-content, #settings-content, #publish-content, #pages-content,#services-content{
   display:none;
 }
 
@@ -693,6 +698,5 @@ div#debug-info{
 .modal{
   display: none;
 }
-
 
 

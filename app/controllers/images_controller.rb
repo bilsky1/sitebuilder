@@ -3,7 +3,7 @@ class ImagesController < ApplicationController
   def add_assets
     #create new image
     if check_page(params[:image_form][:page_name])
-      page = Page.find_by_name(params[:image_form][:page_name])
+      page = Page.find_by_url_name(params[:image_form][:page_name])
       unless page.nil?
         image = page.images.new()
         image.name="Example"
@@ -41,7 +41,7 @@ class ImagesController < ApplicationController
 
     #create new image
     if check_page(params[:image_form][:page_name])
-      page = Page.find_by_name(params[:image_form][:page_name])
+      page = Page.find_by_url_name(params[:image_form][:page_name])
       unless page.nil?
         image = page.images.new()
         image.name="Example"

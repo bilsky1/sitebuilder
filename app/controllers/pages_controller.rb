@@ -8,7 +8,7 @@ class PagesController < ApplicationController
         unless web.nil?
           page = web.pages.find_by_url_name(params[:page_url_name])
           unless page.nil?
-            render :json => { 'page_content' => page.content, 'title' => page.title, 'meta_keywords' => page.meta_keywords, 'meta_description' => page.meta_description, 'web_name' => page.web.name }.to_json
+            render :json => { 'page_id'=>page.id, 'page_content' => page.content, 'title' => page.title, 'meta_keywords' => page.meta_keywords, 'meta_description' => page.meta_description, 'web_name' => page.web.name }.to_json
           else
             output = "Web subpagepage doesn't exist."
             render :json => { 'errors' => output}.to_json
@@ -54,10 +54,10 @@ class PagesController < ApplicationController
   #API update - find web, find web.pages by name, change content or name or anything save return value
   def update_page
     if check_id(params[:web_id])
-      if check_page(params[:page_url_name])
+      if check_id(params[:page_id])
         web = Web.find_by_id(params[:web_id])
         unless web.nil?
-          page = web.pages.find_by_url_name(params[:page_url_name])
+          page = web.pages.find_by_id(params[:page_id])
           unless page.nil?
             page.content = params[:content]
             if page.save

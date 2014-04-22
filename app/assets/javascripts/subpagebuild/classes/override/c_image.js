@@ -156,7 +156,9 @@ function ImageBlock(id, elClass, subpageContentId) {
                         console.log(responseJson.src);
                         //$('#' + this.id).children(".imageAlign").find("i#tmp-loader").remove();
                         $('#'+block.id).children(".imageAlign").html("<a class='fancybox' href='" + responseJson.src  + "'><img id='img" + responseJson.id + "' src='" + responseJson.thumb + "'></a>");
-                        $("#" + block.id).find("a.fancybox").fancybox();
+                        $("#" + block.id).find("a.fancybox").fancybox({
+                            'padding'		: 0
+                        });
                         $("#" + block.settingsDialogId).find("input[name='image_form[id]']").val(responseJson.id);
                     }else{
                         var i;
@@ -175,7 +177,9 @@ function ImageBlock(id, elClass, subpageContentId) {
         });
     };
     this.initDialogWindowSettings = function(){
-        $("#" + this.id).find("a.fancybox").fancybox();
+        $("#" + this.id).find("a.fancybox").fancybox({
+            'padding'		: 0
+        });
         this.setAlignHandler();
         this.setAjaxFileUpload();
         this.setEmptyImageCode();
