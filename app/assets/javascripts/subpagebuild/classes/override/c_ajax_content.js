@@ -7,8 +7,8 @@ function AjaxContentBlock(id,elClass, subpageContentId) {
     this.genBlockCode = "<div class='ajax-block-container'>" +
                             "<div class='ajax-col ajax-content'></div>" +
                             "<div class='ajax-col ajax-content-after'></div>" +
-                            "<div class='buttonAlign'><a class='button' href='#'>Button to next content</a></div>" +
-                            "<div class='buttonBackAlign'><a class='button' href='#'><i class='fa fa-reply'></i></a></div>" +
+                            "<div class='buttonAlign'><a class='button' href='javascript:void(0)'>Button to next content</a></div>" +
+                            "<div class='buttonBackAlign'><a class='button' href='javascript:void(0)'><i class='fa fa-reply'></i></a></div>" +
                         "</div>";
 
     this.settingsDialogId = "settings-confirm" + this.id;
@@ -225,9 +225,9 @@ function AjaxContentBlock(id,elClass, subpageContentId) {
             ajaxContentAfter.hide();
             ajaxContentAfter.css("width","0px");
             ajaxContentAfter.css("height","0px");
-            ajaxContent.show();
             ajaxContent.css("width","auto");
             ajaxContent.css("height","auto");
+            ajaxContent.show();
             $("#" + block.id).children(".ajax-block-container").children(".buttonBackAlign").hide();
             $("#" + block.id).children(".ajax-block-container").children(".buttonAlign").show()
             //EFECTS ON BUTTONS
@@ -247,7 +247,7 @@ function AjaxContentBlock(id,elClass, subpageContentId) {
             ajaxContent.css("height","0px");
             ajaxContentAfter.show();
             ajaxContentAfter.css("width","auto");
-            ajaxContentAfter.css("width","auto");
+            ajaxContentAfter.css("height","auto");
 
             $("#" + block.id).children(".ajax-block-container").children(".buttonAlign").hide();
             $("#" + block.id).children(".ajax-block-container").children(".buttonBackAlign").show();

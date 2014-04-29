@@ -163,8 +163,9 @@ function stoptDragEffect(){
 
 //DRAG & DROP icon on empty subpage content
 function dragAndDropIcon(element){
-    if( jQuery.trim(element.html()) === "" || element.html() === emptyIconCode || genBlocksList.length == 0){
-        element.append(emptyIconCode);
+    if(jQuery.trim(element.html()) === "" || element.html() === emptyIconCode || genBlocksList.length == 0){
+        if(!(element.find("#dndIcon").length >1))
+            element.append(emptyIconCode);
     } else {
         element.find("#dndIcon").remove();
     }
