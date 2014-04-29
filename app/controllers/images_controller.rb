@@ -28,6 +28,31 @@ class ImagesController < ApplicationController
     end
   end
 
+  def check_image_exist
+    if check_id(params[:page_id])
+      if check_id(params[:image_id])
+        page = Page.find_by_id(params[:page_id])
+        unless page.nil?
+          image = page.images.find_by_id(params[:image_id])
+          if image.nil?
+            render :json => { 'remove_block' => 1}.to_json
+          else
+            render :json => { 'remove_block' => 0}.to_json
+          end
+        else
+          output = "Page doesn't exist."
+          render :json => { 'errors' => [output]}.to_json
+        end
+      else
+        output = "Bad image id."
+        render :json => { 'errors' => [output]}.to_json
+      end
+    else
+      output = "Bad page id."
+      render :json => { 'errors' => [output]}.to_json
+    end
+  end
+
   #create image and if id is specified delete old image
   def create_assets
 

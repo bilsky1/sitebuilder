@@ -29,5 +29,4 @@ class Image < ActiveRecord::Base
         errors.add(:image, "You cannot upload a file greater than 10MB")
       end
     end
-
 end

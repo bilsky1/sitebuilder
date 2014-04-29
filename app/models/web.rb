@@ -1,5 +1,5 @@
 class Web < ActiveRecord::Base
-  before_save do
+  before_validation do
     self.subdomain = self.subdomain.downcase
   end
 

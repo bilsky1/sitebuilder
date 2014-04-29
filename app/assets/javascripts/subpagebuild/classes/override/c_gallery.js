@@ -189,6 +189,7 @@ function GalleryBlock(id,elClass, subpageContentId) {
                         block.imageHandler("img" + responseJson.id);
 
                         $("#" + block.settingsDialogId).find("input[name='image_form[id]']").val(responseJson.id);
+                        isContentChange = true;
 
                     }else{
                         var i;
@@ -237,6 +238,7 @@ function GalleryBlock(id,elClass, subpageContentId) {
             buttons: {
                 "Save": function() {
                     $( this ).dialog( "close" );
+                    isContentChange = true;
                 },
                 Cancel: function() {
                     $( this ).dialog( "close" );
@@ -345,6 +347,53 @@ function GalleryBlock(id,elClass, subpageContentId) {
         this.deleteBlockFromArray();
         isContentChange = true;
     };
+
+    this.deteleUnexistedImage = function(imageElement){
+        imageElement.closest(".galleryItem").remove();
+        imageElement.closest(".imageControls").remove();
+        this.setEmptyCode();
+        isContentChange = true;
+    };
+
+    this.checkImagesExist = function(){
+        var block = this;
+        var images = $("#" + this.id).find("img");
+        if(images.length > 0){
+            images.each(function(){
+                var imageId = parseInt($(this).attr("id").replace("img",""));
+                var image = $(this);
+                if(imageId){
+                    $.ajax({
+                        url: "/images/check_image_exist",
+                        type: 'POST',
+                        data: {page_id: block.getCurrentPageId(), image_id: imageId},
+                        dataType: 'json',
+                        error: function (jqXHR, exception) {
+                            if (jqXHR.status === 0) {
+                                alert('Not connect.\n Verify Network.');
+                                console.log(jqXHR.responseText);
+                            } else if (jqXHR.status == 404) {
+                                alert('Requested page not found. [404]');
+                                console.log(jqXHR.responseText);
+                            } else if (jqXHR.status == 500) {
+                                alert('Internal Server Error [500].');
+                                console.log(jqXHR.responseText);
+                            } else {
+                                alert('Uncaught Error.\n' + jqXHR.responseText);
+                                console.log(jqXHR.responseText);
+                            }
+                        },
+                        success: function(data){
+                            if(parseInt(data.remove_block)){
+                                block.deteleUnexistedImage(image);
+                            }
+                        }
+                    });
+                }
+            });
+        }
+    };
+
 
 }//GalleryBlock
 

@@ -3,5 +3,40 @@
 <ul class="users">
   <%= render @users %>
 </ul>
+<script type="text/javascript">
+    $('.make-admin-checkbox').on('click', function() {
+        var checkbox = $(this);
+        $.ajax({
+            type: "POST",
+            url: $(this).data('url'),
+            data: { is_admin: $(this).is(':checked') },
+            dataType: 'json',
+            error: function (jqXHR, exception) {
+                if (jqXHR.status === 0) {
+                    alert('Not connect.\n Verify Network.');
+                    console.log(jqXHR.responseText);
+                } else if (jqXHR.status == 404) {
+                    alert('Requested page not found. [404]');
+                    console.log(jqXHR.responseText);
+                } else if (jqXHR.status == 500) {
+                    alert('Internal Server Error [500].');
+                    console.log(jqXHR.responseText);
+                } else {
+                    alert('Uncaught Error.\n' + jqXHR.responseText);
+                    console.log(jqXHR.responseText);
+                }
+            },
+            success: function(data){
+                if (data.result == 0){
+                    alert("Cannot make admin.");
+                    if(data.checkboxval)
+                        checkbox.prop('checked', true)
+                    else
+                        checkbox.prop('checked', false)
+                }
+            }
+        });
+    });
+</script>
 
 <%= will_paginate %>

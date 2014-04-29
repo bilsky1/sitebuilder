@@ -106,6 +106,7 @@ function SocialIconsBlock(id,elClass, subpageContentId) {
                             $("#" + block.id).find(hrefClass).css("display","inline");
                     });
                     $( this ).dialog( "close" );
+                    isContentChange = true;
                 },
                 Cancel: function() {
                     $( this ).dialog( "close" );

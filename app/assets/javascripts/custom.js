@@ -8,16 +8,16 @@
 /*Pages*/
 function printError(to,error,type){
     $(to).prepend("<div class='alert alert-" + type + " fade in'>" +
-        "<a class='close' data-dismiss='alert' href='#'>x</a>" + error +
+        "<a class='close' data-dismiss='alert' href='javascript:void(0)'>x</a>" + error +
         "</div>");
-    setTimeout(function(){$(to).find("a.close").trigger("click")},3500);
+    setTimeout(function(){$(to).find(".alert").remove()},3500);
 }
 
 function printErrorByElement(to,error,type){
     to.prepend("<div class='alert alert-" + type + " fade in'>" +
-        "<a class='close' data-dismiss='alert' href='#'>x</a>" + error +
+        "<a class='close' data-dismiss='alert' href='javascript:void(0)'>x</a>" + error +
         "</div>");
-    setTimeout(function(){$(to).find("a.close").trigger("click")},3500);
+    setTimeout(function(){$(to).find(".alert").remove()},3500);
 }
 
 function createPageHandler(){
@@ -76,6 +76,7 @@ function createPageHandler(){
 }
 
 function addDeletePageHandler(elem){
+    elem.unbind("click");
     elem.on("click",function(e){
         e.preventDefault();
         var pageItem = elem.closest("li");
@@ -266,7 +267,7 @@ function createPageSettingsHandler(){
 function addPageSettingsElement(webId, pageId, pageTitle, pageName){
     var settingsBlockCode =
         "<li>" +
-            "<a class='showHideLink' href='#'>" +
+            "<a class='showHideLink' href='javascript:void(0)'>" +
         "<span class='pageName'>" + pageName + "</span>" +
         "<i class='fa fa-angle-down fa-lg'></i>" +
     "</a>" +
@@ -292,8 +293,8 @@ function addPageSettingsElement(webId, pageId, pageTitle, pageName){
 }
 
 function pageSettingsBlockHandler(){
-    $("#sidebar-big").find("#pagesSettings").find("li").unbind("click");
-    $("#sidebar-big").find("#pagesSettings").find("li").on("click",".showHideLink",function(){
+    $("#sidebar-big").find("#pagesSettings").find("li").children(".showHideLink").unbind("click");
+    $("#sidebar-big").find("#pagesSettings").find("li").children(".showHideLink").on("click",function(){
         $(this).toggleClass("active");
         if($(this).hasClass("active")){
             $(this).children("i").removeClass("fa-angle-down");

@@ -101,6 +101,7 @@ function ButtonBlock(id,elClass, subpageContentId) {
                     $("#" + block.id).find(".buttonAlign").children("a.button").attr("href",$(this).find("form.ButtonForm").find("input[name*='" + "linkValue" + "']").val());
                     $("#" + block.id).find(".buttonAlign").children("a.button").css("border-radius",$(this).find("form.ButtonForm").find("input[name*='" + "borderRadiusValue" + "']").val());
                     $( this ).dialog( "close" );
+                    isContentChange = true;
                 },
                 Cancel: function() {
                     $( this ).dialog( "close" );

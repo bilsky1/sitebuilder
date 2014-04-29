@@ -51,7 +51,7 @@ class AjaxContentsController < ApplicationController
         render :json => { 'content' => ajaxContent.content, 'content_after' => ajaxContent.content_after }.to_json
       else
         output = "Ajax content doesn't exist"
-        render :json => { 'errors' => [output]}.to_json
+        render :json => { 'errors' => [output], 'remove_block' => 1}.to_json
       end
     else
       output = "Bad ajax content id."
@@ -86,7 +86,7 @@ class AjaxContentsController < ApplicationController
         render :json => { 'content' => ajaxContent.content }.to_json
       else
         output = "Ajax content doesn't exist"
-        render :json => { 'errors' => [output]}.to_json
+        render :json => { 'errors' => [output], 'remove_block' => 1}.to_json
       end
     else
       output = "Bad ajax content id."

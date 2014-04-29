@@ -4,7 +4,8 @@ class WebsController < ApplicationController
   before_action :get_themes,     only: [:new,:edit, :update]
 
   def index
-    @webs = current_user.webs.order("created_at DESC").paginate(page: params[:page])
+    @user = current_user
+    @webs = current_user.webs.where("published_at").order("created_at DESC").paginate(page: params[:page])
   end
 
   def new
@@ -33,11 +34,14 @@ class WebsController < ApplicationController
 
   def show
     @web = Web.find_by_subdomain!(request.subdomain)
+    @google_analytics_service = @web.ext_services.find_by_service_type("Google analytics")
 
     if (@web.published_at < Time.now && !@web.published)
       @pages = @web.pages
       if params[:back_link]=="true"
         flash[:success] = "You can edit this site #{view_context.link_to 'here', edit_web_url(@web, subdomain: 'www')}.".html_safe
+        render 'webs/show'
+      else
         render 'webs/show'
       end
     else

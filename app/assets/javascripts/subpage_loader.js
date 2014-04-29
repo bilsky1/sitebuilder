@@ -1,4 +1,9 @@
 $(document).ready(function(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
     checkURL();
 
@@ -7,34 +12,31 @@ $(document).ready(function(){
 });
 
 function initializeNavEdit(){
-    /*$('ul#nav li a').unbind("click");
-    $('ul#nav li a').click(function (e){
-        if (!isContentChange){
-            checkURL(this.hash);
-        }else{
-            var activePageName = getActivePageName();
-            if(activePageName){
-                unsavedContentModal();
-                setUnsavedContentModalButtonsHandlers(activePageName);
-            }else{
-                checkURL(this.hash);
-            }
-        }
-    });   */
+    $(window).unbind();
     $(window).bind('popstate', function(e) {
         e.preventDefault();
-        if (!isContentChange){
-            checkURL(location.hash);
-        }else{
-            var activePageName = getActivePageName();
-            if(activePageName){
-                unsavedContentModal();
-                setUnsavedContentModalButtonsHandlers(activePageName);
-            }else{
+        var activeHref = $("#nav").find("li.active").children("a").attr("href");
+        if(activeHref != location.hash){
+            if (!isContentChange){
                 checkURL(location.hash);
+            }else{
+                var activePageName = getActivePageName();
+                if(activePageName){
+                    unsavedContentModal();
+                    setUnsavedContentModalButtonsHandlers(activePageName);
+                }else{
+                    checkURL(location.hash);
+                }
             }
         }
     });
+    if (navigator.userAgent.search("Opera") >= 0) {
+        $('ul#nav li a').unbind("click");
+        $('ul#nav li a').click(function (){
+            history.pushState({}, '', $(this).attr("href"));
+            $(window).trigger('popstate');
+        });
+    }
 }
 function getSubpageHash(hash){
     if(!hash){
@@ -143,6 +145,7 @@ function setUnsavedContentModalButtonsHandlers(pageName){
         $(this).unbind('click');
         $("#saveUnsavedContent").unbind('click');
     });*/
+    $("#saveUnsavedContent").unbind("click");
     $("#saveUnsavedContent").on("click",function(){
         var subpageCleaner = new Cleaner();
         subpageCleaner.updateContentToServer(pageName);
@@ -150,6 +153,7 @@ function setUnsavedContentModalButtonsHandlers(pageName){
         $(this).unbind('click');
         //$("#deleteUnsavedContent").unbind('click');
     });
+    $('#unsavedContentModal').unbind("keydown");
     $('#unsavedContentModal').keydown(function(event){
         if(event.keyCode==13){
             $('#saveUnsavedContent').trigger('click');

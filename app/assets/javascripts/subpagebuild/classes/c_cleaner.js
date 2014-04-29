@@ -12,6 +12,7 @@ function Cleaner() {
         this.deleteEmptyContents(tmpSubpageContentEl);
         this.deleteMapsContents(tmpSubpageContentEl);
         this.saveAjaxContentBlocks();
+        removeAllUDragableFromSubpageContent(tmpSubpageContentEl);
         content = tmpSubpageContentEl.html();
         tmpSubpageContentEl.remove();
         return content;
@@ -24,13 +25,15 @@ function Cleaner() {
         });
     };
     this.saveAjaxContent = function(el){
-        var ajaxContentId = el.data("remote-id");
+        var ajaxContentId = el.data("remote-ajax-content-id");
 
         //remove styles makes by edit GUI
         el.find(".buttonAlign").css("display","");
         el.find(".buttonBackAlign").css("display","");
         el.children(".ajax-block-container").children(".ajax-content").css("display","");
         el.children(".ajax-block-container").children(".ajax-content-after").css("display","");
+        removeAllUDragableFromSubpageContent(el.children(".ajax-block-container").children(".ajax-content"));
+        removeAllUDragableFromSubpageContent(el.children(".ajax-block-container").children(".ajax-content-after"));
 
         var content = el.children(".ajax-block-container").children(".ajax-content").html();
         var content_after = el.children(".ajax-block-container").children(".ajax-content-after").html();

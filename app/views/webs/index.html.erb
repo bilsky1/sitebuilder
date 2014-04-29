@@ -4,43 +4,4 @@
     Create new website
     <i class="fa fa-plus"></i>
 <% end %>
-<div class="row-fluid">
-  <div class="span9">
-    <%= will_paginate %>
-  </div>
-</div>
-<ul class="users">
-    <% @webs.each do |web| %>
-    <li id="<%= dom_id(web) %>">
-      <div class="row-fluid">
-        <div class="span9">
-          <%= link_to web.name, edit_web_path(web) %>
-        </div>
-        <div class="span3">
-          <div class="pull-right">
-            <% if signed_in? %>
-                <% unless web.subdomain.nil? || web.subdomain == ""  %>
-                    <%= link_to root_url(subdomain:web.subdomain, :back_link => "true"), class: "btn btn-success" do %>
-                        <i class="fa fa-eye"></i>
-                    <% end %>
-                <% end %>
-
-                <%= link_to edit_web_path(web), class: "btn btn-info" do %>
-                    <i class="fa fa-wrench"></i>
-                <% end %>
-
-                <%= link_to web, method: :delete,
-                            class: "btn btn-danger",
-                            remote: true,
-                            data: { confirm: "You sure?" } do %>
-                    <i class="fa fa-trash-o"></i>
-                <% end %>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </li>
-    <% end %>
-</ul>
-
-<%= will_paginate %>
+<%= render 'webs/user_webs' %>

@@ -1,6 +1,8 @@
 class Page < ActiveRecord::Base
   before_save do
     self.url_name = name.mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n,'').to_s.delete(' ').downcase #delete diacritics and spaces (name is used for #!url purpose)
+    deleteUnusedImage
+    deleteUnusedAjaxContents
   end
 
   after_save :check_navigation_exist
@@ -32,6 +34,35 @@ class Page < ActiveRecord::Base
         return 1
       else
         return nav.page_position
+      end
+    end
+
+    def deleteUnusedImage
+      destroy = false;
+      self.images.each do |image|
+        unless self.content.include? "href=\"" + image.image.url + "\""
+          self.ajax_contents.each do |ajax_content|
+            unless (ajax_content.content.include? "href=\"" + image.image.url + "\"")
+              unless (ajax_content.content_after.include? "href=\"" + image.image.url + "\"")
+                image.destroy
+              end
+            end
+          end
+        end
+      end
+    end
+
+    def deleteUnusedAjaxContents
+      self.ajax_contents.each do |ajax_content|
+        unless self.content.include? "remote-ajax-content-id=\"" + ajax_content.id.to_s + "\""
+          #self.ajax_contents.each do |ajxcont|
+            #unless (ajxcont.content.include? "remote-ajax-content-id=\"" + ajax_content.id.to_s + "\"")
+             #unless (ajxcont.content_after.include? "remote-ajax-content-id=\"" + ajax_content.id.to_s + "\"")
+                ajax_content.destroy
+             #end
+            #end
+          #end
+        end
       end
     end
 end

@@ -95,6 +95,11 @@ function ImageTextBlock(id,elClass, subpageContentId) {
         isContentChange = true;
     };
 
+    this.deteleUnexistedImage = function(){
+        $("#" + this.id).find(".imageContainer").html(this.emptyContent);
+        isContentChange = true;
+    }
+
     this.setAjaxFileUpload = function(){
         var block = this;
         $("#" + block.settingsDialogId).find('.upload-form').find(".file-input").change(function(){
@@ -139,6 +144,7 @@ function ImageTextBlock(id,elClass, subpageContentId) {
                             'padding'		: 0
                         });
                         $("#" + block.settingsDialogId).find("input[name='image_form[id]']").val(responseJson.id);
+                        isContentChange = true;
 
                     }else{
                         var i;
@@ -186,6 +192,7 @@ function ImageTextBlock(id,elClass, subpageContentId) {
             buttons: {
                 "Save": function() {
                     $( this ).dialog( "close" );
+                    isContentChange = true;
                 },
                 Cancel: function() {
                     $( this ).dialog( "close" );
@@ -197,6 +204,41 @@ function ImageTextBlock(id,elClass, subpageContentId) {
     this.deleteCkEditorMessyContent = function  (){
         var inlineWindowIdentifier = $("#" + this.id).find(".ckeditor").attr("aria-describedby");
         $("#" + inlineWindowIdentifier).closest(".cke").remove();
+    };
+
+    this.checkImageExist = function(){
+        var block = this;
+        if($("#" + this.id).find("img").length > 0){
+            var imageId = parseInt($("#" + this.id).find("img").attr("id").replace("img",""));
+            if(imageId){
+                $.ajax({
+                    url: "/images/check_image_exist",
+                    type: 'POST',
+                    data: {page_id: block.getCurrentPageId(), image_id: imageId},
+                    dataType: 'json',
+                    error: function (jqXHR, exception) {
+                        if (jqXHR.status === 0) {
+                            alert('Not connect.\n Verify Network.');
+                            console.log(jqXHR.responseText);
+                        } else if (jqXHR.status == 404) {
+                            alert('Requested page not found. [404]');
+                            console.log(jqXHR.responseText);
+                        } else if (jqXHR.status == 500) {
+                            alert('Internal Server Error [500].');
+                            console.log(jqXHR.responseText);
+                        } else {
+                            alert('Uncaught Error.\n' + jqXHR.responseText);
+                            console.log(jqXHR.responseText);
+                        }
+                    },
+                    success: function(data){
+                        if(parseInt(data.remove_block)){
+                            block.deteleUnexistedImage();
+                        }
+                    }
+                });
+            }
+        }
     };
 
 }//ImageTextBlock

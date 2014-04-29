@@ -40,6 +40,7 @@ function CodeBlock(id,elClass, subpageContentId) {
                 "Save": function() {
                     $("#" + block.id).children(".embeddedCode").html($(this).find("form.CodeForm").find("textarea[name*='" + "codeValue" + "']").val());
                     $( this ).dialog( "close" );
+                    isContentChange = true;
                 },
                 Cancel: function() {
                     $( this ).dialog( "close" );

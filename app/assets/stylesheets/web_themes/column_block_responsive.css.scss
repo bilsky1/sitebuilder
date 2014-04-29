@@ -1,21 +1,21 @@
 @media only screen and (max-width: 992px) {
 /*  GRID OF THREE  */
   .span_1_of_3 {
-    width: 47%;
+    width: 47% !important;
     &:last-child{
-      width: 97%;
+      width: 97% !important;
     }
   }
 /*  GRID OF FOUR */
   .span_1_of_4 {
-    width: 47%;
+    width: 47% !important;
   }
 
 /*  GRID OF FIVE */
   .span_1_of_5 {
-    width: 47%;
+    width: 47% !important;
     &:last-child{
-      width: 97%;
+      width: 97% !important;
     }
   }
 }
@@ -23,61 +23,67 @@
 @media only screen and (max-width: 768px) {
 /*  GRID OF FOUR */
   .span_4_of_4 {
-    width: 100%;
+    width: 100% !important;
   }
 
   .span_3_of_4 {
-    width: 100%;
+    width: 100% !important;
   }
 
   .span_2_of_4 {
-    width: 100%;
+    width: 100% !important;
   }
   .span_1_of_4 {
-    width: 100%;
+    width: 100% !important;
   }
 
 /*  GRID OF FIVE */
   .span_5_of_5 {
-    width: 100%;
+    width: 100% !important;
   }
 
   .span_4_of_5 {
-    width: 100%;
+    width: 100% !important;
   }
 
   .span_3_of_5 {
-    width: 100%;
+    width: 100% !important;
   }
 
   .span_2_of_5 {
-    width: 100%;
+    width: 100% !important;
   }
 
   .span_1_of_5 {
-    width: 100%;
+    width: 100% !important;
+  }
+  .span_1_of_3 {
+    width: 47% !important;
+    &:last-child{
+      width: 97% !important;
+    }
   }
 }
 @media only screen and (max-width: 480px) {
 /*  GRID OF TWO  */
   .span_2_of_2 {
-    width: 100%;
+    width: 100% !important;
   }
   .span_1_of_2 {
-    width: 100%;
+    width: 100% !important;
   }
 
 /*  GRID OF THREE  */
   .span_3_of_3 {
-    width: 100%;
+    width: 100% !important;
   }
   .span_2_of_3 {
-    width: 100%;
+    width: 100% !important;
   }
   .span_1_of_3 {
-    width: 100%;
+    width: 100% !important;
     &:last-child{
-      width: 100%;
+      width: 100% !important;
     }
   }
 }

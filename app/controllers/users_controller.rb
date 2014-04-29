@@ -1,11 +1,30 @@
 class UsersController < ApplicationController
   before_action :signed_out_user, only:[:new, :create]
-  before_action :signed_in_user, only: [:index, :edit, :update, :destroy, :following, :followers]
+  before_action :signed_in_user, only: [:index, :edit, :update, :destroy]
   before_action :correct_user,   only: [:edit, :update]
-  before_action :admin_user,     only: :destroy
+  before_action :admin_user,     only: [:destroy]
 
   def index
-    @users = User.paginate(page: params[:page])
+    if current_user.admin? && !current_user?(@user)
+      @users = User.paginate(page: params[:page])
+    else
+      render 'shared/no_permission'
+    end
+
+  end
+
+  def make_admin
+    if current_user.admin?
+      future_user = User.find_by_id(params[:id])
+      future_user.admin = params[:is_admin]
+      if future_user.save(validate: false)
+        render :json => { 'result' => "1"}.to_json
+      else
+        render :json => { 'result' => "0"}.to_json
+      end
+    else
+      render 'shared/no_permission'
+    end
   end
 
   def new
@@ -13,7 +32,12 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by_id(params[:id])
+    unless @user.nil?
+      @webs = @user.webs.order("created_at DESC").paginate(page: params[:page])
+    else
+      redirect_to root_path
+    end
   end
 
   def create
@@ -89,4 +113,9 @@ class UsersController < ApplicationController
     def admin_user
       redirect_to(root_url) unless current_user.admin?
     end
+
+    private
+      def check_id(string)
+        Integer(string) != nil rescue false
+      end
 end

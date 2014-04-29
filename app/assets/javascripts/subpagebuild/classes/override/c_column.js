@@ -53,6 +53,7 @@ function ColumnBlock(id,elClass) {
                     dragBlockId = "";
                 }
                 setInlineCKeditor('.ckeditor');
+                removeAllUDragableFromSubpageContent(globalSubpageBuild);
                 isContentChange = true;
             },
             update: function( event, ui ) {
@@ -112,6 +113,7 @@ function ColumnBlock(id,elClass) {
         this.removeResizeSeparators();
         this.setResizeSeparators();
         showHideEmptyColumnCode($("#" + block.id));
+        isContentChange = true;
 
     };
 

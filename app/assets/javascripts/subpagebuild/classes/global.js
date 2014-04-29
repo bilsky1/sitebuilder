@@ -18,6 +18,7 @@ var genBlocksList = new Array();
 var globalOptions;
 var globalSubpageBuild;
 var idOfLastBlock;
+var lastHashCode;
 
 var isContentChange = false; //use to alert when there is a unsaved content
 
@@ -29,14 +30,20 @@ function generateBlock(blockType,blockId){
         blockObj = new TextBlock(blockId,globalOptions.gen_block_class, "#" + $(this).attr("id"));
     else if(blockType === "title_b")
         blockObj = new TitleBlock(blockId, globalOptions.gen_block_class, "#" + $(this).attr("id"));
-    else if(blockType === "image_b")
+    else if(blockType === "image_b"){
         blockObj = new ImageBlock(blockId, globalOptions.gen_block_class, "#" + $(this).attr("id"));
-    else if(blockType === "image_text_b")
+        blockObj.checkImageExist();
+    }
+    else if(blockType === "image_text_b"){
         blockObj = new ImageTextBlock(blockId, globalOptions.gen_block_class, "#" + $(this).attr("id"));
+        blockObj.checkImageExist();
+    }
     else if(blockType === "button_b")
         blockObj = new ButtonBlock(blockId, globalOptions.gen_block_class, "#" + $(this).attr("id"));
-    else if(blockType === "gallery_b")
+    else if(blockType === "gallery_b"){
         blockObj = new GalleryBlock(blockId, globalOptions.gen_block_class, "#" + $(this).attr("id"));
+        blockObj.checkImagesExist();
+    }
     else if(blockType === "map_b")
         blockObj = new MapsBlock(blockId, globalOptions.gen_block_class, "#" + $(this).attr("id"));
     //--------STRUCTURE blocks
@@ -85,7 +92,14 @@ function setInlineCKeditor(className){
                 [ 'Link', 'Unlink' ],
                 ['Undo','Redo']
 
-            ]
+            ],
+            on :
+            {
+                change :function( ev )
+                {
+                    isContentChange = true;
+                }
+            }
         });
     });
 }//setInlineCKeditor
@@ -110,7 +124,14 @@ function setInlineCKeditorByEl(className,el){
                 [ 'Link', 'Unlink' ],
                 ['Undo','Redo']
 
-            ]
+            ],
+            on :
+            {
+                change :function( ev )
+                {
+                    isContentChange = true;
+                }
+            }
         });
     });
 }
@@ -121,7 +142,8 @@ function startDragEffect(){
         background: "#2e8bd9",
         border: "1px solid #155489"
     });
-    $(globalOptions.full_page_content).css("background","rgba(0,0,0,0.7)");
+    var color = bgColorForDragEffect(genPageBgColor,"0.6");
+    $(globalOptions.full_page_content).css("background",color);
     globalSubpageBuild.css({
         background: genPageBgColor,
         borderRadius: "5px",
@@ -141,7 +163,7 @@ function stoptDragEffect(){
 
 //DRAG & DROP icon on empty subpage content
 function dragAndDropIcon(element){
-    if( jQuery.trim(element.html()) === "" || element.html() === emptyIconCode){
+    if( jQuery.trim(element.html()) === "" || element.html() === emptyIconCode || genBlocksList.length == 0){
         element.append(emptyIconCode);
     } else {
         element.find("#dndIcon").remove();
@@ -226,7 +248,17 @@ function hex2rgb(hex,opacity) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? "rgba("+ parseInt(result[1], 16) + ","+ parseInt(result[2], 16) + ","+  parseInt(result[3], 16) +"," + opacity + ")" : oldHex;
 }
-
+function bgColorForDragEffect(color,opacity){
+    var dragColor = "#646464";
+    if(color.indexOf("rgba") >= 0){
+        dragColor = color.substring(0,color.lastIndexOf(",")+1) + opacity + color.substring(color.lastIndexOf(")"));
+    } else if(color.indexOf("rgb") >= 0){
+        dragColor = color.replace("rgb","rgba").replace(")", "," + opacity + ")");
+    }else if(color.indexOf("#") >= 0){
+        dragColor = hex2rgb(color,opacity);
+    }
+    return dragColor;
+}
 function removeAllAttr(el){
     el.each(function() {
         var attributes = this.attributes;
@@ -235,4 +267,9 @@ function removeAllAttr(el){
             this.removeAttributeNode(attributes[i]);
         }
     })
+}
+
+function removeAllUDragableFromSubpageContent(el){
+    el.find(".ui-draggable").remove();
+    el.find(".ui-state-highlight").remove();
 }

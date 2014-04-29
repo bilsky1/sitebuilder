@@ -80,6 +80,7 @@ function AjaxContentBlock(id,elClass, subpageContentId) {
                     dragBlockId = "";
                 }
                 setInlineCKeditor('.ckeditor');
+                removeAllUDragableFromSubpageContent(globalSubpageBuild);
                 isContentChange = true;
             },
             update: function( event, ui ) {
@@ -199,6 +200,22 @@ function AjaxContentBlock(id,elClass, subpageContentId) {
         this.showHideEmptyCode(globalSubpageBuild);
     };
 
+    this.deleteBlockNotRemote = function(){
+        var deleteButtonElement = $("#" + this.id).children(".blockControls").children('.deleteBlock');
+        deleteButtonElement.closest(this.elClass).find(this.elClass).each(function(){
+            for(var i=0; i < genBlocksList.length; i++){
+                if($(this).attr("id") === genBlocksList[i].id.toString())
+                    genBlocksList[i].deleteBlock();
+            }
+        });
+        $("#" + this.id).remove();
+        $("#" + this.settingsDialogId).remove();
+        showHideEmptyColumnCode(globalSubpageBuild);
+        this.deleteBlockFromArray();
+        isContentChange = true;
+        this.showHideEmptyCode(globalSubpageBuild);
+    };
+
     this.setAjaxBlockButtonBackHandler = function(){
         var block = this;
         $("#" + this.id).find(".buttonBackAlign").children(".button").on("click",function(e){
@@ -254,7 +271,7 @@ function AjaxContentBlock(id,elClass, subpageContentId) {
             },
             success: function(data){
                 if (data.id){
-                    $("#" + block.id).attr("data-remote-id",data.id);
+                    $("#" + block.id).attr("data-remote-ajax-content-id",data.id);
                     console.log("Set data-id to ajax content by database");
                 }
                 else if(data.errors){
@@ -270,8 +287,8 @@ function AjaxContentBlock(id,elClass, subpageContentId) {
 
     this.deleteAjaxContent = function(){
         var block = this;
-        if($("#" + block.id).attr('data-remote-id')){
-            var remoteId = $("#" + block.id).data("remote-id");
+        if($("#" + block.id).attr('data-remote-ajax-content-id')){
+            var remoteId = $("#" + block.id).data("remote-ajax-content-id");
             $.ajax({
                 url: "/ajax_contents/delete",
                 type: 'POST',
@@ -309,7 +326,7 @@ function AjaxContentBlock(id,elClass, subpageContentId) {
 
     this.getAjaxBlockContents = function(){
         var block = this;
-        var ajaxContentId = $("#" + this.id).data("remote-id");
+        var ajaxContentId = $("#" + this.id).data("remote-ajax-content-id");
         if(ajaxContentId){
             $.ajax({
                 url: "/ajax_contents/get_contents",
@@ -341,25 +358,26 @@ function AjaxContentBlock(id,elClass, subpageContentId) {
                         loadAllBlockInSubcontent(ajaxContentEl);
                         loadAllBlockInSubcontent(ajaxContentAfterEl);
 
+                        block.refreshSortable();
                         //$("#subpageContent").subpagebuild();
 
                         console.log("Successfull - get ajax contents");
                     }
                     else{
-                        var i;
-                        for (i = 0; i < data.errors.length; i++) {
-                            console.log(data.errors[i]);
-                            alert(data.errors[i]);
+                        if(!parseInt(data.remove_block)){
+                            var i;
+                            for (i = 0; i < data.errors.length; i++) {
+                                console.log(data.errors[i]);
+                                alert(data.errors[i]);
+                            }
+                        } else {
+                            block.deleteBlockNotRemote();
                         }
                     }
                 }
             });
         }
     };
-
-    this.getCurrentPageId = function(){
-        return $("#subpageContent").data("page_id");
-    }
 }//AjaxContentBlock
 
 extend(AjaxContentBlock,blockAbstractClass);

@@ -2,7 +2,7 @@ Sitebuilder::Application.routes.draw do
 
 
   constraints(Subdomain) do
-    resources :webs
+    resources :webs, except: :show
     match '/',  to: 'webs#show', via: 'get'
 
     match '/pages/get_page', to: 'pages#get_page', via: 'post'
@@ -15,6 +15,7 @@ Sitebuilder::Application.routes.draw do
 
   constraints(NoSubdomain) do
     resources :users
+    match '/users/make_admin/:id',  to: 'users#make_admin', via: 'post'
     #resources :images
     #resources :pages
     resources :sessions, only: [:new, :create, :destroy]
@@ -25,7 +26,7 @@ Sitebuilder::Application.routes.draw do
     match '/webs/:id/update_style_settings',  to: 'webs#update_style_settings', via: 'post'
     match '/webs/:id/update_publish',  to: 'webs#update_publish', via: 'post'
     match '/webs/:id',  to: 'webs#update', via: 'post'
-    resources :webs
+    resources :webs, except: :show
 
     match '/help',    to: 'static_pages#help',    via: 'get'
     match '/auth',    to: 'static_pages#auth',    via: 'get'
@@ -38,6 +39,7 @@ Sitebuilder::Application.routes.draw do
     match '/images/create_assets', to: 'images#create_assets',     via: 'post'
     match '/images/add_assets', to: 'images#add_assets',     via: 'post'
     match '/images/delete_assets', to: 'images#delete_assets',     via: 'post'
+    match '/images/check_image_exist', to: 'images#check_image_exist', via: 'post'
 
     #pages API
     match '/pages/get_page', to: 'pages#get_page', via: 'post'

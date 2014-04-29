@@ -2,14 +2,14 @@ function printError(to,error,type){
     $(to).prepend("<div class='alert alert-" + type + " fade in'>" +
         "<a class='close' data-dismiss='alert' href='#'>x</a>" + error +
         "</div>");
-    setTimeout(function(){$(to).find("a.close").trigger("click")},3500);
+    setTimeout(function(){$(to).find(".alert").remove()},3500);
 }
 
 function printErrorByElement(to,error,type){
     to.prepend("<div class='alert alert-" + type + " fade in'>" +
         "<a class='close' data-dismiss='alert' href='#'>x</a>" + error +
         "</div>");
-    setTimeout(function(){$(to).find("a.close").trigger("click")},3500);
+    setTimeout(function(){$(to).find(".alert").remove()},3500);
 }
 
 function createServiceHandler(){
@@ -127,7 +127,7 @@ function createServiceSettingsHandler(){
 function addServiceSettingsElement(webId, serviceId, serviceType, serviceValue){
     var settingsBlockCode =
         "<li>" +
-            "<a class='showHideLink' href='#'>" +
+            "<a class='showHideLink' href='javascript:void(0)'>" +
                 "<span class='serviceType'>" + serviceType + "</span>" +
                 "<i class='fa fa-lg fa-angle-down'></i>" +
             "</a>" +
@@ -136,7 +136,7 @@ function addServiceSettingsElement(webId, serviceId, serviceType, serviceValue){
                     "<div class='service-settings-messages'></div>" +
                     "<div class='clearfix'><input type='hidden' name='web_id' value='" + webId + "'></div>" +
                     "<div class='clearfix'><input type='hidden' name='service_id' value='" + serviceId  + "'></div>" +
-                    "<div class='clearfix'><input type='text' name='service_value' value='" + serviceValue  +  "' placeholder='Service value'><i class='tooltip-icon fa fa-info-circle fa-lg' data-placement='left' rel='tooltip' title='' data-original-title='External service value'></i></div>" +
+                    "<div class='clearfix'><textarea cols='10' id='service_value' name='service[value]' placeholder='Google analytics Code' rows='10' >" + serviceValue + "</textarea><i class='tooltip-icon fa fa-info-circle fa-lg' data-placement='left' rel='tooltip' title='External service value'' ></i></div>" +
                     "<div class='clearfix'><input type='submit' value='Save' class='btn btn-success pull-left' id='update-service'><a class='btn btn-danger pull-right delete-service'><i class='fa fa-trash-o fa-lg'></i></a></div>" +
                 "</form>" +
            "</div>" +

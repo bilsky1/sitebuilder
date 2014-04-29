@@ -37,6 +37,7 @@ function TitleBlock(id,elClass, subpageContentId) {
                 return '<h2>' + $(this).html() + '</h2>';
             });
             $(this).addClass("current");
+            isContentChange = true;
         });
         $("#" + this.id).find(".h3").on("click",function(){
             $(this).closest(block.elClass).find(".blockControls").find(".h2, .h3, .h4").removeClass("current");
@@ -44,6 +45,7 @@ function TitleBlock(id,elClass, subpageContentId) {
                 return '<h3>' + $(this).html() + '</h3>';
             });
             $(this).addClass("current");
+            isContentChange = true;
         });
         $("#" + this.id).find(".h4").on("click",function(){
             $(this).closest(block.elClass).find(".blockControls").find(".h2, .h3, .h4").removeClass("current");
@@ -51,6 +53,7 @@ function TitleBlock(id,elClass, subpageContentId) {
                 return '<h4>' + $(this).html() + '</h4>';
             });
             $(this).addClass("current");
+            isContentChange = true;
         });
     };
 

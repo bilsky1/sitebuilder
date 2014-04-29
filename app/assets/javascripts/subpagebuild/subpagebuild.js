@@ -10,7 +10,7 @@
 
 
             globalOptions = $.extend(defaults, options);
-            genPageBgColor = $(globalOptions.full_page_content).css("background");
+            genPageBgColor = $(globalOptions.full_page_content).css("background-color");
             numberOfGenBlock = $(globalOptions.gen_block_class).length;
 
             return this.each(function() {
@@ -22,7 +22,6 @@
                 $(globalOptions.block_container + " .blocks li").on("click", "a" ,function(e){
                     e.preventDefault();
                 });
-
                 $("#" + globalSubpageBuild.attr("id") + ", .col, .ajax-col").sortable({
                     placeholder: "ui-state-highlight",
                     handle: '.moveBlock',
@@ -55,6 +54,7 @@
                             dragBlockId = "";
                         }
                         setInlineCKeditor('.ckeditor');
+                        removeAllUDragableFromSubpageContent(globalSubpageBuild);
                         isContentChange = true;
                     },
                     update: function( event, ui ) {

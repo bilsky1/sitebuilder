@@ -72,6 +72,7 @@ function YoutubeBlock(id,elClass, subpageContentId) {
                     var newSrc = $("#" + block.id).children(".youtubeVideo").children("iframe").attr("src").replace(block.videoID,newVideoID);
                     $("#" + block.id).children(".youtubeVideo").children("iframe").attr("src",newSrc);
                     $( this ).dialog( "close" );
+                    isContentChange = true;
                 },
                 Cancel: function() {
                     $( this ).dialog( "close" );

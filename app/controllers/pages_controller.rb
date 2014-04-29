@@ -138,10 +138,6 @@ class PagesController < ApplicationController
     end
   end
 
-  def get_page_settings_block_el
-    render ''
-  end
-
   private
     def check_id(string)
       Integer(string) != nil rescue false

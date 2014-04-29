@@ -1,9 +1,9 @@
 function Loader() {
 
     this.initAll = function(){
+        this.initAjaxContents($(".gen_block[data-type='ajax_content_b']"));
         this.initGaleries();
         this.initGoogleMaps();
-        this.initAjaxContents($(".gen_block[data-type='ajax_content_b']"))
     };
 
     this.initGoogleMaps = function(){
@@ -64,7 +64,7 @@ function Loader() {
     };
 
     this.getAjaxContent = function(blockEl){
-        var ajaxContentId = blockEl.data("remote-id");
+        var ajaxContentId = blockEl.data("remote-ajax-content-id");
         var loader = this;
         $.ajax({
             url: "/ajax_contents/get_content",
@@ -98,14 +98,19 @@ function Loader() {
                     var ajaxBlocksInsideAjaxBlock = blockEl.children(".ajax-block-container").children(".ajax-content").find(".gen_block[data-type='ajax_content_b']");
                     if(ajaxBlocksInsideAjaxBlock.length > 0)
                         loader.initAjaxContents(blockEl.children(".ajax-block-container").children(".ajax-content").find(".gen_block[data-type='ajax_content_b']"));
-
+                    loader.initGaleries();
+                    loader.initGoogleMaps();
                     console.log("Loader - get ajax content");
                 }
                 else{
-                    var i;
-                    for (i = 0; i < data.errors.length; i++) {
-                        console.log(data.errors[i]);
-                        alert(data.errors[i]);
+                    if(!parseInt(data.remove_block)){
+                        var i;
+                        for (i = 0; i < data.errors.length; i++) {
+                            console.log(data.errors[i]);
+                            alert(data.errors[i]);
+                        }
+                    } else {
+                        blockEl.remove();
                     }
                 }
             }
@@ -114,7 +119,7 @@ function Loader() {
 
     this.getAjaxContentAfter = function(blockEl){
         var loader = this;
-        var ajaxContentId = blockEl.data("remote-id");
+        var ajaxContentId = blockEl.data("remote-ajax-content-id");
         $.ajax({
             url: "/ajax_contents/get_content_after",
             type: 'POST',

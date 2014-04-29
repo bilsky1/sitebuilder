@@ -44,9 +44,8 @@
 
 </head>
 <body style="background: <%= @web.bg_color %>;">
-    <% @google_analytics_service = @web.ext_services.find_by_service_type("Google analytics") %>
-    <% unless @google_analytics_service.nil? %>
-        <%= raw @google_analytics_service.service_value %>
+    <% if !@google_analytics_service.nil? && @web.published_at < Time.now && !@web.published %>
+        <div id="google-analytics" ><%= raw @google_analytics_service.service_value %></div>
     <% end %>
     <%= yield %>
 </body>

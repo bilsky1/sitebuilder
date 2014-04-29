@@ -87,6 +87,7 @@ function DividerBlock(id,elClass, subpageContentId) {
                     $("#" + block.id).children(".dividerBlock").css("width",width);
 
                     $( this ).dialog( "close" );
+                    isContentChange = true;
                 },
                 Cancel: function() {
                     $( this ).dialog( "close" );

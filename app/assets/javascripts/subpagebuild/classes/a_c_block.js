@@ -68,6 +68,7 @@ var blockAbstractClass = {
             buttons: {
                 "Save": function() {
                     $( this ).dialog( "close" );
+                    isContentChange = true;
                 },
                 Cancel: function() {
                     $( this ).dialog( "close" );
@@ -104,10 +105,14 @@ var blockAbstractClass = {
     //showHideEmptyCode - check if elemToAddCode is empty and add or delete emptyIconCode
     showHideEmptyCode: function (elemToAddCode){
         var block = this;
-        if( jQuery.trim(elemToAddCode.html()) === "" || elemToAddCode.html() === emptyIconCode){
+        if( jQuery.trim(elemToAddCode.html()) === "" || elemToAddCode.html() === emptyIconCode || genBlocksList.length == 0){
             elemToAddCode.append(emptyIconCode);
         } else {
             elemToAddCode.find("#dndIcon").remove();
         }
-    }//showHideEmptyCode
+    },//showHideEmptyCode
+
+    getCurrentPageId: function(){
+        return $("#subpageContent").data("page_id");
+    }
 }//blockMethods

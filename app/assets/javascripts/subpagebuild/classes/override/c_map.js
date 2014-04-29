@@ -140,6 +140,7 @@ function MapsBlock(id,elClass, subpageContentId) {
                     $("#" + block.id).children(".googleMaps").attr("data-zoom",zoom);
 
                     $( this ).dialog( "close" );
+                    isContentChange = true;
                 },
                 Cancel: function() {
                     $( this ).dialog( "close" );
