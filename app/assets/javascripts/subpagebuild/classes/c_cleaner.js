@@ -30,8 +30,8 @@ function Cleaner() {
         //remove styles makes by edit GUI
         el.find(".buttonAlign").css("display","");
         el.find(".buttonBackAlign").css("display","");
-        el.children(".ajax-block-container").children(".ajax-content").css("display","");
-        el.children(".ajax-block-container").children(".ajax-content-after").css("display","");
+        el.children(".ajax-block-container").children(".ajax-content").removeAttr("style");
+        el.children(".ajax-block-container").children(".ajax-content-after").removeAttr("style");
         removeAllUDragableFromSubpageContent(el.children(".ajax-block-container").children(".ajax-content"));
         removeAllUDragableFromSubpageContent(el.children(".ajax-block-container").children(".ajax-content-after"));
 

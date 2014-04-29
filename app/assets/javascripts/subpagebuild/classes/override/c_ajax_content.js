@@ -220,8 +220,14 @@ function AjaxContentBlock(id,elClass, subpageContentId) {
         var block = this;
         $("#" + this.id).find(".buttonBackAlign").children(".button").on("click",function(e){
             e.preventDefault();
-            $("#" + block.id).children(".ajax-block-container").children(".ajax-content-after").hide();
-            $("#" + block.id).children(".ajax-block-container").children(".ajax-content").show();
+            var ajaxContentAfter= $("#" + block.id).children(".ajax-block-container").children(".ajax-content-after");
+            var ajaxContent     = $("#" + block.id).children(".ajax-block-container").children(".ajax-content");
+            ajaxContentAfter.hide();
+            ajaxContentAfter.css("width","0px");
+            ajaxContentAfter.css("height","0px");
+            ajaxContent.show();
+            ajaxContent.css("width","auto");
+            ajaxContent.css("height","auto");
             $("#" + block.id).children(".ajax-block-container").children(".buttonBackAlign").hide();
             $("#" + block.id).children(".ajax-block-container").children(".buttonAlign").show()
             //EFECTS ON BUTTONS
@@ -234,8 +240,14 @@ function AjaxContentBlock(id,elClass, subpageContentId) {
         var block = this;
         $("#" + this.id).find(".ajax-block-container").children(".buttonAlign").children(".button").on("click",function(e){
             e.preventDefault();
-            $("#" + block.id).children(".ajax-block-container").children(".ajax-content").hide();
-            $("#" + block.id).children(".ajax-block-container").children(".ajax-content-after").show();
+            var ajaxContent = $("#" + block.id).children(".ajax-block-container").children(".ajax-content");
+            var ajaxContentAfter= $("#" + block.id).children(".ajax-block-container").children(".ajax-content-after");
+            ajaxContent.hide();
+            ajaxContent.css("width","0px");
+            ajaxContent.css("height","0px");
+            ajaxContentAfter.show();
+            ajaxContentAfter.css("width","auto");
+            ajaxContentAfter.css("width","auto");
 
             $("#" + block.id).children(".ajax-block-container").children(".buttonAlign").hide();
             $("#" + block.id).children(".ajax-block-container").children(".buttonBackAlign").show();
