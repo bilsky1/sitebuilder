@@ -2,6 +2,17 @@
 #subpageContent{
   margin: 20px;
 }
+
+.gen_block{
+  padding: 5px;
+  clear: both;
+  &:after{
+    content: " ";
+    clear: both;
+    display: block;
+  }
+}
+
 table{
   text-align: left;
 }
@@ -43,6 +54,7 @@ div.ckeditor {
 #subpageContent .dividerBlock{
   background: #000000;
   height: 1px;
+  margin: 10px 0;
   position: relative;
 }
 /*---------------------------------Title block-------------------------*/
@@ -266,7 +278,7 @@ div.upload {
   position: fixed;
   top: 42px;
   right: 0;
-  z-index: 9999;
+  z-index: 1;
   border-radius: 0 0 0 10px;
 
   #saveSubpage{
@@ -338,10 +350,10 @@ div.upload {
   .buttonAlign{
     padding: 10px 10px;
   }
-}
-.buttonBackAlign{
-  padding: 10px 10px;
-  display: none;
+  .buttonBackAlign{
+    padding: 10px 10px;
+    display: none;
+  }
 }
 /*---------------------------------AJAX CONTENT block--------------------------*/
 /*-------------------UNSAVED CONTENT ALERT

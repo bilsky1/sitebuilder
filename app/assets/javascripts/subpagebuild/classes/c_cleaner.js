@@ -1,4 +1,3 @@
-/*CONTENT CLEANER - change messy content and save to server by AJAX*/
 function Cleaner() {
     this.content = "";
 
@@ -111,7 +110,7 @@ function Cleaner() {
     this.deleteEmptyContents = function(el){
         el.find(".emptyImage").remove();
         el.find(".colEmptyIcon").remove();
-        el.find("#dndIcon").remove();
+        el.find(".dndIcon").remove();
     };
 
     this.changeCKEditorCode = function(el){

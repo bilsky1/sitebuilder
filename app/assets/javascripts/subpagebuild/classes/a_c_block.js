@@ -106,10 +106,10 @@ var blockAbstractClass = {
     showHideEmptyCode: function (elemToAddCode){
         var block = this;
         if(jQuery.trim(elemToAddCode.html()) === "" || elemToAddCode.html() === emptyIconCode || genBlocksList.length == 0){
-            if(!(elemToAddCode.find("#dndIcon").length >1))
+            if(!(elemToAddCode.find(".dndIcon").length >= 1))
                 elemToAddCode.append(emptyIconCode);
         } else {
-            elemToAddCode.find("#dndIcon").remove();
+            elemToAddCode.find(".dndIcon").remove();
         }
     },//showHideEmptyCode
 

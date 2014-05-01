@@ -4,8 +4,9 @@ function YoutubeBlock(id,elClass, subpageContentId) {
     this.elClass = elClass;
     this.subpageContentId = subpageContentId;
 
+    //"?wmode=transparent" is because of IE
     this.genBlockCode = "<div class='youtubeVideo'>" +
-        "<iframe src='//www.youtube.com/embed/hhKXsLFKYqc' frameborder='0' allowfullscreen></iframe>" +
+        "<iframe src='//www.youtube.com/embed/hhKXsLFKYqc?wmode=transparent' frameborder='0' allowfullscreen></iframe>" +
         "</div>";
 
     this.settingsDialogId = "settings-confirm" + this.id;
@@ -26,6 +27,8 @@ function YoutubeBlock(id,elClass, subpageContentId) {
 
     this.getvideoIdFromUrl = function(url){
         var videoID = "";
+        if(url.indexOf("?wmode=transparent") >=0)
+            url = url.replace("?wmode=transparent","");  //"?wmode=transparent" is because of IE
         for (var i = 1; i <= url.length; i++){
             if(url.slice(-i).substr(0,1) !== "/"){
                 videoID = url.slice(-i);
@@ -49,7 +52,7 @@ function YoutubeBlock(id,elClass, subpageContentId) {
         var block = this;
         $("#"+this.id).find('.blockControls:first-child').find('.modifyBlock').on("click",function(e){
             block.videoID = block.getvideoIdFromUrl($("#" + block.id).children(".youtubeVideo").children("iframe").attr("src"));
-            $("#" + block.settingsDialogId).find("form.YoutubeForm").find("input[name*='videoIdValue']").val(block.videoID);
+            $("#" + block.settingsDialogId).find("form.YoutubeForm").find("input[name*='videoIdValue']").val(block.videoID); //"?wmode=transparent" is because of IE
             $('#' + block.settingsDialogId).dialog("open");
         });
     };//setSettingsHandler

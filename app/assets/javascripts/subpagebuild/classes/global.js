@@ -4,7 +4,7 @@ var deleteCode = "<i class='fa fa-times'></i>";
 var moveCode =  "<i class='fa fa-arrows'></i>";
 var settingsCode = "<i class='fa fa-wrench'></i>";
 
-var emptyIconCode = "<div id='dndIcon' class='text-center'><img alt='Drag element here' src='/assets/drag_drop_icon.png'></div>";
+var emptyIconCode = "<div class='dndIcon' class='text-center'><img alt='Drag element here' src='/assets/drag_drop_icon.png'></div>";
 var emptyColumnCode = '<div class="colEmptyIcon">Drag element here</div>';
 
 // variable to know if element is drag & drop or sort
@@ -21,6 +21,39 @@ var idOfLastBlock;
 var lastHashCode;
 
 var isContentChange = false; //use to alert when there is a unsaved content
+
+
+/*Browser detect--------------------------------------------------
+ * ---------------------------------------------------------------*/
+var _browser = {};
+
+function detectBrowser() {
+    var uagent = navigator.userAgent.toLowerCase();
+    $("#result").html("User agent string: <b>" + uagent + "</b>");
+
+    _browser.firefox = /mozilla/.test(uagent) && /firefox/.test(uagent);
+    _browser.chrome = /webkit/.test(uagent) && /chrome/.test(uagent);
+    _browser.safari = /applewebkit/.test(uagent) && /safari/.test(uagent) && !/chrome/.test(uagent);
+    _browser.opera = /opera/.test(uagent);
+    _browser.msie = /msie/.test(uagent);
+    _browser.version = '';
+
+    for (x in _browser)
+    {
+        if (_browser[x]) {
+            _browser.version = uagent.match(new RegExp("(" + x + ")( |/)([0-9]+)"))[3];
+            break;
+        }
+    }
+
+}
+
+
+
+detectBrowser();
+/*Browser detect--------------------------------------------------
+* ---------------------------------------------------------------*/
+
 
 //GENERATE Block object, depend on blockID parameter of dropped block
 function generateBlock(blockType,blockId){
@@ -164,10 +197,10 @@ function stoptDragEffect(){
 //DRAG & DROP icon on empty subpage content
 function dragAndDropIcon(element){
     if(jQuery.trim(element.html()) === "" || element.html() === emptyIconCode || genBlocksList.length == 0){
-        if(!(element.find("#dndIcon").length >1))
+        if(!(element.find(".dndIcon").length >= 1))
             element.append(emptyIconCode);
     } else {
-        element.find("#dndIcon").remove();
+        element.find(".dndIcon").remove();
     }
 } //DRAG & DROP icon
 

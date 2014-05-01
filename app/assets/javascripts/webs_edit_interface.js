@@ -29,29 +29,6 @@ $(document).ready(function() {
     }
 
     //-----------------------------------------------------------------
-    //-----------WINDOW WIDTH start----------------------------------
-    //-----------------------------------------------------------------
-    showHideSidebar();
-    $(window).resize(function(){
-        showHideSidebar();
-    });
-    function showHideSidebar(){
-        if($(window).width() < 790){
-            $("#sidebar-big").css(close_big_sidebar);
-            $("#sidebar-small").css(close_small_sidebar);
-            $("#main-content-inner").css(close_sidebar);
-        }
-        else{
-            $("#sidebar-big").css(open_big_sidebar);
-            $("#sidebar-small").css(open_small_sidebar);
-            $("#main-content-inner").css(open_sidebar);
-        }
-    }
-    //-----------------------------------------------------------------
-    //-----------WINDOW WIDTH end----------------------------------
-    //-----------------------------------------------------------------
-
-    //-----------------------------------------------------------------
     //-----------SIDEBAR-TOGGLE start----------------------------------
     //-----------------------------------------------------------------
     $('#sidebar-toggle').tooltip();
@@ -140,10 +117,6 @@ $(document).ready(function() {
     //-------------------------------------------------------------------
     //-----------DEVICE-VIEW-CONTROL end----------------------------------
     //-------------------------------------------------------------------
-    showHideDeviceControls();
-    $(window).on("resize",function(){
-        showHideDeviceControls();
-    });
     $("#device-view-control").on("click","a",function(event){
         event.preventDefault();
         $(this).parent().children("a").each(function(){
@@ -155,21 +128,6 @@ $(document).ready(function() {
         else
             $("#main-content-inner").css("width","auto");
     });
-
-    /*show or hide device controls by window width */
-    function showHideDeviceControls(){
-        $w = $(window);
-        $("#device-view-control a, #device-view-control a.active").each(function(){
-            var contentWidth = $(this).data("contentWidth").match(/\d+/);
-            var sidebarWidth = parseInt($("#main-content-inner").css('marginLeft').match(/\d+/));
-            if(($w.width() < parseInt(contentWidth)+sidebarWidth) && $(this).attr('id') != "desktop"){      //margin of sidebar content
-                $(this).hide();
-            }
-            else{
-                $(this).show();
-            }
-        });
-    }
 
     //-------------------------------------------------------------------
     //-----------DEVICE-VIEW-CONTROL end----------------------------------

@@ -12,31 +12,60 @@ $(document).ready(function(){
 });
 
 function initializeNavEdit(){
-    $(window).unbind();
-    $(window).bind('popstate', function(e) {
-        e.preventDefault();
-        var activeHref = $("#nav").find("li.active").children("a").attr("href");
-        if(activeHref != location.hash){
-            if (!isContentChange){
-                checkURL(location.hash);
-            }else{
-                var activePageName = getActivePageName();
-                if(activePageName){
-                    unsavedContentModal();
-                    setUnsavedContentModalButtonsHandlers(activePageName);
-                }else{
+    console.log(_browser);
+    if(_browser.chrome || _browser.firefox || _browser.safari || _browser.opera){
+        $(window).unbind('popstate');
+        $(window).bind('popstate', function(e) {
+            e.preventDefault();
+            var activeHref = $("#nav").find("li.active").children("a").attr("href");
+            if(activeHref != location.hash){
+                if (!isContentChange){
                     checkURL(location.hash);
+                }else{
+                    var activePageName = getActivePageName();
+                    if(activePageName){
+                        unsavedContentModal();
+                        setUnsavedContentModalButtonsHandlers(activePageName);
+                    }else{
+                        checkURL(location.hash);
+                    }
                 }
             }
+        });
+        if (_browser.opera){
+            $('ul#nav li a').unbind("click");
+            $('ul#nav li a').click(function (){
+                history.pushState({}, '', $(this).attr("href"));
+                $(window).trigger('popstate');
+            });
         }
-    });
-    if (navigator.userAgent.search("Opera") >= 0) {
-        $('ul#nav li a').unbind("click");
-        $('ul#nav li a').click(function (){
-            history.pushState({}, '', $(this).attr("href"));
-            $(window).trigger('popstate');
+    }
+    else{
+        $(window).unbind('hashchange');
+        $(window).bind('hashchange', function(e) {
+            e.preventDefault();
+            var activeHref = $("#nav").find("li.active").children("a").attr("href");
+            if(activeHref != location.hash){
+                if (!isContentChange){
+                    checkURL(location.hash);
+                }else{
+                    var activePageName = getActivePageName();
+                    if(activePageName){
+                        unsavedContentModal();
+                        setUnsavedContentModalButtonsHandlers(activePageName);
+                    }else{
+                        checkURL(location.hash);
+                    }
+                }
+            }
         });
     }
+    /*if (navigator.userAgent.toLowerCase().search("msie") >= 0){
+        $('ul#nav li a').unbind("click");
+        $('ul#nav li a').click(function (){
+            $(window).trigger('popstate');
+        });
+    } */
 }
 function getSubpageHash(hash){
     if(!hash){

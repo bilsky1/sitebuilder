@@ -594,6 +594,38 @@ ul.blocks{
     }
   }
 }
+@media only screen and (max-width: 789px) {
+  #phone{
+    display:none;
+  }
+}
+@media only screen and (min-width: 790px) {
+  #phone{
+    display:inline;
+  }
+}
+@media only screen and (max-width: 1077px) {
+  #tablet{
+    display:none;
+  }
+}
+@media only screen and (min-width: 1078px) {
+  #tablet{
+    display:inline;
+  }
+}
+@media only screen and (max-width: 1333px) {
+  #laptop{
+    display: none;
+  }
+}
+@media only screen and (min-width: 1334px) {
+  #laptop{
+    display: inline;
+  }
+}
+
+
 /*SIDEBAR TOGGLE BUTTON*/
 a#sidebar-toggle{
   float: left;

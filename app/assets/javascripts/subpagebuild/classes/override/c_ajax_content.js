@@ -56,32 +56,38 @@ function AjaxContentBlock(id,elClass, subpageContentId) {
             refresh: true,
             receive: function(event, ui){
                 if ( transfered === "draggable" && $(this).find(".block") ) {
-                    numberOfGenBlock += 1;
+                    if( !((($(this).attr("class").indexOf("ajax-col") >= 0 || $(this).closest(".ajax-col").length > 0)) && ui.item[0].id === "ajax_content_b") ){
+                        numberOfGenBlock += 1;
 
-                    var id = genIdToNewBlock();
-                    var blockObj = generateBlock(dragBlockId, id);
+                        var id = genIdToNewBlock();
+                        var blockObj = generateBlock(dragBlockId, id);
 
-                    $(this).find(".block").removeClass()
-                        .addClass("gen_block")
-                        .attr("data-type", dragBlockId)
-                        .attr("id",id.toString())
-                        .html(blockObj.genBlockCode);
+                        $(this).find(".block").removeClass()
+                            .addClass("gen_block")
+                            .attr("data-type", dragBlockId)
+                            .attr("id",id.toString())
+                            .html(blockObj.genBlockCode);
 
-                    blockObj.showHideEmptyCode(globalSubpageBuild);
-                    blockObj.setBlockHoverHandler();
+                        blockObj.showHideEmptyCode(globalSubpageBuild,emptyIconCode);
+                        blockObj.setBlockHoverHandler(globalSubpageBuild, emptyIconCode);
 
-                    if($("#" + blockObj.id).data("type") === "column_b" || $("#" + blockObj.id).data("type") === "ajax_content_b" ){
-                        blockObj.refreshSortable();
-                        if($("#" + blockObj.id).data("type") === "ajax_content_b")
-                            blockObj.createAjaxContentService();
+                        if($("#" + blockObj.id).data("type") === "column_b" || $("#" + blockObj.id).data("type") === "ajax_content_b"){
+                            blockObj.refreshSortable();
+                            if($("#" + blockObj.id).data("type") === "ajax_content_b")
+                                blockObj.createAjaxContentService();
+                        }
+
+                        transfered = 'sortable';
+                        dragBlockId = "";
+
+                        setInlineCKeditor('.ckeditor');
+                        removeAllUDragableFromSubpageContent(globalSubpageBuild);
+                        isContentChange = true;
+                    }else{
+                        removeAllUDragableFromSubpageContent(globalSubpageBuild);
+                        alert("Ajax content block cannot be add to ajax content block.");
                     }
-
-                    transfered = 'sortable';
-                    dragBlockId = "";
                 }
-                setInlineCKeditor('.ckeditor');
-                removeAllUDragableFromSubpageContent(globalSubpageBuild);
-                isContentChange = true;
             },
             update: function( event, ui ) {
                 showHideEmptyColumnCode(globalSubpageBuild);

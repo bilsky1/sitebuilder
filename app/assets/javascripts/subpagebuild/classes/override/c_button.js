@@ -4,7 +4,7 @@ function ButtonBlock(id,elClass, subpageContentId) {
     this.elClass = elClass;
     this.subpageContentId = subpageContentId;
 
-    this.genBlockCode = "<div class='buttonAlign'><a class='button' href='#'>Button</a></div>";
+    this.genBlockCode = "<div class='buttonAlign'><a class='button' href='http://www.google.sk/'>Button</a></div>";
 
     this.settingsCode = "<i class='fa fa-link'></i>";
 
