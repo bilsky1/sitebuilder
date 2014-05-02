@@ -12,7 +12,7 @@ $(document).ready(function(){
 });
 
 function initializeNavEdit(){
-    console.log(_browser);
+    //console.log(_browser);
     if(_browser.chrome || _browser.firefox || _browser.safari || _browser.opera){
         $(window).unbind('popstate');
         $(window).bind('popstate', function(e) {

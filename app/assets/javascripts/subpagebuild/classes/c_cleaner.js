@@ -2,7 +2,7 @@ function Cleaner() {
     this.content = "";
     ajaxCounter = 0;
 
-    this.cleanContent = function(content){
+    this.saveAllContent = function(content){
         $("body").append("<div id='tmpSubpageContent'></div>");
         var tmpSubpageContentEl = $("#tmpSubpageContent");
         tmpSubpageContentEl.css("display","none");
@@ -11,22 +11,23 @@ function Cleaner() {
         this.deleteControls(tmpSubpageContentEl);
         this.deleteEmptyContents(tmpSubpageContentEl);
         this.deleteMapsContents(tmpSubpageContentEl);
-        this.saveAjaxContentBlocks();
         removeAllUDragableFromSubpageContent(tmpSubpageContentEl);
-        content = tmpSubpageContentEl.html();
-        tmpSubpageContentEl.remove();
-        return content;
+        this.saveAjaxContentBlocks(); //inside this function after last saved ajax content is saved page, this is because a server delete unsave blocks from db
     };
 
     this.saveAjaxContentBlocks = function(){
         var c = this;
-        $("#tmpSubpageContent").find(".gen_block[data-type='ajax_content_b']").each(function(){
-            c.saveAjaxContent($(this));
-        });
+        if ($("#subpageContent").find(".gen_block[data-type='ajax_content_b']").length === 0){
+            c.savePageContent();
+        }else{
+            $("#tmpSubpageContent").find(".gen_block[data-type='ajax_content_b']").each(function(){
+                c.saveAjaxContent($(this));
+            });
+        }
     };
     this.saveAjaxContent = function(el){
         var ajaxContentId = el.data("remote-ajax-content-id");
-
+        var cleaner = this;
         //remove styles makes by edit GUI
         el.find(".buttonAlign").css("display","");
         el.find(".buttonBackAlign").css("display","");
@@ -66,7 +67,7 @@ function Cleaner() {
             success: function(data){
                 ajaxContentSavedCounter += 1;
                 if(ajaxContentSavedCounter === $("#subpageContent").find(".gen_block[data-type='ajax_content_b']").length){
-                    alert("a je to tu");
+                    cleaner.savePageContent();
                     ajaxContentSavedCounter = 0;
                 }
 
@@ -83,6 +84,56 @@ function Cleaner() {
             }
         });
     }
+
+    this.savePageContent = function(){
+        var tmpSubpageContentEl = $("#tmpSubpageContent");
+        var cleaner = this;
+        this.content = tmpSubpageContentEl.html();
+        tmpSubpageContentEl.remove();
+
+        $.ajax({
+            type: "POST",
+            url: "/pages/update_page",
+            data: {web_id:$("#web-id").text(), page_id: $("#subpageContent").data("page_id"), content: this.content},
+            dataType: 'json',
+            error: function (jqXHR, exception) {
+                if (jqXHR.status === 0) {
+                    alert('Not connect.\n Verify Network.');
+                    console.log(jqXHR.responseText);
+                } else if (jqXHR.status == 404) {
+                    alert('Requested page not found. [404]');
+                    console.log(jqXHR.responseText);
+                } else if (jqXHR.status == 500) {
+                    alert('Internal Server Error [500].');
+                    console.log(jqXHR.responseText);
+                } else {
+                    alert('Uncaught Error.\n' + jqXHR.responseText);
+                    console.log(jqXHR.responseText);
+                }
+                $('#saveSubpage').text("Save subpage");
+            },
+            success: function(data){
+                if (data.update_result != null){
+                    $('#saveSubpage').text("Save subpage");
+
+                    if(parseInt(data.update_result) === 1){
+                        cleaner.printError("Sucessfully updated","success");
+                        isContentChange = false;
+                    }
+                    else
+                        cleaner.printError("We're sorry, content cannot save updated","error");
+                }
+                else if(data.errors != null){
+                    var i;
+                    $('#saveSubpage').text("Save subpage");
+                    for (i = 0; i < data.errors.length; i++) {
+                        console.log(data.errors[i]);
+                        cleaner.printError(data.errors[i],"error");
+                    }
+                }
+            }
+        });
+    };
 
     this.getWindowHash = function(){
         var hash=window.location.hash.toString();
@@ -148,54 +199,9 @@ function Cleaner() {
     }
 
     this.updateContentToServer = function(pageName){
-
         var originalButText = $('#saveSubpage').text();
         var cleaner = this;
-        this.content = cleaner.cleanContent($("#subpageContent").html());
-
-        $('#saveSubpage').text("Loading ...");
-        $.ajax({
-            type: "POST",
-            url: "/pages/update_page",
-            data: {web_id:$("#web-id").text(), page_id: $("#subpageContent").data("page_id"), content: this.content},
-            dataType: 'json',
-            error: function (jqXHR, exception) {
-                if (jqXHR.status === 0) {
-                    alert('Not connect.\n Verify Network.');
-                    console.log(jqXHR.responseText);
-                } else if (jqXHR.status == 404) {
-                    alert('Requested page not found. [404]');
-                    console.log(jqXHR.responseText);
-                } else if (jqXHR.status == 500) {
-                    alert('Internal Server Error [500].');
-                    console.log(jqXHR.responseText);
-                } else {
-                    alert('Uncaught Error.\n' + jqXHR.responseText);
-                    console.log(jqXHR.responseText);
-                }
-                $('#saveSubpage').text("Save subpage");
-            },
-            success: function(data){
-                if (data.update_result != null){
-                    $('#saveSubpage').text("Save subpage");
-
-                    if(parseInt(data.update_result) === 1){
-                        cleaner.printError("Sucessfully updated","success");
-                        isContentChange = false;
-                    }
-                    else
-                        cleaner.printError("We're sorry, content cannot save updated","error");
-                }
-                else if(data.errors != null){
-                    var i;
-                    $('#saveSubpage').text("Save subpage");
-                    for (i = 0; i < data.errors.length; i++) {
-                        console.log(data.errors[i]);
-                        cleaner.printError(data.errors[i],"error");
-                    }
-                }
-            }
-        });
+        cleaner.saveAllContent($("#subpageContent").html());
     };//updateContentToServer
 }
 $(document).ready(function(){

@@ -235,7 +235,8 @@ function AjaxContentBlock(id,elClass, subpageContentId) {
             ajaxContent.css("height","auto");
             ajaxContent.show();
             $("#" + block.id).children(".ajax-block-container").children(".buttonBackAlign").hide();
-            $("#" + block.id).children(".ajax-block-container").children(".buttonAlign").show()
+            $("#" + block.id).children(".ajax-block-container").children(".buttonAlign").show();
+            block.initializeAllGoogleMaps();
             //EFECTS ON BUTTONS
             //$("#" + block.id).children(".ajax-block-container").children(".buttonBackAlign").fadeOut(400);
             //$("#" + block.id).children(".ajax-block-container").children(".buttonAlign").delay(400).fadeIn(600)
@@ -257,12 +258,21 @@ function AjaxContentBlock(id,elClass, subpageContentId) {
 
             $("#" + block.id).children(".ajax-block-container").children(".buttonAlign").hide();
             $("#" + block.id).children(".ajax-block-container").children(".buttonBackAlign").show();
-
+            block.initializeAllGoogleMaps();
             //EFECTS ON BUTTONS
             //$("#" + block.id).children(".ajax-block-container").children(".buttonAlign").fadeOut(400);
             //$("#" + block.id).children(".ajax-block-container").children(".buttonBackAlign").delay(400).fadeIn(600);
             //block.saveContentToAjaxContents();
         });
+    };
+
+    this.initializeAllGoogleMaps = function(){
+        var í = 0;
+        for(i=0; i<genBlocksList.length; i++){
+            if($("#" + genBlocksList[i].id).data("type") === "map_b"){
+                genBlocksList[i].initializeGoogleMap();
+            }
+        }
     };
 
     this.createAjaxContentService = function(){
