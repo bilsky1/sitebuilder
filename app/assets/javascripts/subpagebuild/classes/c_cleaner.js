@@ -1,5 +1,6 @@
 function Cleaner() {
     this.content = "";
+    ajaxCounter = 0;
 
     this.cleanContent = function(content){
         $("body").append("<div id='tmpSubpageContent'></div>");
@@ -63,6 +64,12 @@ function Cleaner() {
                 }
             },
             success: function(data){
+                ajaxContentSavedCounter += 1;
+                if(ajaxContentSavedCounter === $("#subpageContent").find(".gen_block[data-type='ajax_content_b']").length){
+                    alert("a je to tu");
+                    ajaxContentSavedCounter = 0;
+                }
+
                 if(data.result){
                     console.log("AjaxContent: " + ajaxContentId + " was successfully saved");
                 }

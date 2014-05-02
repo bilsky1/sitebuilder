@@ -21,7 +21,7 @@ var idOfLastBlock;
 var lastHashCode;
 
 var isContentChange = false; //use to alert when there is a unsaved content
-
+var ajaxContentSavedCounter = 0; //use when uploading ajax_contents, Use in cleaner.js
 
 /*Browser detect--------------------------------------------------
  * ---------------------------------------------------------------*/
