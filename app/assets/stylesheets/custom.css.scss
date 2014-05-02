@@ -67,8 +67,21 @@ pre{
 .well {
   background-color: $whitesmoke;
 
-  legend{
-    border-color: #d1d1d1;
+  div.legend{
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: 40px;
+    color: #333333;
+    border: 0;
+    border-bottom: 1px solid #d1d1d1;
+
+    small {
+      font-size: 15px;
+      color: #999999;
+    }
   }
 }
   /* CUSTOMIZE THE NAVBAR

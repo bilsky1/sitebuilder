@@ -150,7 +150,8 @@ function Loader() {
                     blockEl.children(".ajax-block-container").children(".buttonBackAlign").css("display","block");
 
                     loader.initAjaxContents(blockEl.children(".ajax-block-container").children(".ajax-content-after").find(".gen_block[data-type='ajax_content_b']"));
-
+                    loader.initGaleries();
+                    loader.initGoogleMaps();
                     console.log("Loader - get ajax content after");
                 }
                 else{

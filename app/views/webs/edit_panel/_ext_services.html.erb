@@ -21,7 +21,7 @@
             <div class="service-settings-messages"></div>
             <div class="clearfix"><input type="hidden" name="web_id" value="<%= @web.id %>"></div>
             <div class="clearfix"><input type="hidden" name="service_id" value="<%= service.id %>"></div>
-            <div class="clearfix"><textarea cols="10" id="service_value" name="service[value]" placeholder="Google analytics Code" rows="10" ><%= service.service_value %></textarea><i class="tooltip-icon fa fa-info-circle fa-lg" data-placement="left" rel="tooltip" title="External service value" ></i></div>
+            <div class="clearfix"><textarea cols="10" name="service[value]" placeholder="Google analytics Code" rows="10" ><%= service.service_value %></textarea><i class="tooltip-icon fa fa-info-circle fa-lg" data-placement="left" title="External service value" ></i></div>
             <div class="clearfix"><input type="submit" value="Save" class="btn btn-success pull-left" id="update-service"><a class="btn btn-danger pull-right delete-service"><i class="fa fa-trash-o fa-lg"></i></a></div>
           </form>
         </div>

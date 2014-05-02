@@ -2,7 +2,7 @@
 <h3 class="category-header">Domain</h3>
 <%= form_for @web, url: {action: "update_publish"}, method: :post, html:{id: "web-domain-settings"} do |w| %>
     <div id="web-domain-settings-messages"></div>
-    <div class="clearfix"><%= w.text_field :subdomain, placeholder: "Subdomain Name" %><i class="tooltip-icon fa fa-info-circle fa-lg" data-placement="left" rel="tooltip" title="Subdomain Name" ></i></div>
+    <div class="clearfix"><%= w.text_field :subdomain, placeholder: "Subdomain Name" %><i class="tooltip-icon fa fa-info-circle fa-lg" data-placement="left" title="Subdomain Name" ></i></div>
 
     <div class="clearfix">
         <div id="web_published_at" class="input-append">
@@ -11,7 +11,7 @@
               <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
             </span>
         </div>
-        <i class="tooltip-icon fa fa-info-circle fa-lg" data-placement="left" rel="tooltip" title="Publish time" ></i>
+        <i class="tooltip-icon fa fa-info-circle fa-lg" data-placement="left" title="Publish time" ></i>
     </div>
     <div class="clearfix"><%= w.submit "Save", class: "btn btn-success pull-right" %></div>
 <% end %>

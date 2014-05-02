@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <% if isEscapeFragmentParams? %>
       <title><%= @web.pages.find_by_url_name(params[:_escaped_fragment_]).title %></title>
   <% else %>
@@ -31,7 +32,7 @@
   <% unless @web.favicon.nil? %>
     <%= favicon_link_tag @web.favicon_url.to_s %>
   <% end %>
-  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
   <%= csrf_meta_tags %>
 
   <% if isEscapeFragmentParams? %>

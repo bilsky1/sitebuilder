@@ -1,7 +1,7 @@
 <% provide(:title, 'Update Password') %>
 <div class="row offset3">
     <div class="span4 well">
-        <legend>Update your password</legend>
+        <div class="legend">Update your password</div>
         <%= form_for @user, :url => password_reset_path(params[:id]) do |f| %>
             <%= render 'shared/error_messages', object: f.object %>
 

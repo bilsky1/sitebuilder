@@ -8,7 +8,7 @@
             <div class="span2">
               <div class="pull-right">
                 <label class="checkbox">
-                    <%= check_box_tag 'admin', nil, user.admin , class:'make-admin-checkbox', "data-url" => url_for( :action => 'make_admin', :id => user.id ) %>
+                    <%= check_box_tag 'admin', nil, user.admin , id: "user[#{user.id}]" , class:'make-admin-checkbox', "data-url" => url_for( :action => 'make_admin', :id => user.id ) %>
                     Administrator
                 </label>
               </div>

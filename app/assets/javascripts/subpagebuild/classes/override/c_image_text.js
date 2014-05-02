@@ -139,7 +139,7 @@ function ImageTextBlock(id,elClass, subpageContentId) {
                     if(!responseJson.errors){
                         console.log(responseJson.src);
                         //$('#' + this.id).children(".imageAlign").find("i#tmp-loader").remove();
-                        $('#'+block.id).children(".imageAndText").children(".imageContainer").html("<a class='fancybox' href='" + responseJson.src  + "'><img id='img" + responseJson.id + "' src='" + responseJson.thumb + "'></a>");
+                        $('#'+block.id).children(".imageAndText").children(".imageContainer").html("<a class='fancybox' href='" + responseJson.src  + "'><img id='img" + responseJson.id + "' src='" + responseJson.thumb + "' alt='" + responseJson.src + "'></a>");
                         $("#" + block.id).find("a.fancybox").fancybox({
                             'padding'		: 0
                         });

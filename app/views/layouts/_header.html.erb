@@ -9,7 +9,7 @@
           <span class="icon-bar"></span>
         </button>
         <% if isWebsEditOrUpdateAction? %>
-            <%= link_to "", id: "sidebar-toggle", 'data-placement' => 'right' , rel:"tooptip", title:"Toggle Sidebar" do %>
+            <%= link_to "", id: "sidebar-toggle", 'data-placement' => 'right' , title:"Toggle Sidebar" do %>
                 <i class="fa fa-bars fa-1g"></i>
             <% end %>
         <% end %>
@@ -35,7 +35,6 @@
                   <%end%>
                 </li>
              <%end%>
-            </li>
             <li class="<%= nav_aktiv(help_path) %>"><%= link_to help_path do%><i class="fa fa-info"></i> Help<%end%></li>
 
             <% if signed_in? %>

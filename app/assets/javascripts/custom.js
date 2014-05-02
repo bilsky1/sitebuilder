@@ -276,11 +276,11 @@ function addPageSettingsElement(webId, pageId, pageTitle, pageName){
             "<div class='page-settings-messages'></div>"+
             "<div class='clearfix'><input type='hidden' name='web_id' value='" + webId +  "'></div>" +
                 "<div class='clearfix'><input type='hidden' name='page_id' value='" + pageId + "'></div>" +
-                    "<div class='clearfix'><input type='text' name='name' value='" + pageName + "' placeholder='Page name'><i class='tooltip-icon fa fa-info-circle fa-lg' data-placement='left' rel='tooltip' title='' data-original-title='Page name'></i></div>" +
-                        "<div class='clearfix'><input type='text' name='title' value='ester' placeholder='" + pageTitle + "'><i class='tooltip-icon fa fa-info-circle fa-lg' data-placement='left' rel='tooltip' title='' data-original-title='Page title'></i></div>" +
-                            "<div class='clearfix'><input type='text' name='meta_keywords' value='' placeholder='Keywords'><i class='tooltip-icon fa fa-info-circle fa-lg' data-placement='left' rel='tooltip' title='' data-original-title='Keywords'></i></div>" +
-                                "<div class='clearfix'><input type='text' name='meta_description' value='' placeholder='Description'><i class='tooltip-icon fa fa-info-circle fa-lg' data-placement='left' rel='tooltip' title='' data-original-title='Description'></i></div>" +
-                                    "<div class='clearfix'><input type='submit' value='Save' class='btn btn-success' id='update-page'></div>" +
+                    "<div class='clearfix'><input type='text' name='name' value='" + pageName + "' placeholder='Page name'><i class='tooltip-icon fa fa-info-circle fa-lg' data-placement='left' title='' data-original-title='Page name'></i></div>" +
+                        "<div class='clearfix'><input type='text' name='title' value='ester' placeholder='" + pageTitle + "'><i class='tooltip-icon fa fa-info-circle fa-lg' data-placement='left'title='' data-original-title='Page title'></i></div>" +
+                            "<div class='clearfix'><input type='text' name='meta_keywords' value='' placeholder='Keywords'><i class='tooltip-icon fa fa-info-circle fa-lg' data-placement='left' title='' data-original-title='Keywords'></i></div>" +
+                                "<div class='clearfix'><input type='text' name='meta_description' value='' placeholder='Description'><i class='tooltip-icon fa fa-info-circle fa-lg' data-placement='left' title='' data-original-title='Description'></i></div>" +
+                                    "<div class='clearfix'><input type='submit' value='Save' class='btn btn-success'></div>" +
                                     "</form>" +
                                 "</div>" +
                             "</li>";

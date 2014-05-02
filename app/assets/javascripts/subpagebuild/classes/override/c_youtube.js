@@ -6,7 +6,7 @@ function YoutubeBlock(id,elClass, subpageContentId) {
 
     //"?wmode=transparent" is because of IE
     this.genBlockCode = "<div class='youtubeVideo'>" +
-        "<iframe src='//www.youtube.com/embed/hhKXsLFKYqc?wmode=transparent' frameborder='0' allowfullscreen></iframe>" +
+        "<iframe src='//www.youtube.com/embed/hhKXsLFKYqc?wmode=transparent' style='border:0;' allowfullscreen></iframe>" +
         "</div>";
 
     this.settingsDialogId = "settings-confirm" + this.id;

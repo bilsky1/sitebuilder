@@ -182,7 +182,7 @@ function GalleryBlock(id,elClass, subpageContentId) {
                     if(!responseJson.errors){
                         console.log(responseJson.src);
                         $('#' + block.id).children(".galleryDiv").find(".emptyImage").remove();
-                        $('#'+block.id).children(".galleryDiv").append("<div class='galleryItem'><a id='link" + responseJson.id + "' data-fancybox-group='gal" + block.id + "' class='fancybox' href='" + responseJson.src  + "'><img id='img" + responseJson.id + "' src='" + responseJson.thumb + "'></a></div>");
+                        $('#'+block.id).children(".galleryDiv").append("<div class='galleryItem'><a id='link" + responseJson.id + "' data-fancybox-group='gal" + block.id + "' class='fancybox' href='" + responseJson.src  + "'><img id='img" + responseJson.id + "' src='" + responseJson.thumb + "' alt='" + responseJson.src + "'></a></div>");
                         $("#" + block.id).find(".fancybox").fancybox({
                             'padding'		: 0
                         });

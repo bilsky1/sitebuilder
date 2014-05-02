@@ -21,7 +21,7 @@ function createServiceHandler(){
         $.ajax({
             type: form.attr("method"),
             url: form.attr("action"),
-            data: {web_id:form.find("input[name='web_id']").val(), service_type:form.find("input[name='service_type']").val() , service_value: form.find("#service_value").val()},
+            data: {web_id:form.find("input[name='web_id']").val(), service_type:form.find("input[name='service_type']").val() , service_value: form.find("textarea[name='service[value]']").val()},
             dataType: 'json',
             error: function (jqXHR, exception) {
                 if (jqXHR.status === 0) {
@@ -108,7 +108,7 @@ function createServiceSettingsHandler(){
             success: function(data){
                 if (data.update_settings_result != null){
                     printErrorByElement(form.children(".service-settings-messages"),"Successfully updated","success");
-                    form.find("input[name='service_value']").val(data.ext_service_value);
+                    form.find("textarea[name='service[value]']").val(data.ext_service_value);
                 }
                 else if(data.errors != null){
                     var i;
@@ -136,7 +136,7 @@ function addServiceSettingsElement(webId, serviceId, serviceType, serviceValue){
                     "<div class='service-settings-messages'></div>" +
                     "<div class='clearfix'><input type='hidden' name='web_id' value='" + webId + "'></div>" +
                     "<div class='clearfix'><input type='hidden' name='service_id' value='" + serviceId  + "'></div>" +
-                    "<div class='clearfix'><textarea cols='10' id='service_value' name='service[value]' placeholder='Google analytics Code' rows='10' >" + serviceValue + "</textarea><i class='tooltip-icon fa fa-info-circle fa-lg' data-placement='left' rel='tooltip' title='External service value'' ></i></div>" +
+                    "<div class='clearfix'><textarea cols='10' name='service[value]' placeholder='Google analytics Code' rows='10' >" + serviceValue + "</textarea><i class='tooltip-icon fa fa-info-circle fa-lg' data-placement='left' title='External service value'' ></i></div>" +
                     "<div class='clearfix'><input type='submit' value='Save' class='btn btn-success pull-left' id='update-service'><a class='btn btn-danger pull-right delete-service'><i class='fa fa-trash-o fa-lg'></i></a></div>" +
                 "</form>" +
            "</div>" +

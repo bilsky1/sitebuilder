@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <title><%= full_title(yield(:title)) %></title>
 
   <!-- Good showing on mobile device with responsive design -->
@@ -16,7 +17,7 @@
 
 
 
-  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
   <script src="http://malsup.github.com/jquery.form.js"></script>
 
   <%= csrf_meta_tags %>
@@ -28,6 +29,7 @@
 <% else %>
     <div id="content" class="container-fluid">
 <% end %>
+
       <div id='flash_messages'>
         <% unless request.url.include?(sessions_path) %>
             <%= render 'shared/flash_messages' %>
@@ -35,13 +37,11 @@
       </div>
       <%= yield %>
 
-      <% if Rails.env.development? %>
-          <!--<div id="debug-info">
-            <%= debug(params) %>
-          </div>-->
-      <% end %>
+<% if isWebsEditOrUpdateAction? %>
+        </div>
+<% else %>
     </div>
-</div>
+<% end %>
 
 </body>
 </html>

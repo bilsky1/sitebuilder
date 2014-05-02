@@ -6,10 +6,10 @@
 <!-- HEADER start -->
 <div class="custom-theme-wrapper custom-theme-row1">
   <header id="custom-theme-header" class="clear">
-    <hgroup>
+    <div class="hgroup">
       <h1><%= @web.name %></h1>
       <h2 id="header_content"><%= render 'webs/header_content' %></h2>
-    </hgroup>
+    </div>
     <!-- ************************NAVIGATION*********************** -->
     <%= render 'layouts/web_themes/' + @web.theme.name + '/navigation' %>
   </header>
