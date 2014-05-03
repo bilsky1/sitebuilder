@@ -33,22 +33,24 @@ class WebsController < ApplicationController
   end
 
   def show
-    @web = Web.find_by_subdomain!(request.subdomain)
-    @google_analytics_service = @web.ext_services.find_by_service_type("Google analytics")
+    @web = Web.find_by_subdomain(request.subdomain)
+    unless @web.nil?
+      @google_analytics_service = @web.ext_services.find_by_service_type("Google analytics")
 
-    if (@web.published_at < Time.now && !@web.published)
-      @pages = @web.pages
-      if params[:back_link]=="true"
-        flash[:success] = "You can edit this site #{view_context.link_to 'here', edit_web_url(@web, subdomain: 'www')}.".html_safe
-        render 'webs/show'
+      if (@web.published_at < Time.now && !@web.published)
+        @pages = @web.pages
+        if params[:back_link]=="true"
+          flash[:success] = "You can edit this site #{view_context.link_to 'here', edit_web_url(@web, subdomain: 'www')}.".html_safe
+          render 'webs/show'
+        else
+          render 'webs/show'
+        end
       else
-        render 'webs/show'
+        render 'webs/remaining_time_to_publish'
       end
     else
-      render 'webs/remaining_time_to_publish'
+      redirect_to root_url(subdomain:"www")
     end
-
-
   end
 
   def edit
