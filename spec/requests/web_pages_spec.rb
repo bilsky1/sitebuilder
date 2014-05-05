@@ -35,8 +35,8 @@ describe "Web pages" do
       it { should have_selector('div.pagination') }
 
       it "should list each web" do
-        user.webs.paginate(page: 1).each do |web|
-          expect(page).to have_selector('li', text: web.name)
+        user.webs.order("created_at DESC").paginate(page: 1).each do |web|
+          expect(page).to have_link(web.name, href: edit_web_path(web))
         end
       end
     end
@@ -80,18 +80,21 @@ describe "Web pages" do
      end
 
      describe "with valid information" do
-       let(:web_name)  { "Example web site" }
-       before do
-         #ODO choose theme in selectbox
-         #theme.save!
-         fill_in "Name",  with: web_name
-         #select theme.id, from: "web[theme_id]"
-         click_button "Create new website"
-       end
-       it { should have_selector('div.alert.alert-success') }
-       it { should have_content(:web_name) }
+       pending "create web with valid information #{__FILE__}"
+       #let(:web_name)  { "Example web site" }
+       #before do
+       #TODO choose theme in selectbox
+       #theme.save!
+       #fill_in "Name",  with: web_name
+       #select theme.id, from: "web[theme_id]"
+       #click_button "Create new website"
+       #end
+       #it { should have_selector('div.alert.alert-success') }
+       #it { should have_content(:web_name) }
+       #end
      end
   end
+
   describe "show" do
     before do
       sign_in user

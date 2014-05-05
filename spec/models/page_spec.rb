@@ -5,12 +5,13 @@ describe Page do
   let(:web) {FactoryGirl.create(:web)}
 
   before do
-    @page = web.pages.build(name: "Example Web", content:"example HTML", title: "Title 3")
+    @page = web.pages.build(name: "Example Web", url_name: "example" , content:"example HTML", title: "Title 3")
   end
 
   subject { @page }
 
   it{ should respond_to(:name) }
+  it{ should respond_to(:url_name) }
   it{ should respond_to(:content) }
   it{ should respond_to(:title) }
   it{ should respond_to(:meta_description) }
@@ -30,7 +31,7 @@ describe Page do
   end
 
   describe "when name is too long" do
-    before { @page.name = "a" * 61 }
+    before { @page.name = "a" * 51 }
     it{ should_not be_valid }
   end
 

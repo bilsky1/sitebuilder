@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by_id(params[:id])
     unless @user.nil?
-      @webs = @user.webs.order("created_at DESC").paginate(page: params[:page])
+      @webs = @user.webs.where("published_at <= :published_at",published_at: Time.now).order("created_at DESC").paginate(page: params[:page])
     else
       redirect_to root_path
     end

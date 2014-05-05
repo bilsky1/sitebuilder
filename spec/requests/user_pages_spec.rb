@@ -105,7 +105,7 @@ describe "User Pages" do
   end
 
   describe "index" do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryGirl.create(:admin) }
 
     before do
       sign_in user

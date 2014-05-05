@@ -29,6 +29,7 @@ FactoryGirl.define do
 
   factory :page do
     sequence(:name) { |n| "ExampleName#{n}"}
+    sequence(:url_name) { |n| "example#{n}"}
     sequence(:content) { |n| "HtmlContent#{n}"}
     sequence(:title) { |n| "Title #{n}"}
     sequence(:meta_keywords) { |n| "Meta keywords #{n}"}

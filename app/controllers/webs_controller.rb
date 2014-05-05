@@ -5,7 +5,7 @@ class WebsController < ApplicationController
 
   def index
     @user = current_user
-    @webs = current_user.webs.where("published_at").order("created_at DESC").paginate(page: params[:page])
+    @webs = current_user.webs.order("created_at DESC").paginate(page: params[:page])
   end
 
   def new
