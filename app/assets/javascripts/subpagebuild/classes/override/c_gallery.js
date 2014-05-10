@@ -143,7 +143,7 @@ function GalleryBlock(id,elClass, subpageContentId) {
     this.setAjaxFileUpload = function(){
         var block = this;
         $("#" + block.settingsDialogId).find('.upload-form').find(".file-input").change(function(){
-            $('#' + block.id).children(".galleryDiv").append("<i class='tmp-loader' class='fa fa-cog fa-spin fa-lg'></i>");
+            $('#' + block.id).children(".galleryDiv").append("<i class='fa fa-cog fa-spin fa-lg tmp-loader'></i>");
             //for test error make a error in image_uploader.rb
             $(this).closest('form').ajaxSubmit({
                 beforeSubmit: function(a,f,o) {
@@ -172,6 +172,7 @@ function GalleryBlock(id,elClass, subpageContentId) {
                         alert('Uncaught Error.\n' + jqXHR.responseText);
                         console.log("Uncaught Error.\n" + jqXHR.responseText);
                     }
+                    $('#' + block.id).children(".galleryDiv").find(".tmp-loader").remove();
                 },
                 complete: function(XMLHttpRequest, textStatus) {
                     console.log(XMLHttpRequest.responseText);

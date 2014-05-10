@@ -103,7 +103,7 @@ function ImageTextBlock(id,elClass, subpageContentId) {
     this.setAjaxFileUpload = function(){
         var block = this;
         $("#" + block.settingsDialogId).find('.upload-form').find(".file-input").change(function(){
-            $('#' + block.id).children(".imageAlign").html("<i id='tmp-loader' class='fa fa-cog fa-spin fa-lg'></i>");
+            $('#' + block.id).children(".imageAndText").children(".imageContainer").html("<i class='fa fa-cog fa-spin fa-lg tmp-loader'></i>");
             //for test error make a error in image_uploader.rb
             $(this).closest('form').ajaxSubmit({
                 beforeSubmit: function(a,f,o) {
@@ -132,13 +132,14 @@ function ImageTextBlock(id,elClass, subpageContentId) {
                         alert('Uncaught Error.\n' + jqXHR.responseText);
                         console.log("Uncaught Error.\n" + jqXHR.responseText);
                     }
+                    $('#' + block.id).children(".imageAndText").children(".imageContainer").find(".tmp-loader").remove();
                 },
                 complete: function(XMLHttpRequest, textStatus) {
                     console.log(XMLHttpRequest.responseText);
                     responseJson = jQuery.parseJSON(XMLHttpRequest.responseText);
+                    $('#' + block.id).children(".imageAndText").children(".imageContainer").find(".tmp-loader").remove();
                     if(!responseJson.errors){
                         console.log(responseJson.src);
-                        //$('#' + this.id).children(".imageAlign").find("i#tmp-loader").remove();
                         $('#'+block.id).children(".imageAndText").children(".imageContainer").html("<a class='fancybox' href='" + responseJson.src  + "'><img id='img" + responseJson.id + "' src='" + responseJson.thumb + "' alt='" + responseJson.src + "'></a>");
                         $("#" + block.id).find("a.fancybox").fancybox({
                             'padding'		: 0

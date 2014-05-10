@@ -11,6 +11,7 @@ function Cleaner() {
         this.deleteControls(tmpSubpageContentEl);
         this.deleteEmptyContents(tmpSubpageContentEl);
         this.deleteMapsContents(tmpSubpageContentEl);
+        this.deleteImageLoaderIcon(tmpSubpageContentEl);
         removeAllUDragableFromSubpageContent(tmpSubpageContentEl);
         this.saveAjaxContentBlocks(); //inside this function after last saved ajax content is saved page, this is because a server delete unsave blocks from db
     };
@@ -25,6 +26,7 @@ function Cleaner() {
             });
         }
     };
+
     this.saveAjaxContent = function(el){
         var ajaxContentId = el.data("remote-ajax-content-id");
         var cleaner = this;
@@ -163,6 +165,10 @@ function Cleaner() {
     this.deleteControls = function(el){
         el.find(".imageControls").remove();
         el.find(".blockControls").remove();
+    };
+
+    this.deleteImageLoaderIcon = function(el){
+        el.find(".tmp-loader").remove();
     };
 
     this.deleteEmptyContents = function(el){
