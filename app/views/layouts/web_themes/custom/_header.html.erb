@@ -10,7 +10,7 @@
 
   <!-- Good showing on mobile device with responsive design -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
   <%= stylesheet_link_tag "web_themes/" + @web.theme.name + "/import", media: "all", "data-turbolinks-track" => true %>
   <%= stylesheet_link_tag "bootstrap", media: "all", "data-turbolinks-track" => true %>
   <%= stylesheet_link_tag "web_themes/generator_style", media: "all", "data-turbolinks-track" => true %>
@@ -32,7 +32,7 @@
   <% unless @web.favicon.nil? %>
     <%= favicon_link_tag @web.favicon_url.to_s %>
   <% end %>
-  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+
   <%= csrf_meta_tags %>
 
   <% if isEscapeFragmentParams? %>

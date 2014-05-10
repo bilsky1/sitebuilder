@@ -1,8 +1,7 @@
 <% provide(:title, @user.name) %>
 <h1><%= @user.name %></h1>
-<%= @user.email %>
+<p><strong>Email: </strong><%= @user.email %></p>
 <% if @user.state? %>
-    <br>
     <br>
     <h2>Published web sites</h2>
     <%= render 'webs/user_webs' %>
