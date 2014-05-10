@@ -111,7 +111,7 @@ function getPage(subpageName){
     cleaner.deletePluginsMessyCode();
     cleaner.reinitializeBlockList();
 
-    $('#subpageContent').prepend("<div id='loading'><i class='fa fa-spinner fa-spin fa-2x'></i></div>");
+    //$('#subpageContent').prepend("<div id='loading'><i class='fa fa-spinner fa-spin fa-2x'></i></div>");
     $.ajax({
         type: "POST",
         url: "/pages/get_page",
@@ -135,7 +135,7 @@ function getPage(subpageName){
         success: function(data){
             if (data.page_content != null){
                 $("#subpageContent").fadeOut(600, function (){
-                    $("#subpageContent").find("#loading").remove();
+                    //$("#subpageContent").find("#loading").remove();
                     genBlocksList = new Array(); //TODO - lost unsaved changes
                     //edit interface sucess method
                     $("#subpageContent").html(data.page_content);
