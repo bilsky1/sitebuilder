@@ -1,4 +1,5 @@
 class StaticPagesController < ApplicationController
+  #Akcia určená pre home podstránku systému.
   def home
     if signed_in?
       redirect_to webs_path
@@ -7,9 +8,13 @@ class StaticPagesController < ApplicationController
     end
   end
 
+  #Výpis pomôcky v pdf súbore
   def help
+    pdf_filename = File.join(Rails.root, "public/user_guide.pdf")
+    send_file(pdf_filename, :filename => "user_guide.pdf", :disposition => 'inline', :type => "application/pdf")
   end
 
+  #Autentifikačná akcia systému. Využíva sa pri overení emailovej adresy.
   def auth
     if params[:verification]
       @user = User.find_by_verification_token(params[:verification])

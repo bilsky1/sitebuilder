@@ -44,10 +44,9 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
-   #def filename
-   #  "#{secure_token}.#{file.extension}"  if original_filename
-   #end
-
+  #  def filename
+  #   "#{secure_token}.#{file.extension}"  if original_filename
+  #  end
    def filename
      @name ||= "#{timestamp}.#{file.extension}" if original_filename.present? and super.present?
    end
@@ -62,8 +61,8 @@ class ImageUploader < CarrierWave::Uploader::Base
    #end
 
   private
-   #use for stored filename
-   def secure_token
+   #Use for stored filename.
+   def secure_token #:doc:
      var = :"@#{mounted_as}_secure_token"
      random_token = Digest::SHA2.hexadigest("#{Time.now.utc}--#{model.id.to_s}").first(20)
      model.instance_variable_get(var) or model.instance_variable_set(var, random_token)

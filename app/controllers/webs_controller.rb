@@ -1,17 +1,28 @@
+=begin
+
+== Before akcie
+ before_action :signed_in_user, except: :show
+ before_action :correct_user,   only: [:edit, :update, :destroy, :update_style_settings, :update_publish]
+ before_action :get_themes,     only: [:new,:edit, :update]
+
+=end
 class WebsController < ApplicationController
   before_action :signed_in_user, except: :show
   before_action :correct_user,   only: [:edit, :update, :destroy, :update_style_settings, :update_publish]
   before_action :get_themes,     only: [:new,:edit, :update]
 
+  #Správa web stránok.
   def index
     @user = current_user
     @webs = current_user.webs.order("created_at DESC").paginate(page: params[:page])
   end
 
+  #Formulár vytvorenia novej web stránky.
   def new
     @web = current_user.webs.build if signed_in?
   end
 
+  #Spracovanie údajov z formuláru pre vytvorenie novej web stránky.
   def create
     @themes = Theme.all
     @web = current_user.webs.build(web_params)
@@ -32,6 +43,7 @@ class WebsController < ApplicationController
 
   end
 
+  #Akcia je volaná iba v prípade prístupu zo subdomény.
   def show
     @web = Web.find_by_subdomain(request.subdomain)
     unless @web.nil?
@@ -53,24 +65,21 @@ class WebsController < ApplicationController
     end
   end
 
+  #Akcia editačného prostredia.
   def edit
     @pages = @web.pages
     @ext_services = @web.ext_services
   end
 
+  #Úprava formuláru pre zmenu niektorých nastavení web stránky. Toto nie AJAX-ové spracovanie je nutné pre úspešnú zmenu témy.
   def update
     @web.update_attributes(web_params_update)
     @pages = @web.pages
     @ext_services = @web.ext_services
     render 'webs/edit'
-    #respond_to do |format|
-    #  @web.update_attributes(web_params_update)
-
-    #  format.html { redirect_to webs_url }
-    #  format.js
-    #end
   end
 
+  #Vymazanie web stránky.
   def destroy
     respond_to do |format|
       @web.destroy
@@ -81,8 +90,9 @@ class WebsController < ApplicationController
     end
   end
 
+  #Akcia slúžiaca pre AJAX-ovú zmenu štýlových nastavení.
   def update_style_settings
-    #create new image
+    #create new favicon
     unless params[:web][:favicon].nil?
       @web.favicon = params[:web][:favicon]
     end
@@ -94,6 +104,7 @@ class WebsController < ApplicationController
     end
   end
 
+  #Akcia pre úpravu publikačných nastavení.
   def update_publish
     #create new image
     @web.subdomain = params[:web][:subdomain]

@@ -1,7 +1,10 @@
 class PasswordResetsController < ApplicationController
+  # Akcia slúži na výpis formuláru zabudnutého hesla.
+  # Ak je aj akcia prázdna je na ňu defaultne vytvorená url adresa v routes.rb a priradený view.
   def new
   end
 
+  # Po vyplnení formuláru zabudnutého hesla je používateľovi zaslaný email s inštrukciami.
   def create
     user = User.find_by_email(params[:email])
     user.send_password_reset if user
@@ -9,10 +12,12 @@ class PasswordResetsController < ApplicationController
     redirect_to root_url
   end
 
+  # Akcia zmeny hesla.
   def edit
     @user = User.find_by_password_reset_token!(params[:id])
   end
 
+  # Akcia na spracovanie údajov z formuláru pre zmenu hesla.
   def update
     @user = User.find_by_password_reset_token!(params[:id])
     if @user.password_reset_sent_at < 2.hours.ago

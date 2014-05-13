@@ -1,5 +1,20 @@
+=begin
+
+== Popis
+Vzhľadomna to, že editačné prostredie aj režim zobrazovania web stránky má AJAX-ový charakter obsahuje tento controller potrebné API akcie.
+Tieto akcie sú volané pomocou AJAX-ových volaní z editačného alebo zobrazovacieho režimu.
+V každom kroku priebehu vykonávania každej akcie sa overujú hodnoty parametrov od používateľa.
+
+== Ukážka výpisu odpovede na akciu
+Úspešný priebeh akcie
+ render :json => {'id'=> image.id ,'src' => image.image.url, "thumb" => image.image.url(:thumb)}.to_json
+
+Neúspešný priebeh akcie
+ render :json => { :errors => image.errors.full_messages }.to_json
+
+=end
 class ImagesController < ApplicationController
-  #create images from multiupload
+  #Akcia pre pridávanie obrázkov.
   def add_assets
     #create new image
     if check_id(params[:image_form][:page_id])
@@ -28,6 +43,7 @@ class ImagesController < ApplicationController
     end
   end
 
+  #Akcia slúžiaca pre zistenie existencie obrázku.
   def check_image_exist
     if check_id(params[:page_id])
       if check_id(params[:image_id])
@@ -53,7 +69,7 @@ class ImagesController < ApplicationController
     end
   end
 
-  #create image and if id is specified delete old image
+  #Akcia slúžiaca pre vymazanie resp. nahradenie niektorého z obrázkov.
   def create_assets
 
     #delete assets if image already exist
@@ -86,7 +102,7 @@ class ImagesController < ApplicationController
     end
   end
 
-  #delete image
+  #Akcia pre vymazanie obrázku.
   def delete_assets
     if check_id(params[:id])
       image = Image.find_by_id(params[:id])

@@ -1,4 +1,21 @@
+=begin
+
+== Popis
+Vzhľadomna to, že editačné prostredie aj režim zobrazovania web stránky má AJAX-ový charakter obsahuje tento controller potrebné API akcie.
+Tieto akcie sú volané pomocou AJAX-ových volaní z editačného alebo zobrazovacieho režimu.
+V každom kroku priebehu vykonávania každej akcie sa overujú hodnoty parametrov od používateľa.
+
+== Ukážka výpisu odpovede na akciu
+Úspešný priebeh akcie
+ render :json => { 'update_settings_result' => "1", 'ext_service_value' => service.service_value}.to_json
+
+Neúspešný priebeh akcie
+ render :json => { :errors => ext_service.errors.full_messages }.to_json
+
+=end
 class ExtServicesController < ApplicationController
+
+  #Akcia pre vytvorenie záznamu externej služby.
   def create_ext_service
     if check_id(params[:web_id])
       web = Web.find_by_id(params[:web_id])
@@ -21,11 +38,7 @@ class ExtServicesController < ApplicationController
     end
   end
 
-  def get_ext_service
-    output = "TODO get ext service"
-    render :json => { 'errors' => [output]}.to_json
-  end
-
+  #Akcia pre úpravu služby tretej strany.
   def update_ext_service
     if  check_id(params[:web_id])
       if check_id(params[:service_id])
@@ -57,6 +70,7 @@ class ExtServicesController < ApplicationController
     end
   end
 
+  #Akcia pre vymazanie externej služby.
   def delete_ext_service
     if check_id(params[:service_id])
       service = ExtService.find_by_id(params[:service_id])

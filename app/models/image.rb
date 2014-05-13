@@ -1,14 +1,14 @@
 =begin
 == Popis
 Model Image má na starosť správu obrázkov či už ako záznam v databáze alebo aj fyzického súboru na servery.
-V tomto modeli je využitý aj ruby gem Carrierwave. Resp. je využitá pomocou neho vygenerovaná trieda (ImageUploader) slúžiaca na upload obrázkov.
+V tomto modeli je využitý aj ruby gem Carrierwave resp. je využitá pomocou neho vygenerovaná trieda (ImageUploader) slúžiaca na upload obrázkov.
 
 == Relácia
 Vytvorená je relácia na podstránku webu. To znamená, že z tohoto modelu je prístup k podstránke (Page), na ktorej je obrázok zobrazovaný.
  belongs_to :page
 
 == Validácia
-Maximálna dĺžka názvu obrázku je 50.
+Maximálna dĺžka názvu obrázku je 50 znakov.
  validates :name, presence: true, length: { maximum: 50 }
 Nutná prítomnosť identifikátora podstránky.
  validates :page_id, presence: true
@@ -16,7 +16,7 @@ Nutná prítomnosť identifikátora podstránky.
 == Požadované parametre Carriewave
 Inštancia uploadovaného obrázka. Vďaka tejto inštancií má model prístup k fyzickému súboru na serveri.
   mount_uploader :image, ImageUploader
-Nutnosť tohoto modelu obsahovať inštanciu uploadovaného súboru. Tento súbor podlieha aj validácií veľkosti.
+Nutnosť tohoto modelu obsahovať inštanciu uploadovaného súboru. Tento súbor podlieha validácií veľkosti v ImageUploader triede.
   validates :image, presence: true
   validate :file_size
 

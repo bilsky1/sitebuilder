@@ -1,9 +1,11 @@
 module SessionsHelper
+  #Helper metóda pre prihlásenie užívateľa. Vytvorenie cookie pre aktuálne prihláseného užívateľa.
   def sign_in(user)
       cookies.permanent[:remember_token] = user.remember_token
       self.current_user = user
   end
 
+  #Overenie či je nejaký používateľ prihlásený.
   def signed_in?
     !current_user.nil?
   end
@@ -12,6 +14,7 @@ module SessionsHelper
     @current_user = user
   end
 
+  #Vytvorenie premennej prihláseného užívateľa na základe cookie.
   def current_user
     # ||= (“or equals”) means
     # if current user is not false
@@ -21,6 +24,7 @@ module SessionsHelper
     end
   end
 
+  #Overenie, či prihlásený používateľ je zhodný s používateľom z parametra metódy.
   def current_user?(user)
     user == current_user
   end
@@ -32,6 +36,7 @@ module SessionsHelper
     end
   end
 
+  #Odhlásenie používateľa.
   def sign_out
     self.current_user = nil
     cookies.delete(:remember_token)

@@ -1,5 +1,5 @@
-# encoding: utf-8
-
+# Resizing uploaded favicon if size is more then 32x32px
+#  process resize_to_limit: [32, 32]
 class FaviconUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
@@ -24,14 +24,9 @@ class FaviconUploader < CarrierWave::Uploader::Base
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
 
-  # Process files as they are uploaded:
-  # process :scale => [32, 32]
-  #
-  # def scale(width, height)
-  #   if width > 32 || height > 32
-  #     process :resize_to_fit => [32, 32]
-  #   end
-  # end
+  # Resizing uploaded favicon if size is more then 32x32px
+  #  process resize_to_limit: [32, 32]
+  process resize_to_limit: [32, 32]
 
   # Create different versions of your uploaded files:
   # version :thumb do
@@ -46,10 +41,9 @@ class FaviconUploader < CarrierWave::Uploader::Base
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  # def filename
+  #  def filename
   #   "something.jpg" if original_filename
-  # end
-
+  #  end
   def filename
     @name ||= "#{timestamp}.#{file.extension}" if original_filename.present? and super.present?
   end
@@ -64,8 +58,8 @@ class FaviconUploader < CarrierWave::Uploader::Base
   #end
 
   private
-  #use for stored filename
-  def secure_token
+  #Use for stored filename.
+  def secure_token #:doc:
     var = :"@#{mounted_as}_secure_token"
     random_token = Digest::SHA2.hexadigest("#{Time.now.utc}--#{model.id.to_s}").first(20)
     model.instance_variable_get(var) or model.instance_variable_set(var, random_token)

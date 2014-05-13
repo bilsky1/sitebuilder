@@ -8,7 +8,7 @@ Každá podstránka spadá pod určitý web.
  belongs_to :web
 Podstránka môže obsahovať viac obrázkov, ktoré sa po vymazaní podstránky odstránia.
  has_many :images, dependent: :destroy
-Naždá podstránka obsahuje svoju pozíciu v navigácií danej web stránky.
+Každá podstránka obsahuje svoju pozíciu v navigácií danej web stránky.
  has_many :navigations, dependent: :destroy
 Rovnako ako v prípade obrázkov môže podstránka obsahovať viac Ajax-ových blokov.
  has_many :ajax_contents, dependent: :destroy
@@ -100,8 +100,8 @@ class Page < ActiveRecord::Base
       end
     end
 
-    # Obstránenie nepoužívaných AJAX-ovo obsahových blokov.
-    def deleteUnusedAjaxContents
+    # Odstránenie nepoužívaných AJAX-ovo obsahových blokov.
+    def deleteUnusedAjaxContents #:doc:
       self.ajax_contents.each do |ajax_content|
         unless self.content.include? "remote-ajax-content-id=\"" + ajax_content.id.to_s + "\""
           ajax_content.destroy

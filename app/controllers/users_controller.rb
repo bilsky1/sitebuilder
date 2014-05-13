@@ -1,9 +1,19 @@
+=begin
+
+== Before akcie
+ before_action :signed_out_user, only:[:new, :create]
+ before_action :signed_in_user, only: [:index, :edit, :update, :destroy]
+ before_action :correct_user,   only: [:edit, :update]
+ before_action :admin_user,     only: [:destroy]
+
+=end
 class UsersController < ApplicationController
   before_action :signed_out_user, only:[:new, :create]
   before_action :signed_in_user, only: [:index, :edit, :update, :destroy]
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: [:destroy]
 
+  #Správa užívateľov prístupná iba pre administrátora.
   def index
     if current_user.admin? && !current_user?(@user)
       @users = User.paginate(page: params[:page])
@@ -13,6 +23,7 @@ class UsersController < ApplicationController
 
   end
 
+  #Akcia slúžiaca na AJAX-ové vytvorenie administrátora iným administrátorom.
   def make_admin
     if current_user.admin?
       future_user = User.find_by_id(params[:id])
@@ -27,10 +38,12 @@ class UsersController < ApplicationController
     end
   end
 
+  #Akcia registračného formulára.
   def new
     @user = User.new
   end
 
+  #Profil používateľa.
   def show
     @user = User.find_by_id(params[:id])
     unless @user.nil?
@@ -40,6 +53,7 @@ class UsersController < ApplicationController
     end
   end
 
+  #Spracovanie registračných údajov od používateľa a odoslanie verifikačného emailu.
   def create
     @user = User.new(user_params)
     if @user.save
@@ -51,10 +65,12 @@ class UsersController < ApplicationController
     end
   end
 
+  #Formulár zmeny údajov používateľom.
   def edit
     @user = User.find(params[:id])
   end
 
+  #Spracovanie údajov z formuláru zmeny používateľských údajov.
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
@@ -66,6 +82,7 @@ class UsersController < ApplicationController
     end
   end
 
+  #Akcia pre AJAX-ové vymazanie užívateľa.
   def destroy
     @user = User.find(params[:id])
     #current_user? user is the same as current_user.is == user.id

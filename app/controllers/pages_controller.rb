@@ -1,6 +1,21 @@
+=begin
+
+== Popis
+Vzhľadomna to, že editačné prostredie aj režim zobrazovania web stránky má AJAX-ový charakter obsahuje tento controller potrebné API akcie.
+Tieto akcie sú volané pomocou AJAX-ových volaní z editačného alebo zobrazovacieho režimu.
+V každom kroku priebehu vykonávania každej akcie sa overujú hodnoty parametrov od používateľa.
+
+== Ukážka výpisu odpovede na akciu
+Úspešný priebeh akcie
+ render :json => { 'update_settings_result' => "1", 'page_name' => page.name, 'page_url_name' => page.url_name}.to_json
+
+Neúspešný priebeh akcie
+ render :json => { :errors => page.errors.full_messages }.to_json
+
+=end
 class PagesController < ApplicationController
 
-  #API get - find web and then find subpage by name
+  #Akcia slúžiaca pre získanie údajov podstránky.
   def get_page
     if check_id(params[:web_id])
       if check_page(params[:page_url_name])
@@ -27,6 +42,7 @@ class PagesController < ApplicationController
     end
   end
 
+  #Akcia pre vytvorenie novej podstránky webu.
   def create_page
     if check_id(params[:web_id])
       web = Web.find_by_id(params[:web_id])
@@ -51,7 +67,7 @@ class PagesController < ApplicationController
     end
   end
 
-  #API update - find web, find web.pages by name, change content or name or anything save return value
+  #Akcia zabezpečujúca úpravu obsahu podstránky.
   def update_page
     if check_id(params[:web_id])
       if check_id(params[:page_id])
@@ -83,6 +99,7 @@ class PagesController < ApplicationController
     end
   end
 
+  #Akcia na vymazanie podstránky.
   def delete_page
     if check_id(params[:page_id])
       page = Page.find_by_id(params[:page_id])
@@ -108,6 +125,7 @@ class PagesController < ApplicationController
     end
   end
 
+  #Akcia slúžiaca pre úpravu nastavení podstránky.
   def update_page_settings
     if  check_id(params[:web_id])
       if check_id(params[:page_id])

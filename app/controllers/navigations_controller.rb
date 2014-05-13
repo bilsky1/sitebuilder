@@ -1,5 +1,6 @@
 class NavigationsController < ApplicationController
 
+  #API akcia slúžiaca pre zmenu pozícií podstránok v navigácií.
   def uprate_navigation
     if check_id(params[:web_id])
       unless params[:pages].blank?

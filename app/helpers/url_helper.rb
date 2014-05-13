@@ -1,4 +1,5 @@
 module UrlHelper
+  #Helper slúžiaci pre vytváranie url odkazu na subdoménu niektorej z vytvorených web stránok.
   def with_subdomain(subdomain)
     subdomain = (subdomain || "")
     subdomain += "." unless subdomain.empty?

@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
     self.save(:validate=>false)
   end
 
-  #Odosielanie emailu za účelom znovuobnovenia zabudnutého hesla.
+  #Odosielanie emailu za účelom znovu obnovenia zabudnutého hesla.
   #Pred samotným odoslaním emailu sa generuje bezpečnostný token a ukladá sa čas odoslania.
   def send_password_reset
     generate_token(:password_reset_token)
