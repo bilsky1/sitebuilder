@@ -29,17 +29,17 @@ function DividerBlock(id,elClass, subpageContentId) {
         var block = this;
         $("#" + this.settingsDialogId).find("form.dividerForm").find(".leftAlign").on("click",function(e){
             e.preventDefault();
-            $("#" + block.id).children(".dividerBlock").css("margin","0");
+            $("#" + block.id).children(".dividerBlock").css("margin","10px 0");
             $("#" + block.id).children(".dividerBlock").css("float","left");
         });
         $("#" + this.settingsDialogId).find("form.dividerForm").find(".centerAlign").on("click",function(e){
             e.preventDefault();
             $("#" + block.id).children(".dividerBlock").css("float","none");
-            $("#" + block.id).children(".dividerBlock").css("margin","0 auto");
+            $("#" + block.id).children(".dividerBlock").css("margin","10px auto");
         });
         $("#" + this.settingsDialogId).find("form.dividerForm").find(".rightAlign").on("click",function(e){
             e.preventDefault();
-            $("#" + block.id).children(".dividerBlock").css("margin","0");
+            $("#" + block.id).children(".dividerBlock").css("margin","10px 0");
             $("#" + block.id).children(".dividerBlock").css("float","right");
         });
     };
@@ -60,10 +60,10 @@ function DividerBlock(id,elClass, subpageContentId) {
         this.setColorPickers();
         this.setAlignHandler();
         var height = $("#" + this.id).children(".dividerBlock").css("height");
-        var width = (100*$("#" + this.id).children(".dividerBlock").width())/$("#" + this.id).width();
+        var width = $("#" + this.id).children(".dividerBlock").css("width");
         //var color = $("#" + this.id).children(".dividerBlock").css("background-color");
         $("#" + this.settingsDialogId).find("form.dividerForm").find("input[name*='heightValue']").val(height);
-        $("#" + this.settingsDialogId).find("form.dividerForm").find("input[name*='widthValue']").val(width + "%");
+        $("#" + this.settingsDialogId).find("form.dividerForm").find("input[name*='widthValue']").val(width);
         //$("#" + this.settingsDialogId).find("form.dividerForm").find("input[name*='colorHexa']").val(color);
     };
     //createDialogWindow - create settings dialog window for change options of block

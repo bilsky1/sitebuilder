@@ -26,6 +26,10 @@
 <div id="subpageContent">
   <% if isEscapeFragmentParams? %>
       <%= raw @web.pages.find_by_url_name(params[:_escaped_fragment_]).content %>
+      <% @web.pages.find_by_url_name(params[:_escaped_fragment_]).ajax_contents.each do |ajxcnt| %>
+          <%= raw ajxcnt.content %>
+          <%= raw ajxcnt.content_after %>
+      <% end %>
   <% end %>
 </div>
 

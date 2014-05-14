@@ -8,7 +8,7 @@ class StaticPagesController < ApplicationController
     end
   end
 
-  #Výpis pomôcky v pdf súbore
+  #Výpis pomôcky v pdf súbore.
   def help
     pdf_filename = File.join(Rails.root, "public/user_guide.pdf")
     send_file(pdf_filename, :filename => "user_guide.pdf", :disposition => 'inline', :type => "application/pdf")

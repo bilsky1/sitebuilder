@@ -90,4 +90,6 @@ Sitebuilder::Application.configure do
       :authentication => :plain,
       :enable_starttls_auto => true
   }
+
+  config.action_dispatch.tld_length = 1
 end

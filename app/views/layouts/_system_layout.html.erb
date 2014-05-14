@@ -30,12 +30,14 @@
     <div id="content" class="container-fluid">
 <% end %>
 
+    <% unless isWebsEditOrUpdateAction? %>
       <div id='flash_messages'>
         <% unless request.url.include?(sessions_path) %>
             <%= render 'shared/flash_messages' %>
         <% end %>
       </div>
-      <%= yield %>
+    <% end %>
+    <%= yield %>
 
 <% if isWebsEditOrUpdateAction? %>
         </div>
