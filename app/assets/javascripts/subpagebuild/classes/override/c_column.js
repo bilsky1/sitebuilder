@@ -253,10 +253,18 @@ function ColumnBlock(id,elClass) {
             if (index != len - 1) {
                 left += (100*$(this).width()/$(this).closest(".columns").width()) + 2.5 ;    //(100*width/parentWidth)  + margin column
                 var separator = $(block.separatorCode).css("left",left + "%").attr("data-pos",index.toString());
-                $(this).closest(".columns").append(separator);
-                block.setResizeDragable();
+                if(!block.isSeparatorAdded()){
+                    $(this).closest(".columns").append(separator);
+                    block.setResizeDragable();
+                }
             }
         });
+    };
+
+    this.isSeparatorAdded = function(){
+        if($("#" + this.id).find(".columnSep").length !== $("#" + this.id).find(".col").length - 1 )
+            return false;
+        return true;
     };
 
     this.removeResizeSeparators = function(){

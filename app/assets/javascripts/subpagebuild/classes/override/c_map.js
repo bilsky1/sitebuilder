@@ -132,15 +132,19 @@ function MapsBlock(id,elClass, subpageContentId) {
                 "Save": function() {
                     var address = $("#" + block.settingsDialogId).find("form.MapForm").find("input[name*='addressValue']").val();
                     var zoom = $("#" + block.settingsDialogId).find("form.MapForm").find("select option:selected").val();
-                    block.codeAdressGoogleMapsApi(address,parseInt(zoom));
+
                     var height = $("#" + block.settingsDialogId).find("form.MapForm").find("input[name*='heightValue']").val();
                     $("#" + block.id).children(".googleMaps").css("height",height);
+
+                    //block.codeAdressGoogleMapsApi(address,parseInt(zoom));
 
                     $("#" + block.id).children(".googleMaps").attr("data-loc",address);
                     $("#" + block.id).children(".googleMaps").attr("data-zoom",zoom);
 
                     $("#" + block.id).children(".googleMaps").data("loc",address);
                     $("#" + block.id).children(".googleMaps").data("zoom",zoom);
+
+                    block.initializeGoogleMap();
 
                     $( this ).dialog( "close" );
                     isContentChange = true;

@@ -60,7 +60,11 @@ function DividerBlock(id,elClass, subpageContentId) {
         this.setColorPickers();
         this.setAlignHandler();
         var height = $("#" + this.id).children(".dividerBlock").css("height");
-        var width = $("#" + this.id).children(".dividerBlock").css("width");
+        //var width = $("#" + this.id).children(".dividerBlock").css("width");
+        if($("#" + this.id).width() > 0 && $("#" + this.id).children(".dividerBlock").width() > 0)
+            var width = Math.round((100*$("#" + this.id).children(".dividerBlock").width())/$("#" + this.id).width()) + "%";
+        else
+            var width = $("#" + this.id).children(".dividerBlock").css("width");
         //var color = $("#" + this.id).children(".dividerBlock").css("background-color");
         $("#" + this.settingsDialogId).find("form.dividerForm").find("input[name*='heightValue']").val(height);
         $("#" + this.settingsDialogId).find("form.dividerForm").find("input[name*='widthValue']").val(width);
