@@ -139,6 +139,9 @@ function MapsBlock(id,elClass, subpageContentId) {
                     $("#" + block.id).children(".googleMaps").attr("data-loc",address);
                     $("#" + block.id).children(".googleMaps").attr("data-zoom",zoom);
 
+                    $("#" + block.id).children(".googleMaps").data("loc",address);
+                    $("#" + block.id).children(".googleMaps").data("zoom",zoom);
+
                     $( this ).dialog( "close" );
                     isContentChange = true;
                 },
