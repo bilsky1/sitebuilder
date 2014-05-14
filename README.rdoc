@@ -2,8 +2,8 @@ Online website Builder
 
 =============================================================
 
-Tento online nástroj je určený pre používateľov, ktorých účelom je vytvoriť statickú web stránku. Používatelia tohoto nástroja,
-nepotrebujú disponovať znalosťami z danej oblasti tvorby webových stránok. Tieto znalosti sú však výhodou pri práci s nástrojom.
-Samotná tvorba webu je veľmi rýchle. Pokiaľ má používateľ pred pripravený všetok multimediálny obsah, ktorý chce prezentovať je
-možné pomocou tohoto nástroja vytvoriť a publikovať webovú stránku v priebehu niekoľko desiatok minút. Chceme upozorniť, že pre
-správne fungovanie tohoto nástroja je potrebné mať povolený JavaScript v používanom prehliadači.
+Tento online nástroj je určený pre používateľov, ktorých účelom je vytvoriť statickú web stránku. Používatelia tohto nástroja
+nepotrebujú disponovať znalosťami z oblasti tvorby webových stránok. Tieto znalosti sú však výhodou pri práci s týmto nástrojom.
+Samotná tvorba webu je veľmi rýchla. Pokiaľ má používateľ predpripravený všetok multimediálny obsah, ktorý chce prezentovať, je
+možné pomocou tohto nástroja vytvoriť a publikovať webovú stránku v priebehu niekoľko desiatok minút. Chceme upozorniť, že pre
+správne fungovanie tohto nástroja je potrebné mať povolený JavaScript v používanom prehliadači.

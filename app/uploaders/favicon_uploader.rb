@@ -1,4 +1,4 @@
-# Resizing uploaded favicon if size is more then 32x32px
+# Resizing uploaded favicon if size is more then 32x32px.
 #  process resize_to_limit: [32, 32]
 class FaviconUploader < CarrierWave::Uploader::Base
 

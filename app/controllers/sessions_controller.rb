@@ -1,10 +1,10 @@
 class SessionsController < ApplicationController
 
-  #Akcia pre výpis prihlasovacieho formuláru. Výpisa s vykonáva vo view-e.
+  #Akcia pre výpis prihlasovacieho formuláru. Výpis sa vykonáva vo view-e.
   def new
   end
 
-  #Spracovanie údajov z formuláru pre prihlásenie. V prípade správnych údajov prihlásenie používateľa.
+  #Spracovanie údajov z formuláru pre prihlásenie. V prípade správnych údajov nastane prihlásenie používateľa.
   def create
     user = User.find_by(email: params[:session][:email].downcase)
 

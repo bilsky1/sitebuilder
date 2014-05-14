@@ -22,7 +22,7 @@ class WebsController < ApplicationController
     @web = current_user.webs.build if signed_in?
   end
 
-  #Spracovanie údajov z formuláru pre vytvorenie novej web stránky.
+  #Spracovanie údajov z formulára pre vytvorenie novej web stránky.
   def create
     @themes = Theme.all
     @web = current_user.webs.build(web_params)
@@ -71,7 +71,7 @@ class WebsController < ApplicationController
     @ext_services = @web.ext_services
   end
 
-  #Úprava formuláru pre zmenu niektorých nastavení web stránky. Toto nie AJAX-ové spracovanie je nutné pre úspešnú zmenu témy.
+  #Úprava formulára pre zmenu niektorých nastavení web stránky. Táto metóda nie je AJAX-ovo volaná, pretože je nutné pregenerovanie .css a .js súborov v hlavičke web stránky.
   def update
     @web.update_attributes(web_params_update)
     @pages = @web.pages

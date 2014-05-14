@@ -1,6 +1,6 @@
 class PasswordResetsController < ApplicationController
   # Akcia slúži na výpis formuláru zabudnutého hesla.
-  # Ak je aj akcia prázdna je na ňu defaultne vytvorená url adresa v routes.rb a priradený view.
+  # Ak je aj akcia prázdna, je na ňu defaultne vytvorená url adresa v routes.rb a priradený view.
   def new
   end
 

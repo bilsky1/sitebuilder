@@ -1,15 +1,15 @@
 =begin
 
 == Popis
-Vzhľadomna to, že editačné prostredie aj režim zobrazovania web stránky má AJAX-ový charakter obsahuje tento controller potrebné API akcie.
+Vzhľadomna to, že editačné prostredie aj režim zobrazovania web stránky má AJAX-ový charakter, obsahuje tento controller potrebné API akcie.
 Tieto akcie sú volané pomocou AJAX-ových volaní z editačného alebo zobrazovacieho režimu.
 V každom kroku priebehu vykonávania každej akcie sa overujú hodnoty parametrov od používateľa.
 
 == Ukážka výpisu odpovede na akciu
-Úspešný priebeh akcie
+Úspešný priebeh akcie.
  render :json => {'id'=> image.id ,'src' => image.image.url, "thumb" => image.image.url(:thumb)}.to_json
 
-Neúspešný priebeh akcie
+Neúspešný priebeh akcie.
  render :json => { :errors => image.errors.full_messages }.to_json
 
 =end
@@ -69,7 +69,7 @@ class ImagesController < ApplicationController
     end
   end
 
-  #Akcia slúžiaca pre vymazanie resp. nahradenie niektorého z obrázkov.
+  #Akcia slúžiaca pre vymazanie, resp. nahradenie niektorého z obrázkov.
   def create_assets
 
     #delete assets if image already exist

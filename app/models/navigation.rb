@@ -3,7 +3,7 @@
 Navigation model a celkovo tabuľka navigations je určená na ukladanie poradia podstránok v navigácií danej web stránky.
 
 == Relácie
-Vytvorená je relácie na model Web a Page.
+Vytvorené sú relácie na modely Web a Page.
  belongs_to :web
  belongs_to :page
 

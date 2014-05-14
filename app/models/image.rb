@@ -1,10 +1,10 @@
 =begin
 == Popis
-Model Image má na starosť správu obrázkov či už ako záznam v databáze alebo aj fyzického súboru na servery.
-V tomto modeli je využitý aj ruby gem Carrierwave resp. je využitá pomocou neho vygenerovaná trieda (ImageUploader) slúžiaca na upload obrázkov.
+Model Image má na starosť správu obrázkov či už ako záznam v databáze alebo aj fyzického súboru na serveri.
+V tomto modely je využitý aj ruby gem Carrierwave, resp. je využitá pomocou neho vygenerovaná trieda (ImageUploader) slúžiaca na upload obrázkov.
 
 == Relácia
-Vytvorená je relácia na podstránku webu. To znamená, že z tohoto modelu je prístup k podstránke (Page), na ktorej je obrázok zobrazovaný.
+Vytvorená je relácia na podstránku webu. To znamená, že z tohto modelu je prístup k podstránke (Page), na ktorej je obrázok zobrazovaný.
  belongs_to :page
 
 == Validácia
@@ -16,7 +16,7 @@ Nutná prítomnosť identifikátora podstránky.
 == Požadované parametre Carriewave
 Inštancia uploadovaného obrázka. Vďaka tejto inštancií má model prístup k fyzickému súboru na serveri.
   mount_uploader :image, ImageUploader
-Nutnosť tohoto modelu obsahovať inštanciu uploadovaného súboru. Tento súbor podlieha validácií veľkosti v ImageUploader triede.
+Nutnosť tohto modelu obsahovať inštanciu uploadovaného súboru. Tento súbor podlieha validácií veľkosti v ImageUploader triede.
   validates :image, presence: true
   validate :file_size
 
@@ -43,7 +43,7 @@ class Image < ActiveRecord::Base
   validate :file_size
 
   protected
-    #Zapamätanie resp. sprístupnenie ID
+    #Zapamätanie resp. sprístupnenie ID.
     def remember_id
       @id = id
     end

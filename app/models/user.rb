@@ -7,10 +7,10 @@ Každý používateľ môže mať vytvorených viac web stránok.
  has_many :webs, dependent: :destroy
 
 == Validácia
-Bez názvu web stránky nie je možné danú stránku uložiť resp. vytvoriť. Maximálna dĺžka názvu webu je 50 znakov.
+Bez názvu web stránky nie je možné danú stránku uložiť, resp. vytvoriť. Maximálna dĺžka názvu webu je 50 znakov.
  validates :name, presence: true, length: { maximum: 50 }
 Validácie e-mailovej adresy. Overuje sa, či zadaná emailová adresa nie je prázdna.
-Taktiež overujeme email pomocou regulárneho výrazu a kontrolujeme unikátnost emailu v systéme.
+Taktiež overujeme email pomocou regulárneho výrazu a kontrolujeme unikátnosť emailu v systéme.
  validates :email, presence: true,
             format: { with: VALID_EMAIL_REGEX },
             uniqueness: { case_sensitive: false }
@@ -22,7 +22,7 @@ Pred uložením sa upravuje emailová adresa a taktiež sa generujú bezpečnost
     generate_token(:remember_token)
     generate_token(:verification_token)
  end
-Po uložení sa overuje existenia záznamu v navigádií (Navigation).
+Po uložení sa overuje existencia záznamu v navigácií (Navigation).
  after_save :check_navigation_exist
 
 =end
@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence:true
   validates :password, length: { minimum: 6 }  #presence is automatically validate in has_secure_password
 
-  #Metóda slúžiace pre nastavenie používateľa ako verifikovaného.
+  #Metóda slúžiaca pre nastavenie používateľa ako verifikovaného.
   def verify
     self.state = 1
     self.save(:validate=>false)
@@ -63,8 +63,8 @@ class User < ActiveRecord::Base
     UserMailer.password_reset(self).deliver
   end
 
-  #Úspešnej registrácií predchádza aj overenie e-mailu používateľom.
-  #Toto overenie prebieha na základe registračného e-mailu, ktorý obsahuje overovací odkaz s vygenerovaným bezpečnostným kľúčom.
+  #Úspešnej registrácií predchádza aj overenie emailu používateľom.
+  #Toto overenie prebieha na základe registračného emailu, ktorý obsahuje overovací odkaz s vygenerovaným bezpečnostným kľúčom.
   #Odosielanie emailu zabezpečuje práve táto metóda.
   def send_registration_confirmation
     UserMailer.registration_confirmation(self).deliver

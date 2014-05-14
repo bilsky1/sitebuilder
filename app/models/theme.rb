@@ -11,7 +11,7 @@ Uloženie témy požaduje definovanie názvu témy, ktorý nesmie obsahovať via
  validates :name, presence: true, length: { maximum: 50 }
 
 == Before save metóda
-Vzhľadom na to, že sa používa názov súborov témy rovnaký ako name atribút v tabuľke Themes je vytvorená before metóda na normalizáciu tohoto názvu.
+Vzhľadom na to, že sa používa názov súborov témy rovnaký ako name atribút v tabuľke Themes, je vytvorená before metóda na normalizáciu tohoto názvu.
  before_save do
    self.name = name.mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n,'').to_s.delete(' ') #delete diacritics and spaces
  end

@@ -1,5 +1,5 @@
 module ApplicationHelper
-  #Métóda helpera slúži na vytvorenie titulku podstránky aplikácie.
+  #Métóda helpera, ktorá slúži na vytvorenie titulku podstránky aplikácie.
   def full_title (page_title)
     base_title = "WBSBuilder"
     if page_title.empty?

@@ -1,15 +1,15 @@
 =begin
 
 == Popis
-Vzhľadomna to, že editačné prostredie aj režim zobrazovania web stránky má AJAX-ový charakter obsahuje tento controller potrebné API akcie.
+Vzhľadomna to, že editačné prostredie aj režim zobrazovania web stránky má AJAX-ový charakter, obsahuje tento controller potrebné API akcie.
 Tieto akcie sú volané pomocou AJAX-ových volaní z editačného alebo zobrazovacieho režimu.
 V každom kroku priebehu vykonávania každej akcie sa overujú hodnoty parametrov od používateľa.
 
 == Ukážka výpisu odpovede na akciu
-Úspešný priebeh akcie
+Úspešný priebeh akcie.
  render :json => { 'update_settings_result' => "1", 'ext_service_value' => service.service_value}.to_json
 
-Neúspešný priebeh akcie
+Neúspešný priebeh akcie.
  render :json => { :errors => ext_service.errors.full_messages }.to_json
 
 =end

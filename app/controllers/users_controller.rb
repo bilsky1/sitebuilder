@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: [:destroy]
 
-  #Správa užívateľov prístupná iba pre administrátora.
+  #Správa používateľov prístupná iba pre administrátora.
   def index
     if current_user.admin? && !current_user?(@user)
       @users = User.paginate(page: params[:page])
@@ -82,7 +82,7 @@ class UsersController < ApplicationController
     end
   end
 
-  #Akcia pre AJAX-ové vymazanie užívateľa.
+  #Akcia pre AJAX-ové vymazanie používateľa.
   def destroy
     @user = User.find(params[:id])
     #current_user? user is the same as current_user.is == user.id

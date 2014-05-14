@@ -5,7 +5,7 @@ Model web stránok vytváraných používateľom za pomoci systému.
 == Relácie
 Určenie tvorcu web stránky.
  belongs_to :user
-Relácia s tabuľkoz Theme.
+Relácia s tabuľkou Theme.
  belongs_to :theme
 Možnosť obsahovať viac podstránok, pričom po vymazaní web stránky sa odstránia aj všetky podstránky.
  has_many :pages, dependent: :destroy
@@ -17,7 +17,7 @@ Každý web môže obsahovať prepojenie s externými službami.
 == Validácia
 Požiadavka na prítomnosť názvu web stránky a jej obmedzenie maximálnej dĺžky na 50 znakov.
  validates :name, presence: true, length: { maximum: 50 }
-Maximálna dĺžka ukladanej farby je 7 pretože sa ukladá iba hexadecimály kód farby.
+Maximálna dĺžka ukladanej farby je 7, pretože sa ukladá iba hexadecimálny kód farby.
  validates :bg_color, length: { maximum: 7 }
 Nutnosť priradenia témy.
  validates :theme_id, presence:true
