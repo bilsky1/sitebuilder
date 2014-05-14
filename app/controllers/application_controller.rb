@@ -6,4 +6,12 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   include UrlHelper
   include WebsHelper
+
+  before_filter :redirectNoSubdomain
+
+  def redirectNoSubdomain
+    if !(request.subdomain.present?)
+      redirect_to root_url(subdomain:"www")
+    end
+  end
 end

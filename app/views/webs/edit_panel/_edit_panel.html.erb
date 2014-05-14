@@ -3,9 +3,16 @@
       <!-- sidebar menu start-->
       <ul class="sidebar-menu" id="nav-accordion">
         <li>
-          <%= link_to root_url(subdomain:@web.subdomain, :back_link => "true"), id: "sidebar-view" do %>
-              <i class="fa fa-eye"></i>
+          <% unless @web.subdomain.blank? %>
+              <%= link_to root_url(subdomain:@web.subdomain, :back_link => "true"), id: "sidebar-view", target: '_blank' do %>
+                  <i class="fa fa-eye"></i>
+              <% end %>
+          <% else %>
+              <%= link_to root_url(subdomain:"www", :back_link => "true"), id: "sidebar-view", target: '_blank' do %>
+                  <i class="fa fa-eye"></i>
+              <% end %>
           <% end %>
+
         </li>
 
         <li>

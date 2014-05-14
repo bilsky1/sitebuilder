@@ -107,64 +107,68 @@ function generateBlock(blockType,blockId){
 //set up inline editor for elements with class (Argument className)
 function setInlineCKeditor(className){
     $(className).each(function(){
-        var name;
-        for(name in CKEDITOR.instances) {
-            var instance = CKEDITOR.instances[name];
-            if(this && this == instance.element.$) {
-                return;
-            }
-        }
-        $(this).attr('contenteditable', true);
-
-        CKEDITOR.inline( this, {
-            uiColor: '#C2C2C2',
-            toolbar: [
-                ['Bold','Italic','Underline', "-" ,'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'],
-                ['TextColor','BGColor','Font','FontSize'],
-                [ 'NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-                [ 'Link', 'Unlink' ],
-                ['Undo','Redo']
-
-            ],
-            on :
-            {
-                change :function( ev )
-                {
-                    isContentChange = true;
+        $(this).on("click",function(){
+            var name;
+            for(name in CKEDITOR.instances) {
+                var instance = CKEDITOR.instances[name];
+                if(this && this == instance.element.$) {
+                    return;
                 }
             }
+            $(this).attr('contenteditable', true);
+
+            CKEDITOR.inline( this, {
+                uiColor: '#C2C2C2',
+                toolbar: [
+                    ['Bold','Italic','Underline', "-" ,'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'],
+                    ['TextColor','BGColor','Font','FontSize'],
+                    [ 'NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+                    [ 'Link', 'Unlink' ],
+                    ['Undo','Redo']
+
+                ],
+                on :
+                {
+                    change :function( ev )
+                    {
+                        isContentChange = true;
+                    }
+                }
+            });
         });
     });
 }//setInlineCKeditor
 
 function setInlineCKeditorByEl(className,el){
     el.find(className).each(function(){
-        var name;
-        for(name in CKEDITOR.instances) {
-            var instance = CKEDITOR.instances[name];
-            if(this && this == instance.element.$) {
-                return;
-            }
-        }
-        $(this).attr('contenteditable', true);
-
-        CKEDITOR.inline( this, {
-            uiColor: '#C2C2C2',
-            toolbar: [
-                ['Bold','Italic','Underline', "-" ,'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'],
-                ['TextColor','BGColor','Font','FontSize'],
-                [ 'NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-                [ 'Link', 'Unlink' ],
-                ['Undo','Redo']
-
-            ],
-            on :
-            {
-                change :function( ev )
-                {
-                    isContentChange = true;
+        $(this).on("click",function(){
+            var name;
+            for(name in CKEDITOR.instances) {
+                var instance = CKEDITOR.instances[name];
+                if(this && this == instance.element.$) {
+                    return;
                 }
             }
+            $(this).attr('contenteditable', true);
+
+            CKEDITOR.inline( this, {
+                uiColor: '#C2C2C2',
+                toolbar: [
+                    ['Bold','Italic','Underline', "-" ,'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'],
+                    ['TextColor','BGColor','Font','FontSize'],
+                    [ 'NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+                    [ 'Link', 'Unlink' ],
+                    ['Undo','Redo']
+
+                ],
+                on :
+                {
+                    change :function( ev )
+                    {
+                        isContentChange = true;
+                    }
+                }
+            });
         });
     });
 }

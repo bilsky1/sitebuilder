@@ -180,7 +180,9 @@ function AjaxContentBlock(id,elClass, subpageContentId) {
                 "Save": function() {
                     $("#" + block.id).find(".buttonAlign").children("a.button").text($(this).find("form.AjaxButtonForm").find("input[name*='" + "anchorValue" + "']").val());
                     $("#" + block.id).find(".buttonAlign").children("a.button").css("border-radius",$(this).find("form.AjaxButtonForm").find("input[name*='" + "borderRadiusValue" + "']").val());
+                    $("#" + block.id).find(".buttonBackAlign").children("a.button").css("border-radius",$(this).find("form.AjaxButtonForm").find("input[name*='" + "borderRadiusValue" + "']").val());
                     $( this ).dialog( "close" );
+                    isContentChange = true;
                 },
                 Cancel: function() {
                     $( this ).dialog( "close" );
@@ -237,9 +239,6 @@ function AjaxContentBlock(id,elClass, subpageContentId) {
             $("#" + block.id).children(".ajax-block-container").children(".buttonBackAlign").hide();
             $("#" + block.id).children(".ajax-block-container").children(".buttonAlign").show();
             block.initializeAllGoogleMaps();
-            //EFECTS ON BUTTONS
-            //$("#" + block.id).children(".ajax-block-container").children(".buttonBackAlign").fadeOut(400);
-            //$("#" + block.id).children(".ajax-block-container").children(".buttonAlign").delay(400).fadeIn(600)
         });
     };
 
@@ -259,10 +258,6 @@ function AjaxContentBlock(id,elClass, subpageContentId) {
             $("#" + block.id).children(".ajax-block-container").children(".buttonAlign").hide();
             $("#" + block.id).children(".ajax-block-container").children(".buttonBackAlign").show();
             block.initializeAllGoogleMaps();
-            //EFECTS ON BUTTONS
-            //$("#" + block.id).children(".ajax-block-container").children(".buttonAlign").fadeOut(400);
-            //$("#" + block.id).children(".ajax-block-container").children(".buttonBackAlign").delay(400).fadeIn(600);
-            //block.saveContentToAjaxContents();
         });
     };
 
