@@ -82,10 +82,12 @@ $(document).ready(function() {
 
     /*Active manu*/
     $("#sidebar-small .sidebar-menu li").on("click", "a",function(){
-        $("#sidebar-small .sidebar-menu li").children("a").each(function () {
-            $(this).removeClass("active");
-        });
-        $(this).addClass("active");
+        if($(this).attr("id") !== "sidebar-view"){
+            $("#sidebar-small .sidebar-menu li").children("a").each(function () {
+                $(this).removeClass("active");
+            });
+            $(this).addClass("active");
+        }
     });
 
     /*Change content of sidebar-big*/
