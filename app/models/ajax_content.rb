@@ -3,7 +3,7 @@
 Tento súbor obsahuje model zaoberajúci sa správou údajov <i>AjaxContent</i> bloku.
 Tento model má vytvorenú reláciu s modelom <i>Page</i>.
 Relácia je typu 1:M, pričom AjaxContent musí vždy spadať pod určitú podstránku.
-V tomto modely sa nachádzajú pravidlá relácií a taktiež validačné pravidlá.
+V tomto modeli sa nachádzajú pravidlá relácií a taktiež validačné pravidlá.
 
 == Relácia
 Vytvorená je relácia na podstránku webu. To znamená, že z tohto modelu je prístup k podstránke, do ktorej spadá.

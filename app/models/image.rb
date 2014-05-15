@@ -1,7 +1,7 @@
 =begin
 == Popis
 Model Image má na starosť správu obrázkov či už ako záznam v databáze alebo aj fyzického súboru na serveri.
-V tomto modely je využitý aj ruby gem Carrierwave, resp. je využitá pomocou neho vygenerovaná trieda (ImageUploader) slúžiaca na upload obrázkov.
+V tomto modeli je využitý aj ruby gem Carrierwave, resp. je využitá pomocou neho vygenerovaná trieda (ImageUploader) slúžiaca na upload obrázkov.
 
 == Relácia
 Vytvorená je relácia na podstránku webu. To znamená, že z tohto modelu je prístup k podstránke (Page), na ktorej je obrázok zobrazovaný.
