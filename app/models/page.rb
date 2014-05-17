@@ -3,6 +3,11 @@
 Tento model slúži na ukladanie obsahu podstránky webu. Model obsahuje relácie na dalšie modely a
 taktiež rôzne metódy veľmi podstatné pre správne fungovanie systému.
 
+== Virtuálny parameter
+Tento parameter modelu vzhľadom k tomu, že je virtuálny, nie je synchronizovaný s databázou.
+Slúži pre identifikáciu potreby skontrolovať obsah vzhľadom na nepoužívané obrázky a AjaxContent bloky.
+ attr_accessor :checkUnusedContent
+
 == Relácie
 Každá podstránka spadá pod určitý web.
  belongs_to :web
@@ -29,18 +34,26 @@ Pred uložením podstránky sa robí úprava parametra name a uloženie do url_n
 Táto úprava spočíva v odstránení diakritiky, medzier a niektorých špeciálnych znakov.
  before_save do
     self.url_name = name.mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n,'').to_s.delete(' ').downcase #delete diacritics and spaces (name is used for #!url purpose)
-    deleteUnusedImage
-    deleteUnusedAjaxContents
+    if checkUnusedContent
+      deleteUnusedImage
+      deleteUnusedAjaxContents
+    end
  end
 Po uložení sa overuje existencia záznamu v navigádií (Navigation).
  after_save :check_navigation_exist
 
 =end
 class Page < ActiveRecord::Base
+
+  attr_accessor :checkUnusedContent
+
+
   before_save do
     self.url_name = name.mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n,'').to_s.delete(' ').downcase #delete diacritics and spaces (name is used for #!url purpose)
-    deleteUnusedImage
-    deleteUnusedAjaxContents
+    if checkUnusedContent
+      deleteUnusedImage
+      deleteUnusedAjaxContents
+    end
   end
 
   after_save :check_navigation_exist

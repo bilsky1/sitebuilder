@@ -2,7 +2,7 @@
 function TextBlock(id, elClass, subpageContentId) {
     this.id = id;
     this.elClass = elClass;
-    this.genBlockCode = "<div class='ckeditor'><p>Testovaci text</p></div>";
+    this.genBlockCode = "<div class='ckeditor'><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,...</p></div>";
 
     this.settingsCode = "";
     this.settingsDialogId = "settings-confirm" + this.id;

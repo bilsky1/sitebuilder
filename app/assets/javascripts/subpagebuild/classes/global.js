@@ -116,7 +116,8 @@ function setInlineCKeditor(className){
                 }
             }
             $(this).attr('contenteditable', true);
-
+            var ctrlDown = false;
+            var ctrlKey = 17, vKey = 86;
             CKEDITOR.inline( this, {
                 uiColor: '#C2C2C2',
                 toolbar: [
@@ -132,6 +133,26 @@ function setInlineCKeditor(className){
                     change :function( ev )
                     {
                         isContentChange = true;
+                    },
+                    contentDom: function(ev){
+                        ev.editor.document.on( 'keyup', function(event)
+                        {
+                            if(event.data.$.keyCode == ctrlKey)
+                                ctrlDown=false;
+                        });
+
+                        ev.editor.document.on( 'keydown', function(event){
+                            if(event.data.$.keyCode == 17) ctrlDown=true;
+                            if(event.data.$.keyCode == vKey && ctrlDown == true){
+                                //The preventDefault() call prevents the browser's save popup to appear.
+                                //The try statement fixes a weird IE error.
+                                alert("For paste click right mouse button and then click paste.");
+                                try {
+                                    event.data.$.preventDefault();
+                                } catch(err) {}
+                                return false;
+                            }
+                        });
                     }
                 }
             });
@@ -151,6 +172,9 @@ function setInlineCKeditorByEl(className,el){
             }
             $(this).attr('contenteditable', true);
 
+            var ctrlDown = false;
+            var ctrlKey = 17, vKey = 86, cKey = 67;
+
             CKEDITOR.inline( this, {
                 uiColor: '#C2C2C2',
                 toolbar: [
@@ -166,6 +190,26 @@ function setInlineCKeditorByEl(className,el){
                     change :function( ev )
                     {
                         isContentChange = true;
+                    },
+                    contentDom: function(ev){
+                        ev.editor.document.on( 'keyup', function(event)
+                        {
+                            if(event.data.$.keyCode == ctrlKey)
+                                ctrlDown=false;
+                        });
+
+                        ev.editor.document.on( 'keydown', function(event){
+                            if(event.data.$.keyCode == 17) ctrlDown=true;
+                            if(event.data.$.keyCode == vKey && ctrlDown == true){
+                                //The preventDefault() call prevents the browser's save popup to appear.
+                                //The try statement fixes a weird IE error.
+                                alert("For paste click right mouse button and then click paste.");
+                                try {
+                                    event.data.$.preventDefault();
+                                } catch(err) {}
+                                return false;
+                            }
+                        });
                     }
                 }
             });

@@ -76,6 +76,7 @@ class PagesController < ApplicationController
           page = web.pages.find_by_id(params[:page_id])
           unless page.nil?
             page.content = params[:content]
+            page.checkUnusedContent = true
             if page.save
               render :json => { 'update_result' => "1"}.to_json
             else
@@ -133,6 +134,7 @@ class PagesController < ApplicationController
         unless web.nil?
           page = web.pages.find_by_id(params[:page_id])
           unless page.nil?
+            page.checkUnusedContent = false
             if page.update(updateSettingsParams)
               render :json => { 'update_settings_result' => "1", 'page_name' => page.name, 'page_url_name' => page.url_name}.to_json
             else
