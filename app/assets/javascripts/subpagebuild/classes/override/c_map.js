@@ -111,8 +111,8 @@ function MapsBlock(id,elClass, subpageContentId) {
     this.setSettingsHandler = function(){
         var block = this;
         $("#"+this.id).find('.blockControls:first-child').find('.modifyBlock').on("click",function(e){
-            $("#" + block.settingsDialogId).find("form.MapForm").find("select option").removeAttr("selected");
-            $("#" + block.settingsDialogId).find("form.MapForm").find("select option[value*='" + block.map.getZoom() +"']").attr("selected","selected");
+            $("#" + block.settingsDialogId).find("form.MapForm").find("select option").prop("selected",false);
+            $("#" + block.settingsDialogId).find("form.MapForm").find("select option[value*='" + block.map.getZoom() +"']").prop("selected",true);
             $('#' + block.settingsDialogId).dialog("open");
         });
     };//setSettingsHandler

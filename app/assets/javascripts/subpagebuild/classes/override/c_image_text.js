@@ -20,7 +20,7 @@ function ImageTextBlock(id,elClass, subpageContentId) {
 
     this.emptyContent = "<p class='emptyImage'>Upload image via settings</p>";
 
-    this.genBlockCode = "<div class='imageAndText'><div class='imageContainer'>" + this.emptyContent + "</div><p class='ckeditor'>Lorem ipsum text</p></div>";
+    this.genBlockCode = "<div class='imageAndText'><div class='imageContainer'>" + this.emptyContent + "</div><p class='ckeditor'>Lorem ipsum dolor sit amet, consectetur adipisicing elit,...</p></div>";
 
     this.settingsDialogId = "settings-confirm" + this.id;
     this.settingsDialogCode =   "<div class='ImageTextDiv'>" +

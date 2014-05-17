@@ -139,8 +139,11 @@ $(document).ready(function() {
     //-------------------------------------------------------------------
     //---------------SETTINGS PAGES start--------------------------------
     //-------------------------------------------------------------------
+    var webBgColor = $("#main-content-inner").css("background");
+    if (!webBgColor || webBgColor == "")
+        webBgColor = $("#main-content-inner").css("background-color");
     $("#web_bg_color").minicolors('settings', {
-        defaultValue: hex($("#main-content-inner").css("background")),
+        defaultValue: hex(webBgColor),
         change: function(hex) {
 
             $("#main-content-inner").css("background",hex2rgb(hex,1));

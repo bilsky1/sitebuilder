@@ -135,7 +135,13 @@ function AjaxContentBlock(id,elClass, subpageContentId) {
         });
         this.setAlignHandler();
         this.setColorPickers();
-        $("#" + this.settingsDialogId).find("input[name*='" + "borderRadiusValue" + "']").val($("#" + this.id).find("a").css("border-radius")); //init border radius
+
+        var borderRadius = $("#" + this.id).find("a").css("border-radius");
+        if (!borderRadius && borderRadius=="")
+            borderRadius = $("#" + this.id).find("a").css("border-top-left-radius") + " " + $("#" + this.id).find("a").css("border-top-right-radius") + " " +
+                $("#" + this.id).find("a").css("border-bottom-left-radius") + " " + $("#" + this.id).find("a").css("border-bottom-right-radius");
+
+        $("#" + this.settingsDialogId).find("input[name*='" + "borderRadiusValue" + "']").val(borderRadius); //init border radius
 
         //When create new cols ajax respond set link to ajax content to data-property
         this.setAjaxBlockButtonHandler();

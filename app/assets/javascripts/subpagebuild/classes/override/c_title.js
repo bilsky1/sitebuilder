@@ -3,7 +3,7 @@ function TitleBlock(id,elClass, subpageContentId) {
     this.id = id;
     this.elClass = elClass;
 
-    this.genBlockCode = "<div class='ckeditor'><h2>Testovaci titulok</h2></div>";
+    this.genBlockCode = "<div class='ckeditor'><h2>Example Title</h2></div>";
 
     this.settingsCode = "<button class='h2' >h2</button>" +
         "<button class='h3' >h3</button>" +

@@ -54,6 +54,8 @@ function GalleryBlock(id,elClass, subpageContentId) {
         var block = this;
         var borderColor = $("#" + block.id).find(".galleryItem").css("border-color");
         if(borderColor == null) borderColor="#FFFFFF";
+        else if (borderColor == "") borderColor = $("#" + block.id).find(".galleryItem").css("border-top-color");
+
         $("#" + block.settingsDialogId).find( "input[name*='borderColorVal']").minicolors('settings',{
             defaultValue: hex(borderColor),
             opacity: true,
@@ -68,10 +70,12 @@ function GalleryBlock(id,elClass, subpageContentId) {
     this.setBorderOnOff = function(){
         var block=this;
         var tmp = $("#" + block.id).find(".galleryItem").css("border-width");
+        if(!tmp || tmp=="" )
+            tmp = $("#" + block.id).find(".galleryItem").css("border-top-width");
         var borderStatus;
 
         if(tmp != null){
-            tmp.replace("px","");
+            tmp = jQuery.trim(tmp.replace("px",""));
             if (tmp === "0")
                 borderStatus = false;
             else
@@ -96,6 +100,8 @@ function GalleryBlock(id,elClass, subpageContentId) {
     this.setGalItemSpacing =function(){
         var block = this;
         var spacing = $("#" + this.id).find(".galleryItem").css("margin");
+        if(!spacing || spacing == "")
+            spacing = $("#" + this.id).find(".galleryItem").css("margin-top");
         var inputVal;
         if(spacing != null){
             spacing.replace("px","");
