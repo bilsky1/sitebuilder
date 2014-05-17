@@ -125,7 +125,7 @@ function setInlineCKeditor(className){
                     ['TextColor','BGColor','Font','FontSize'],
                     [ 'NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
                     [ 'Link', 'Unlink' ],
-                    ['Undo','Redo','Paste']
+                    ['Undo','Redo']
 
                 ],
                 on :
@@ -169,7 +169,7 @@ function setInlineCKeditorByEl(className,el){
                     ['TextColor','BGColor','Font','FontSize'],
                     [ 'NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
                     [ 'Link', 'Unlink' ],
-                    ['Undo','Redo','Paste']
+                    ['Undo','Redo']
 
                 ],
                 on :
