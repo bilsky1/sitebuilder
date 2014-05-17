@@ -125,7 +125,7 @@ function setInlineCKeditor(className){
                     ['TextColor','BGColor','Font','FontSize'],
                     [ 'NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
                     [ 'Link', 'Unlink' ],
-                    ['Undo','Redo']
+                    ['Undo','Redo','Paste']
 
                 ],
                 on :
@@ -134,24 +134,11 @@ function setInlineCKeditor(className){
                     {
                         isContentChange = true;
                     },
-                    contentDom: function(ev){
-                        ev.editor.document.on( 'keyup', function(event)
-                        {
-                            if(event.data.$.keyCode == ctrlKey)
-                                ctrlDown=false;
-                        });
-
-                        ev.editor.document.on( 'keydown', function(event){
-                            if(event.data.$.keyCode == 17) ctrlDown=true;
-                            if(event.data.$.keyCode == vKey && ctrlDown == true){
-                                //The preventDefault() call prevents the browser's save popup to appear.
-                                //The try statement fixes a weird IE error.
-                                alert("For paste click right mouse button and then click paste.");
-                                try {
-                                    event.data.$.preventDefault();
-                                } catch(err) {}
-                                return false;
-                            }
+                    /*copy paste bug of CKEDITOR*/
+                    instanceReady:function( ev ) {
+                        ev.editor.on( 'afterPaste', function( evt ) {
+                            var content = ev.editor.getData();
+                            ev.editor.setData(content);
                         });
                     }
                 }
@@ -173,7 +160,7 @@ function setInlineCKeditorByEl(className,el){
             $(this).attr('contenteditable', true);
 
             var ctrlDown = false;
-            var ctrlKey = 17, vKey = 86, cKey = 67;
+            var ctrlKey = 17, vKey = 86;
 
             CKEDITOR.inline( this, {
                 uiColor: '#C2C2C2',
@@ -182,7 +169,7 @@ function setInlineCKeditorByEl(className,el){
                     ['TextColor','BGColor','Font','FontSize'],
                     [ 'NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
                     [ 'Link', 'Unlink' ],
-                    ['Undo','Redo']
+                    ['Undo','Redo','Paste']
 
                 ],
                 on :
@@ -191,24 +178,11 @@ function setInlineCKeditorByEl(className,el){
                     {
                         isContentChange = true;
                     },
-                    contentDom: function(ev){
-                        ev.editor.document.on( 'keyup', function(event)
-                        {
-                            if(event.data.$.keyCode == ctrlKey)
-                                ctrlDown=false;
-                        });
-
-                        ev.editor.document.on( 'keydown', function(event){
-                            if(event.data.$.keyCode == 17) ctrlDown=true;
-                            if(event.data.$.keyCode == vKey && ctrlDown == true){
-                                //The preventDefault() call prevents the browser's save popup to appear.
-                                //The try statement fixes a weird IE error.
-                                alert("For paste click right mouse button and then click paste.");
-                                try {
-                                    event.data.$.preventDefault();
-                                } catch(err) {}
-                                return false;
-                            }
+                    /*copy paste bug of CKEDITOR*/
+                    instanceReady:function( ev ) {
+                        ev.editor.on( 'afterPaste', function( evt ) {
+                            var content = ev.editor.getData();
+                            ev.editor.setData(content);
                         });
                     }
                 }

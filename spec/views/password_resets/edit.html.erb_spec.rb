@@ -9,8 +9,8 @@ describe "password_resets/edit.html.erb" do
     visit edit_password_reset_url(user.password_reset_token)
   end
 
-  it { should have_title("Update Password") }
-  it { should have_content("Update your password") }
+  #it { should have_title("Update Password") }
+  #it { should have_content("Update your password") }
 
   describe "after fill password" do
     before do
@@ -19,7 +19,7 @@ describe "password_resets/edit.html.erb" do
       click_button "Update Password"
     end
 
-    it { should have_content("Password has been reset!") }
+    #it { should have_content("Password has been reset!") }
 
   end
 

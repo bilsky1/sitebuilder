@@ -11,7 +11,9 @@ class ApplicationController < ActionController::Base
 
   def redirectNoSubdomain
     if !(request.subdomain.present?)
-      redirect_to root_url(subdomain:"www")
+      if request.domain != "localhost"
+        redirect_to root_url(subdomain:"www")
+      end
     end
   end
 end

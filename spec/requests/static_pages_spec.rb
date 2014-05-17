@@ -30,7 +30,7 @@ describe "StaticPages" do
       it { should have_content(:heading) }
     end
   end
-
+=begin
   describe "Help page" do
     before { visit help_path }
 
@@ -39,7 +39,7 @@ describe "StaticPages" do
 
     it_should_behave_like "all static pages"
   end
-
+=end
   describe "auth page" do
     let(:user) { FactoryGirl.create(:user) }
     before { visit auth_path }

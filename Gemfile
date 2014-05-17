@@ -59,7 +59,7 @@ gem 'bcrypt-ruby', '3.0.1'
   gem 'bootstrap-will_paginate', '0.0.9'
   gem "font-awesome-rails"
   gem 'jquery-ui-rails'
-  gem "ckeditor_rails", "~> 4.3.1"
+  gem "ckeditor_rails", "~> 4.4.0"
   gem "jquery-minicolors-rails", "~> 2.1.1.2"
   #gem "fancybox-rails", "~> 0.2.1"
   gem 'fancybox2-rails', '~> 0.2.8'
