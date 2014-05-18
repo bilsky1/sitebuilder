@@ -112,7 +112,7 @@ function MapsBlock(id,elClass, subpageContentId) {
         var block = this;
         $("#"+this.id).find('.blockControls:first-child').find('.modifyBlock').on("click",function(e){
             $("#" + block.settingsDialogId).find("form.MapForm").find("select option").prop("selected",false);
-            $("#" + block.settingsDialogId).find("form.MapForm").find("select option[value*='" + block.map.getZoom() +"']").prop("selected",true);
+            $("#" + block.settingsDialogId).find("form.MapForm").find("select option[value*='" + $("#" + block.id).children(".googleMaps").data("zoom") +"']").prop("selected",true);
             $('#' + block.settingsDialogId).dialog("open");
         });
     };//setSettingsHandler
