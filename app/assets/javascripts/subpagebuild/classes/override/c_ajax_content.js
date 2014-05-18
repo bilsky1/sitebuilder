@@ -130,16 +130,17 @@ function AjaxContentBlock(id,elClass, subpageContentId) {
 
     this.initDialogWindowSettings = function(){
         var block = this;
-        $("#" + this.id).find(".buttonAlign").children("a.button").each(function(){
+        $("#" + this.id).children(".ajax-block-container").find(".buttonAlign").children("a.button").each(function(){
             $("#" + block.settingsDialogId).find("input[name*='" + "anchorValue" + "']").val($(this).text());
         });
         this.setAlignHandler();
         this.setColorPickers();
 
-        var borderRadius = $("#" + this.id).find("a").css("border-radius");
+        var buttonEl = $("#" + this.id).children(".ajax-block-container").children(".buttonAlign").children("a.button");
+        var borderRadius = buttonEl.css("border-radius");
         if (!borderRadius && borderRadius=="")
-            borderRadius = $("#" + this.id).find("a").css("border-top-left-radius") + " " + $("#" + this.id).find("a").css("border-top-right-radius") + " " +
-                $("#" + this.id).find("a").css("border-bottom-left-radius") + " " + $("#" + this.id).find("a").css("border-bottom-right-radius");
+            borderRadius =  buttonEl.css("border-top-left-radius") + " " + buttonEl.css("border-top-right-radius") + " " +
+                            buttonEl.css("border-bottom-left-radius") + " " + buttonEl.css("border-bottom-right-radius");
 
         $("#" + this.settingsDialogId).find("input[name*='" + "borderRadiusValue" + "']").val(borderRadius); //init border radius
 
@@ -150,14 +151,15 @@ function AjaxContentBlock(id,elClass, subpageContentId) {
 
     this.setColorPickers = function(){
         var block = this;
-        var textColor = $("#" + block.id).find("a.button").css("color");
-        var bgColor = $("#" + block.id).find("a.button").css("background-color");
+        var textColor = $("#" + block.id).children(".ajax-block-container").children(".buttonAlign").children("a.button").css("color");
+        var bgColor = $("#" + block.id).children(".ajax-block-container").children(".buttonAlign").children("a.button").css("background-color");
         $("#" + block.settingsDialogId).find( "input[name*='textColorValue']").minicolors('settings',{
             defaultValue: hex(textColor),
             opacity: true,
             change: function(hex, opacity) {
 
-                $("#" + block.id).find("a.button").css("color",hex2rgb(hex,opacity));
+                $("#" + block.id).children(".ajax-block-container").children(".buttonAlign").children("a.button").css("color",hex2rgb(hex,opacity));
+                $("#" + block.id).children(".ajax-block-container").children(".buttonBackAlign").children("a.button").css("color",hex2rgb(hex,opacity));
                 //console.log(hex2rgb(hex,opacity));
             }
         });
@@ -166,7 +168,8 @@ function AjaxContentBlock(id,elClass, subpageContentId) {
             opacity: true,
             change: function(hex, opacity) {
 
-                $("#" + block.id).find("a.button").css("background",hex2rgb(hex,opacity));
+                $("#" + block.id).children(".ajax-block-container").children(".buttonAlign").children("a.button").css("background",hex2rgb(hex,opacity));
+                $("#" + block.id).children(".ajax-block-container").children(".buttonBackAlign").children("a.button").css("background",hex2rgb(hex,opacity));
                 //console.log(hex2rgb(hex,opacity));
             }
         });
@@ -184,9 +187,9 @@ function AjaxContentBlock(id,elClass, subpageContentId) {
             autoOpen: false,
             buttons: {
                 "Save": function() {
-                    $("#" + block.id).find(".buttonAlign").children("a.button").text($(this).find("form.AjaxButtonForm").find("input[name*='" + "anchorValue" + "']").val());
-                    $("#" + block.id).find(".buttonAlign").children("a.button").css("border-radius",$(this).find("form.AjaxButtonForm").find("input[name*='" + "borderRadiusValue" + "']").val());
-                    $("#" + block.id).find(".buttonBackAlign").children("a.button").css("border-radius",$(this).find("form.AjaxButtonForm").find("input[name*='" + "borderRadiusValue" + "']").val());
+                    $("#" + block.id).children(".ajax-block-container").children(".buttonAlign").children("a.button").text($(this).find("form.AjaxButtonForm").find("input[name*='" + "anchorValue" + "']").val());
+                    $("#" + block.id).children(".ajax-block-container").children(".buttonAlign").children("a.button").css("border-radius",$(this).find("form.AjaxButtonForm").find("input[name*='" + "borderRadiusValue" + "']").val());
+                    $("#" + block.id).children(".ajax-block-container").children(".buttonBackAlign").children("a.button").css("border-radius",$(this).find("form.AjaxButtonForm").find("input[name*='" + "borderRadiusValue" + "']").val());
                     $( this ).dialog( "close" );
                     isContentChange = true;
                 },

@@ -33,7 +33,10 @@ function TitleBlock(id,elClass, subpageContentId) {
 
         $("#" + this.id).find(".h2").on("click",function(){
             $(this).closest(block.elClass).find(".blockControls").find(".h2, .h3, .h4").removeClass("current");
-            $(this).closest(block.elClass).find(".ckeditor").find('h2, h3, h4').replaceWith(function() {
+            var headings = $(this).closest(block.elClass).find(".ckeditor").find('h2, h3, h4');
+            if(!headings || headings.length <= 0 )
+                headings = $(this).closest(block.elClass).find(".ckeditor").find('p:first-child');
+            headings.removeClass("current").replaceWith(function() {
                 return '<h2>' + $(this).html() + '</h2>';
             });
             $(this).addClass("current");
@@ -41,7 +44,10 @@ function TitleBlock(id,elClass, subpageContentId) {
         });
         $("#" + this.id).find(".h3").on("click",function(){
             $(this).closest(block.elClass).find(".blockControls").find(".h2, .h3, .h4").removeClass("current");
-            $(this).closest(block.elClass).find(".ckeditor").find('h2, h3, h4').removeClass("current").replaceWith(function() {
+            var headings = $(this).closest(block.elClass).find(".ckeditor").find('h2, h3, h4');
+            if(!headings || headings.length <= 0 )
+                headings = $(this).closest(block.elClass).find(".ckeditor").find('p:first-child');
+            headings.removeClass("current").replaceWith(function() {
                 return '<h3>' + $(this).html() + '</h3>';
             });
             $(this).addClass("current");
@@ -49,7 +55,10 @@ function TitleBlock(id,elClass, subpageContentId) {
         });
         $("#" + this.id).find(".h4").on("click",function(){
             $(this).closest(block.elClass).find(".blockControls").find(".h2, .h3, .h4").removeClass("current");
-            $(this).closest(block.elClass).find(".ckeditor").find('h2, h3, h4').removeClass("current").replaceWith(function() {
+            var headings = $(this).closest(block.elClass).find(".ckeditor").find('h2, h3, h4');
+            if(!headings || headings.length <= 0 )
+                headings = $(this).closest(block.elClass).find(".ckeditor").find('p:first-child');
+            headings.removeClass("current").replaceWith(function() {
                 return '<h4>' + $(this).html() + '</h4>';
             });
             $(this).addClass("current");
