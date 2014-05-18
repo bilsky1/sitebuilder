@@ -130,7 +130,7 @@ function AjaxContentBlock(id,elClass, subpageContentId) {
 
     this.initDialogWindowSettings = function(){
         var block = this;
-        $("#" + this.id).children(".ajax-block-container").find(".buttonAlign").children("a.button").each(function(){
+        $("#" + this.id).children(".ajax-block-container").children(".buttonAlign").children("a.button").each(function(){
             $("#" + block.settingsDialogId).find("input[name*='" + "anchorValue" + "']").val($(this).text());
         });
         this.setAlignHandler();
