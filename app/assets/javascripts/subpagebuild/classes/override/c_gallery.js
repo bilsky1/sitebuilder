@@ -209,6 +209,7 @@ function GalleryBlock(id,elClass, subpageContentId) {
                         }
                         alert(errorMessage);
                         console.log(errorMessage);
+                        block.setEmptyCode();
                     }
                 }
             });
