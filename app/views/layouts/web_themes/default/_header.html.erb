@@ -11,24 +11,24 @@
   <!-- Good showing on mobile device with responsive design -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
-  <%= stylesheet_link_tag "web_themes/" + @web.theme.name + "/import", media: "all", "data-turbolinks-track" => true %>
-  <%= stylesheet_link_tag "bootstrap", media: "all", "data-turbolinks-track" => true %>
-  <%= stylesheet_link_tag "web_themes/generator_style", media: "all", "data-turbolinks-track" => true %>
-  <%= stylesheet_link_tag "web_themes/column_block", media: "all", "data-turbolinks-track" => true %>
-  <%= stylesheet_link_tag "fancybox", media: "all", "data-turbolinks-track" => true %>
-  <%= stylesheet_link_tag "web_themes/column_block_responsive", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag "web_themes/" + @web.theme.name + "/import", media: "all" %>
+  <%= stylesheet_link_tag "bootstrap", media: "all" %>
+  <%= stylesheet_link_tag "web_themes/generator_style", media: "all" %>
+  <%= stylesheet_link_tag "web_themes/column_block", media: "all" %>
+  <%= stylesheet_link_tag "fancybox", media: "all" %>
+  <%= stylesheet_link_tag "web_themes/column_block_responsive", media: "all" %>
 
-  <%= javascript_include_tag "jquery", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "jquery_ujs", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "jquery" %>
+  <%= javascript_include_tag "jquery_ujs" %>
 
   <% unless isEscapeFragmentParams? %>
-    <%= javascript_include_tag "web_themes/subpage_loader", "data-turbolinks-track" => true %>
-    <%= javascript_include_tag "web_themes/classes/c_loader", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "web_themes/subpage_loader" %>
+    <%= javascript_include_tag "web_themes/classes/c_loader" %>
   <% end %>
 
-  <%= javascript_include_tag "bootstrap", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "fancybox", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "web_themes/" + @web.theme.name + "/import", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "bootstrap" %>
+  <%= javascript_include_tag "fancybox" %>
+  <%= javascript_include_tag "web_themes/" + @web.theme.name + "/import" %>
   <% unless @web.favicon.nil? %>
       <%= favicon_link_tag @web.favicon_url.to_s %>
   <% end %>
